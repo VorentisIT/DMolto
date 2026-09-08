@@ -119,21 +119,19 @@
   text-decoration: none;
 }
 
-.brand-badge-box {
-  width: 42px;
-  height: 42px;
-  border-radius: 12px;
-  background: linear-gradient(135deg, var(--color-terracotta-glow) 0%, var(--color-terracotta-deep) 100%);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #FFFFFF;
-  box-shadow: 0 4px 16px rgba(234, 88, 12, 0.45);
+.brand-logo-img {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid rgba(234, 88, 12, 0.5);
+  box-shadow: 0 4px 16px rgba(234, 88, 12, 0.4);
+  flex-shrink: 0;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.flame-icon {
-  width: 22px;
-  height: 22px;
+.nav-brand:hover .brand-logo-img {
+  transform: scale(1.08) rotate(6deg);
 }
 
 .brand-text {
