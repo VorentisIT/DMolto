@@ -98,34 +98,5 @@
     </div>
   }
 
-  <!-- Mobile Navigation Drawer -->
-  @if (pizzaService.isMobileMenuOpen()) {
-    <div class="mobile-nav-scrim" (click)="closeMobileMenu()">
-      <div class="mobile-nav-panel" (click)="$event.stopPropagation()">
-        <div class="mobile-nav-top">
-          <div class="nav-brand">
-            <img src="/images/dmolto-logo.png" alt="D'Molto Pizzeria Logo" class="brand-logo-img">
-            <div class="brand-text">
-              <span class="brand-title">D’Molto</span>
-              <span class="brand-tagline">PIZZERIA NAPOLETANA</span>
-            </div>
-          </div>
-          <button type="button" class="modal-x-btn" (click)="closeMobileMenu()">✕</button>
-        </div>
-        <nav class="mobile-nav-links">
-          <a href="#hero-section" class="mobile-nav-link" [class.active]="pizzaService.activeNavTab() === 'home'" (click)="navigateToSection('home', 'hero-section', $event)">Home</a>
-          <a href="#assembly-stage" class="mobile-nav-link" [class.active]="pizzaService.activeNavTab() === 'craft'" (click)="navigateToSection('craft', 'assembly-stage', $event)">The Craft</a>
-          <a href="#menu-ribbon" class="mobile-nav-link" [class.active]="pizzaService.activeNavTab() === 'menu'" (click)="navigateToSection('menu', 'menu-ribbon', $event)">Menu</a>
-          <a href="#reservations-section" class="mobile-nav-link" [class.active]="pizzaService.activeNavTab() === 'reservations'" (click)="navigateToSection('reservations', 'reservations-section', $event)">Reservations</a>
-          <a href="#location-section" class="mobile-nav-link" [class.active]="pizzaService.activeNavTab() === 'find-us'" (click)="navigateToSection('find-us', 'location-section', $event)">Find Us</a>
-        </nav>
-        <div class="mobile-nav-footer">
-          <button type="button" class="btn-pill-terracotta btn-full-width" (click)="closeMobileMenu(); openReservation()">
-            <span>Book a Table</span>
-            <span>→</span>
-          </button>
-        </div>
-      </div>
-    </div>
-  }
+  <!-- Mobile Navigation Drawer: rendered at app root level in app.html for proper position:fixed -->
 </header>

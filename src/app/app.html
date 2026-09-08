@@ -1,19 +1,61 @@
 <!-- Separate Modular Navbar Component -->
 <app-navbar></app-navbar>
 
+<!-- Mobile Navigation Drawer — at ROOT level so position:fixed covers full viewport -->
+@if (pizzaService.isMobileMenuOpen()) {
+  <div class="mobile-nav-scrim" (click)="pizzaService.isMobileMenuOpen.set(false)">
+    <div class="mobile-nav-panel" (click)="$event.stopPropagation()">
+      <div class="mobile-nav-top">
+        <div class="nav-brand">
+          <img src="/images/dmolto-logo.png" alt="D'Molto Pizzeria Logo" class="brand-logo-img">
+          <div class="brand-text">
+            <span class="brand-title">D'Molto</span>
+            <span class="brand-tagline">PIZZERIA NAPOLETANA</span>
+          </div>
+        </div>
+        <button type="button" class="modal-x-btn" (click)="pizzaService.isMobileMenuOpen.set(false)">✕</button>
+      </div>
+      <nav class="mobile-nav-links">
+        <a href="#hero-section" class="mobile-nav-link" [class.active]="pizzaService.activeNavTab() === 'home'" (click)="pizzaService.activeNavTab.set('home'); pizzaService.isMobileMenuOpen.set(false)">Home</a>
+        <a href="#assembly-stage" class="mobile-nav-link" [class.active]="pizzaService.activeNavTab() === 'craft'" (click)="pizzaService.activeNavTab.set('craft'); pizzaService.isMobileMenuOpen.set(false)">The Craft</a>
+        <a href="#menu-ribbon" class="mobile-nav-link" [class.active]="pizzaService.activeNavTab() === 'menu'" (click)="pizzaService.activeNavTab.set('menu'); pizzaService.isMobileMenuOpen.set(false)">Menu</a>
+        <a href="#reservations-section" class="mobile-nav-link" [class.active]="pizzaService.activeNavTab() === 'reservations'" (click)="pizzaService.activeNavTab.set('reservations'); pizzaService.isMobileMenuOpen.set(false)">Reservations</a>
+        <a href="#location-section" class="mobile-nav-link" [class.active]="pizzaService.activeNavTab() === 'find-us'" (click)="pizzaService.activeNavTab.set('find-us'); pizzaService.isMobileMenuOpen.set(false)">Find Us</a>
+      </nav>
+      <div class="mobile-nav-footer">
+        <button type="button" class="btn-pill-terracotta btn-full-width" (click)="pizzaService.isMobileMenuOpen.set(false); pizzaService.isReservationOpen.set(true)">
+          <span>Book a Table</span>
+          <span>→</span>
+        </button>
+      </div>
+    </div>
+  </div>
+}
+
 <main class="page-content-wrapper">
   @switch (pizzaService.activeNavTab()) {
     @case ('craft') {
-      <app-craft></app-craft>
+      <div class="standalone-page-view">
+        <app-craft></app-craft>
+        <app-location-footer></app-location-footer>
+      </div>
     }
     @case ('menu') {
-      <app-menu-section></app-menu-section>
+      <div class="standalone-page-view">
+        <app-menu-section></app-menu-section>
+        <app-location-footer></app-location-footer>
+      </div>
     }
     @case ('reservations') {
-      <app-reservations></app-reservations>
+      <div class="standalone-page-view">
+        <app-reservations></app-reservations>
+        <app-location-footer></app-location-footer>
+      </div>
     }
     @case ('find-us') {
-      <app-location-footer></app-location-footer>
+      <div class="standalone-page-view">
+        <app-location-footer></app-location-footer>
+      </div>
     }
     @default {
       <app-hero></app-hero>
@@ -91,41 +133,98 @@
         </div>
       </section>
 
-      <!-- Atmosphere Section -->
+      <!-- The D'Molto Experience Bento Section -->
       <section class="atmosphere-gallery-section" id="experience-section">
         <div class="container">
-          <div class="atmosphere-header text-center">
-            <span class="editorial-kicker text-gold">THE D’MOLTO EXPERIENCE</span>
-            <h2 class="section-title font-serif">More Than a Meal, A Memory.</h2>
-            <p class="section-subtitle">
-              Step into our candlelit Neapolitan pizzeria in Model Town. Feel the warmth of the roaring wood-fired oven and the aroma of baking sourdough.
-            </p>
+          <div class="experience-header-container">
+            <div class="experience-title-block">
+              <span class="editorial-kicker text-gold">THE D’MOLTO EXPERIENCE</span>
+              <h2 class="section-title font-serif">More Than a Meal, <span class="text-orange">A Memory.</span></h2>
+              <p class="section-subtitle">
+                Step into our candlelit Neapolitan pizzeria in Model Town. Feel the warmth of the roaring 450°C wood-fired oven, Italian acoustic melodies, and the aroma of 48-hour fermented sourdough.
+              </p>
+
+              <div class="experience-badges-row">
+                <span class="exp-badge-pill">✦ Candlelit Dining</span>
+                <span class="exp-badge-pill">✦ Live Hearth Bake</span>
+                <span class="exp-badge-pill">✦ Italian Aperitivo Bar</span>
+              </div>
+            </div>
+
+            <div class="exp-script-annotation">
+              <span class="script-annotation">Every Evening<br>Tells a Story</span>
+            </div>
           </div>
 
-          <div class="atmosphere-grid">
-            <div class="atmosphere-card large-card">
-              <img src="/images/interior.jpg" alt="Rustic dining room with cozy leather booths and wood-fired oven glow" class="atmosphere-img" loading="lazy">
-              <div class="card-caption-overlay">
-                <span class="caption-kicker">ATMOSPHERE</span>
-                <h3 class="caption-title font-serif">Warm Candlelit Dining</h3>
+          <!-- Asymmetric Bento Showcase Grid -->
+          <div class="experience-bento-grid">
+            <!-- Hero Bento Card: Warm Dining Room -->
+            <div class="bento-hero-card">
+              <img src="/images/interior.jpg" alt="Rustic dining room with cozy leather booths and wood-fired oven glow" class="bento-card-photo" loading="lazy">
+              <div class="bento-gradient-overlay"></div>
+              <div class="bento-content-body">
+                <span class="bento-kicker-tag">THE AMBIANCE • MODEL TOWN</span>
+                <h3 class="bento-card-title font-serif">Warm Candlelit Dining</h3>
+                <p class="bento-card-desc">
+                  Curated leather booths, soft acoustic ambiance, and an open hearth view created for romantic date nights, family milestones, and grand celebrations.
+                </p>
               </div>
             </div>
 
-            <div class="atmosphere-card">
-              <img src="/images/gallery-bar.jpg" alt="Sleek Italian marble bar counter with craft cocktails" class="atmosphere-img" loading="lazy">
-              <div class="card-caption-overlay">
-                <span class="caption-kicker">BAR & LOUNGE</span>
-                <h3 class="caption-title font-serif">Italian Aperitivo Bar</h3>
-              </div>
-            </div>
+            <!-- Right Column Stack of Secondary Cards -->
+            <div class="bento-right-column" style="display: flex; flex-direction: column; gap: 24px;">
+              <div class="bento-sub-row">
+                <!-- Card 2: Bar & Lounge -->
+                <div class="bento-item-card">
+                  <img src="/images/gallery-bar.jpg" alt="Sleek Italian marble bar counter with craft cocktails" class="bento-card-photo" loading="lazy">
+                  <div class="bento-gradient-overlay"></div>
+                  <span class="bento-kicker-tag" style="background: rgba(200, 155, 83, 0.9);">APERITIVO & WINE</span>
+                  <h4 class="bento-item-title font-serif">Italian Aperitivo Bar</h4>
+                  <span class="bento-item-sub">Craft Cocktails & Wine Pairings</span>
+                </div>
 
-            <div class="atmosphere-card">
-              <img src="/images/gallery-garnish.jpg" alt="Chef garnishing pizza with fresh organic basil and olive oil" class="atmosphere-img" loading="lazy">
-              <div class="card-caption-overlay">
-                <span class="caption-kicker">HEARTH KITCHEN</span>
-                <h3 class="caption-title font-serif">Oven-Side Craft</h3>
+                <!-- Card 3: Oven-Side Craft -->
+                <div class="bento-item-card">
+                  <img src="/images/gallery-garnish.jpg" alt="Chef garnishing pizza with fresh organic basil and olive oil" class="bento-card-photo" loading="lazy">
+                  <div class="bento-gradient-overlay"></div>
+                  <span class="bento-kicker-tag" style="background: rgba(34, 139, 34, 0.9);">HEARTH KITCHEN</span>
+                  <h4 class="bento-item-title font-serif">Oven-Side Craft</h4>
+                  <span class="bento-item-sub">San Marzano & Fior Di Latte</span>
+                </div>
+              </div>
+
+              <!-- Card 4: Editorial Guest Review Card -->
+              <div class="bento-editorial-review-card">
+                <div>
+                  <div class="review-stars-row">
+                    <span class="stars-gold">★★★★★</span>
+                    <span class="review-score-tag">5.0 / 5.0 (480+ Reviews)</span>
+                  </div>
+                  <blockquote class="editorial-review-quote">
+                    “The crust has that signature Neapolitan airy chew and delicate leopard char. Paired with candlelight and warm Italian hospitality — D'Molto is easily the finest pizzeria in Ludhiana.”
+                  </blockquote>
+                </div>
+
+                <div class="review-author-cell">
+                  <div class="author-avatar-initial">P</div>
+                  <div>
+                    <span class="author-name-text">Prabhleen & Simran S.</span>
+                    <span class="author-location-text">Verified Model Town Dining Guests</span>
+                  </div>
+                </div>
               </div>
             </div>
+          </div>
+
+          <!-- Bottom CTA Bar -->
+          <div class="experience-cta-bar">
+            <button type="button" class="btn-pill-terracotta" (click)="pizzaService.isReservationOpen.set(true)">
+              <span>Reserve Your Table Experience</span>
+              <span>→</span>
+            </button>
+            <button type="button" class="btn-pill-outline-luxury" (click)="pizzaService.activeNavTab.set('menu')">
+              <span>View Signature Menu</span>
+            </button>
           </div>
         </div>
       </section>

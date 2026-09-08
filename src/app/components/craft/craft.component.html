@@ -16,31 +16,28 @@
         At D’Molto, every pizza is made with 48-hour cold fermented sourdough, fresh artisan produce, and bold flavours — baked hot in our 450°C stone hearth oven for an unforgettable crust.
       </p>
 
-      <!-- Simple Clean Highlights -->
-      <ul class="craft-simple-highlights">
-        <li><span class="highlight-bullet">✦</span> <strong>48-Hour Sourdough Fermentation</strong> — Slow-rested Caputo 00 dough for a light, digestible crust.</li>
-        <li><span class="highlight-bullet">✦</span> <strong>San Marzano D.O.P. & Fior di Latte</strong> — Hand-crushed volcanic tomatoes and fresh daily mozzarella.</li>
-        <li><span class="highlight-bullet">✦</span> <strong>450°C Stone Hearth Bake</strong> — High-heat wood-fired oven creating trademark leopard char.</li>
-      </ul>
-
-      <!-- Detailed Craft Interactive Tabs -->
-      <div class="craft-pillars-tab-row">
+      <!-- Sleek Pillar Horizontal Tabset (Replaces 4-Card Grid) -->
+      <div class="craft-pillars-tabset">
         @for (pillar of craftPillars; track pillar.id; let i = $index) {
           <button 
             type="button" 
-            class="craft-tab-btn" 
+            class="craft-pillar-tab-btn" 
             [class.active]="selectedIndex() === i"
             (click)="selectPillar(i)">
-            <span class="tab-title">{{ pillar.title }}</span>
+            <span class="tab-pillar-num">0{{ pillar.num }}</span>
+            <span class="tab-pillar-title">{{ pillar.title }}</span>
           </button>
         }
       </div>
 
-      <!-- Selected Pillar Detailed Box -->
-      <div class="craft-active-pillar-detail">
-        <span class="detail-badge">{{ activePillar().badge }}</span>
-        <h3 class="detail-tagline font-serif">{{ activePillar().tagline }}</h3>
-        <p class="detail-desc">{{ activePillar().description }}</p>
+      <!-- Active Pillar Spotlight Card -->
+      <div class="craft-active-spotlight-card">
+        <div class="spotlight-header">
+          <span class="spotlight-kicker text-gold">PILLAR 0{{ activePillar().num }} • {{ activePillar().icon }}</span>
+          <span class="spotlight-badge">✦ {{ activePillar().badge }}</span>
+        </div>
+        <h3 class="spotlight-title font-serif">{{ activePillar().tagline }}</h3>
+        <p class="spotlight-desc">{{ activePillar().description }}</p>
       </div>
 
       <!-- Action Buttons -->

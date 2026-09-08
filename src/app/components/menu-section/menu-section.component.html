@@ -1,112 +1,160 @@
 <!-- ==========================================================================
-     3. EXPLORE THE D'MOLTO MENU (EXACT LUXURY HORIZONTAL RIBBON TRACK)
+     3. EXPLORE THE D'MOLTO MENU (RESPONSIVE GRID SHOWCASE & RIBBON MODES)
      ========================================================================== -->
 <section class="menu-ribbon-section" id="menu-ribbon">
   <div class="container">
     <!-- Section Header -->
     <div class="menu-editorial-header">
       <div class="header-text-block">
-        <span class="editorial-kicker">OUR MENU</span>
+        <span class="editorial-kicker text-gold">GOURMET SELECTION</span>
         <h2 class="section-title font-serif">Explore The <span class="text-orange">D’Molto</span> Menu</h2>
         <p class="section-subtitle">
           From timeless classics to chef's specials, every pizza tells a story. Discover bold flavors, fresh ingredients, and the authentic taste of Naples.
         </p>
       </div>
 
-      <!-- Right Script Annotation with Arrow -->
+      <!-- Right Script Annotation -->
       <div class="header-script-box">
         <span class="script-annotation">Good Food<br>Brings<br>People Together</span>
       </div>
     </div>
 
-    <!-- Category Filter Bar -->
-    <div class="menu-categories-bar">
-      <button 
-        type="button" 
-        class="category-pill" 
-        [class.active]="pizzaService.activeCategory() === 'all'" 
-        (click)="setCategory('all')">
-        All Creations
-      </button>
-      <button 
-        type="button" 
-        class="category-pill" 
-        [class.active]="pizzaService.activeCategory() === 'classics'" 
-        (click)="setCategory('classics')">
-        Classics
-      </button>
-      <button 
-        type="button" 
-        class="category-pill" 
-        [class.active]="pizzaService.activeCategory() === 'signature'" 
-        (click)="setCategory('signature')">
-        Signature Specials
-      </button>
-      <button 
-        type="button" 
-        class="category-pill" 
-        [class.active]="pizzaService.activeCategory() === 'vegetarian'" 
-        (click)="setCategory('vegetarian')">
-        Vegetarian
-      </button>
-      <button 
-        type="button" 
-        class="category-pill" 
-        [class.active]="pizzaService.activeCategory() === 'seafood'" 
-        (click)="setCategory('seafood')">
-        Seafood
-      </button>
-      <button 
-        type="button" 
-        class="category-pill" 
-        [class.active]="pizzaService.activeCategory() === 'desserts'" 
-        (click)="setCategory('desserts')">
-        Desserts
-      </button>
-      <button 
-        type="button" 
-        class="category-pill" 
-        [class.active]="pizzaService.activeCategory() === 'beverages'" 
-        (click)="setCategory('beverages')">
-        Beverages
-      </button>
-    </div>
+    <!-- Category Filter moved below showcase (original removed) -->
 
-    <!-- Ribbon Controls -->
+    <!-- View Mode & Navigation Control Bar -->
     <div class="ribbon-navigation-bar">
-      <span class="ribbon-counter-hint">SWIPE OR USE ARROWS TO EXPLORE</span>
-      <div class="ribbon-arrow-controls">
-        <button type="button" class="ribbon-arrow" (click)="scrollMenuTrack('left')" title="Scroll Left">←</button>
-        <button type="button" class="ribbon-arrow" (click)="scrollMenuTrack('right')" title="Scroll Right">→</button>
+      <div class="layout-toggle-group">
+        <button 
+          type="button" 
+          class="layout-mode-btn" 
+          [class.active]="layoutMode() === 'grid'"
+          (click)="setLayoutMode('grid')"
+          title="Grid Showcase View">
+          <span class="mode-icon">⊞</span>
+          <span>Grid Showcase</span>
+        </button>
+        <button 
+          type="button" 
+          class="layout-mode-btn" 
+          [class.active]="layoutMode() === 'ribbon'"
+          (click)="setLayoutMode('ribbon')"
+          title="Horizontal Scroll Ribbon">
+          <span class="mode-icon">⇯</span>
+          <span>Ribbon Scroll</span>
+        </button>
       </div>
-    </div>
 
-    <!-- Menu Items Horizontal Ribbon Scroll Track -->
-    <div class="menu-horizontal-track" #menuScrollTrack>
-      @for (pizza of pizzaService.filteredMenuItems(); track pizza.id) {
-        <article class="luxury-pizza-card">
-          <div class="card-media-wrap">
-            <img [src]="pizza.image || '/images/hero-pizza.jpg'" [alt]="pizza.name" class="card-media-img" loading="lazy">
-            @if (pizza.isSpecial) {
-              <span class="chef-choice-badge">Signature Selection</span>
-            }
-            <span class="card-subtitle-tag">{{ pizza.subtitle }}</span>
+      @if (layoutMode() === 'ribbon') {
+        <div class="ribbon-arrow-controls-wrap" style="display: flex; align-items: center; gap: 16px;">
+          <span class="ribbon-counter-hint">SWIPE OR USE ARROWS TO EXPLORE</span>
+          <div class="ribbon-arrow-controls">
+            <button type="button" class="ribbon-arrow" (click)="scrollMenuTrack('left')" title="Scroll Left">←</button>
+            <button type="button" class="ribbon-arrow" (click)="scrollMenuTrack('right')" title="Scroll Right">→</button>
           </div>
-
-          <div class="card-details-wrap">
-            <h3 class="card-pizza-title font-serif">{{ pizza.name }}</h3>
-            <p class="card-pizza-desc">{{ pizza.description }}</p>
-
-            <div class="card-footer-row">
-              <span class="card-pizza-price">₹{{ pizza.price }}</span>
-              <button type="button" class="card-add-btn" (click)="addToCart(pizza)">
-                <span>+ Add to Bag</span>
-              </button>
-            </div>
-          </div>
-        </article>
+        </div>
       }
     </div>
+
+    <!-- MENU SHOWCASE WRAPPER: flex column so CSS order works on mobile -->
+    <div class="menu-showcase-wrapper">
+
+      <!-- PIZZA SHOWCASE (order: 1 on all screens) -->
+      <div class="menu-showcase-block">
+        @if (layoutMode() === 'grid') {
+          <!-- 1. RESPONSIVE GRID SHOWCASE MODE -->
+          <div class="menu-grid-showcase-container">
+            @for (pizza of pizzaService.filteredMenuItems(); track pizza.id) {
+              <article class="luxury-pizza-card grid-card">
+                <div class="card-media-wrap">
+                  <img [src]="pizza.image || '/images/hero-pizza.jpg'" [alt]="pizza.name" class="card-media-img" loading="lazy">
+                  <div class="card-photo-vignette"></div>
+
+                  @if (pizza.isSpecial) {
+                    <span class="chef-choice-badge">
+                      <span class="badge-star">✦</span> Signature Selection
+                    </span>
+                  }
+                  <span class="card-subtitle-tag">{{ pizza.subtitle }}</span>
+                </div>
+
+                <div class="card-details-wrap">
+                  <span class="card-item-kicker">ARTISANAL CREATION</span>
+                  <h3 class="card-pizza-title font-serif">{{ pizza.name }}</h3>
+                  <p class="card-pizza-desc">{{ pizza.description }}</p>
+
+                  <div class="card-micro-tags-row">
+                    <span class="micro-tag-pill">✦ 48h Dough</span>
+                    <span class="micro-tag-pill">✦ Wood-Fired</span>
+                  </div>
+
+                  <div class="card-footer-row">
+                    <div class="price-stack">
+                      <span class="card-price-label">PRICE</span>
+                      <span class="card-pizza-price font-serif">₹{{ pizza.price }}</span>
+                    </div>
+                    <button type="button" class="card-add-btn" (click)="addToCart(pizza)">
+                      <span>+ Add to Bag</span>
+                    </button>
+                  </div>
+                </div>
+              </article>
+            }
+          </div>
+        } @else {
+          <!-- 2. HORIZONTAL RIBBON TRACK MODE -->
+          <div class="menu-horizontal-track" #menuScrollTrack>
+            @for (pizza of pizzaService.filteredMenuItems(); track pizza.id) {
+              <article class="luxury-pizza-card">
+                <div class="card-media-wrap">
+                  <img [src]="pizza.image || '/images/hero-pizza.jpg'" [alt]="pizza.name" class="card-media-img" loading="lazy">
+                  <div class="card-photo-vignette"></div>
+
+                  @if (pizza.isSpecial) {
+                    <span class="chef-choice-badge">
+                      <span class="badge-star">✦</span> Signature Selection
+                    </span>
+                  }
+                  <span class="card-subtitle-tag">{{ pizza.subtitle }}</span>
+                </div>
+
+                <div class="card-details-wrap">
+                  <span class="card-item-kicker">ARTISANAL CREATION</span>
+                  <h3 class="card-pizza-title font-serif">{{ pizza.name }}</h3>
+                  <p class="card-pizza-desc">{{ pizza.description }}</p>
+
+                  <div class="card-micro-tags-row">
+                    <span class="micro-tag-pill">✦ 48h Dough</span>
+                    <span class="micro-tag-pill">✦ Wood-Fired</span>
+                  </div>
+
+                  <div class="card-footer-row">
+                    <div class="price-stack">
+                      <span class="card-price-label">PRICE</span>
+                      <span class="card-pizza-price font-serif">₹{{ pizza.price }}</span>
+                    </div>
+                    <button type="button" class="card-add-btn" (click)="addToCart(pizza)">
+                      <span>+ Add to Bag</span>
+                    </button>
+                  </div>
+                </div>
+              </article>
+            }
+          </div>
+        }
+      </div>
+
+      <!-- CATEGORY FILTER PILLS (order: 2 — always below showcase) -->
+      <div class="category-filter-pills">
+        <button type="button" class="category-pill" [class.active]="pizzaService.activeCategory() === 'all'" (click)="setCategory('all')">All Creations</button>
+        <button type="button" class="category-pill" [class.active]="pizzaService.activeCategory() === 'classics'" (click)="setCategory('classics')">Classics</button>
+        <button type="button" class="category-pill" [class.active]="pizzaService.activeCategory() === 'signature'" (click)="setCategory('signature')">Signature Specials</button>
+        <button type="button" class="category-pill" [class.active]="pizzaService.activeCategory() === 'vegetarian'" (click)="setCategory('vegetarian')">Vegetarian</button>
+        <button type="button" class="category-pill" [class.active]="pizzaService.activeCategory() === 'seafood'" (click)="setCategory('seafood')">Seafood</button>
+        <button type="button" class="category-pill" [class.active]="pizzaService.activeCategory() === 'desserts'" (click)="setCategory('desserts')">Desserts</button>
+        <button type="button" class="category-pill" [class.active]="pizzaService.activeCategory() === 'beverages'" (click)="setCategory('beverages')">Beverages</button>
+      </div>
+
+    </div><!-- /menu-showcase-wrapper -->
 
     <div class="menu-bottom-cta text-center">
       <button type="button" class="btn-pill-outline-luxury" (click)="openReservation()">

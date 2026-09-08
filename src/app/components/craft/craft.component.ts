@@ -31,7 +31,7 @@ export class CraftComponent {
       badge: '48-Hour Cold Ferment',
       tagline: 'Light, Digestible & Airy Cornicione',
       description: 'Our dough is cold-fermented for a minimum of 48 hours using imported Caputo 00 flour and wild sourdough starter. This creates a signature blistered crust that is incredibly light, fragrant, and easily digestible.',
-      image: '/images/dough-ball.jpg'
+      image: '/images/chef-craft.jpg'
     },
     {
       id: 'tomatoes',
@@ -61,7 +61,7 @@ export class CraftComponent {
       badge: '90-Second Neapolitan Bake',
       tagline: 'Blistered Crust & Melted Perfection',
       description: 'Slid onto a beechwood peel and thrust into our 450°C dome hearth stone oven, every pizza cooks in just 90 seconds. The intense heat locks in moisture while giving the crust its prized leopard-spotted char.',
-      image: '/images/chef-craft.jpg'
+      image: '/images/gallery-garnish.jpg'
     }
   ];
 

@@ -470,29 +470,31 @@ export class App implements AfterViewInit, OnDestroy {
     });
     gsap.ticker.lagSmoothing(0);
 
-    // 1. HERO SCROLL TRANSITION TIMELINE (Pizza shifts down & hides on scroll)
-    const heroTl = gsap.timeline({
-      scrollTrigger: {
-        trigger: '#hero-section',
-        start: 'top top',
-        end: 'bottom top',
-        scrub: 1.2,
-      }
-    });
+    // 1. HERO SCROLL TRANSITION TIMELINE (Pizza shifts down & hides on scroll) - disabled on mobile
+    if (isPlatformBrowser(this.platformId) && window.innerWidth > 768) {
+      const heroTl = gsap.timeline({
+        scrollTrigger: {
+          trigger: '#hero-section',
+          start: 'top top',
+          end: 'bottom top',
+          scrub: 1.2,
+        }
+      });
 
-    heroTl.to('#hero-left-content', {
-      opacity: 0,
-      y: -60,
-      ease: 'power1.out'
-    }, 0);
+      heroTl.to('#hero-left-content', {
+        opacity: 0,
+        y: -60,
+        ease: 'power1.out'
+      }, 0);
 
-    heroTl.to('#hero-giant-pizza', {
-      y: 160,
-      rotation: 24,
-      scale: 0.82,
-      opacity: 0,
-      ease: 'power1.inOut'
-    }, 0);
+      heroTl.to('#hero-giant-pizza', {
+        y: 160,
+        rotation: 24,
+        scale: 0.82,
+        opacity: 0,
+        ease: 'power1.inOut'
+      }, 0);
+    }
 
     // 2. THE CRAFT SHOWCASE IMAGE SCROLL PARALLAX
     gsap.fromTo('.craft-showcase-photo', 

@@ -1,4 +1,4 @@
-import { Component, ViewEncapsulation, ElementRef, viewChild } from '@angular/core';
+import { Component, ViewEncapsulation, ElementRef, viewChild, signal, computed } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { PizzaService, PizzaItem } from '../../services/pizza.service';
 
@@ -12,11 +12,23 @@ import { PizzaService, PizzaItem } from '../../services/pizza.service';
 })
 export class MenuSectionComponent {
   readonly menuScrollTrack = viewChild<ElementRef<HTMLElement>>('menuScrollTrack');
+  readonly layoutOverride = signal<'grid' | 'ribbon' | null>(null);
+
+  readonly layoutMode = computed<'grid' | 'ribbon'>(() => {
+    const override = this.layoutOverride();
+    if (override) return override;
+    // Default to 'ribbon' on Home page, and 'grid' on dedicated Menu page
+    return this.pizzaService.activeNavTab() === 'menu' ? 'grid' : 'ribbon';
+  });
 
   constructor(public pizzaService: PizzaService) {}
 
   setCategory(category: string): void {
     this.pizzaService.activeCategory.set(category);
+  }
+
+  setLayoutMode(mode: 'grid' | 'ribbon'): void {
+    this.layoutOverride.set(mode);
   }
 
   addToCart(pizza: PizzaItem): void {

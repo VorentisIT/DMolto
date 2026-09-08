@@ -1,90 +1,117 @@
 <!-- ==========================================================================
      7. LOCATION & FOOTER DEDICATED PAGE VIEW
      ========================================================================== -->
-<section class="location-editorial-section" id="location-section">
-  <div class="container location-layout-grid">
-    <!-- Left Column: Detailed Address & Hours -->
-    <div class="location-text-card">
+<section class="findus-editorial-section" id="location-section">
+  <div class="container">
+    <div class="atmosphere-header text-center" style="margin-bottom: 36px;">
       <span class="editorial-kicker text-gold">FIND US IN LUDHIANA</span>
       <h2 class="section-title font-serif">Visit Our <span class="text-orange">Pizzeria</span></h2>
-      <p class="section-subtitle">
+      <p class="section-subtitle" style="margin: 0 auto;">
         Step into our rustic Naples hearth. Located in the heart of Model Town, Ludhiana — serving artisanal Neapolitan sourdough pizzas daily.
       </p>
-
-      <div class="location-details-list">
-        <div class="location-detail-cell">
-          <span class="cell-icon">📍</span>
-          <div class="cell-content">
-            <strong>Address & Location</strong>
-            <p>130, Model Town Road, Pritm Nagar, Model Town, Ludhiana, Punjab 141002</p>
-          </div>
-        </div>
-
-        <div class="location-detail-cell">
-          <span class="cell-icon">🕒</span>
-          <div class="cell-content">
-            <strong>Opening Hours</strong>
-            <p>Monday – Sunday: 12:00 PM – 11:00 PM (Oven fires at 12 PM)</p>
-          </div>
-        </div>
-
-        <div class="location-detail-cell">
-          <span class="cell-icon">📞</span>
-          <div class="cell-content">
-            <strong>Reservations & Direct Call</strong>
-            <p><a href="tel:+918360340447" class="location-link">+91 83603 40447</a></p>
-          </div>
-        </div>
-      </div>
-
-      <div class="location-actions-row">
-        <a href="https://maps.google.com/?q=130+Model+Town+Road+Ludhiana" target="_blank" class="btn-pill-terracotta">
-          <span>Get Google Maps Directions</span>
-          <span>↗</span>
-        </a>
-        <button type="button" class="btn-pill-outline-luxury" (click)="openReservation()">
-          <span>Book a Table</span>
-        </button>
-      </div>
     </div>
 
-    <!-- Right Column: Interactive Map Preview Card -->
-    <div class="location-map-card">
-      <div class="map-frame-wrapper">
-        <img src="/images/interior.jpg" alt="D'Molto Ludhiana Pizzeria hearth interior" class="map-bg-photo">
-        <div class="map-overlay-badge">
-          <span class="map-pin-icon">📍</span>
-          <div class="map-badge-text">
-            <strong>D'Molto Pizzeria</strong>
-            <span>130 Model Town Road, Ludhiana</span>
+    <div class="findus-card-grid">
+      <!-- Contact Info Box -->
+      <div class="findus-contact-box">
+        <div class="contact-entry">
+          <div class="contact-icon-bubble">📍</div>
+          <div>
+            <h3 class="entry-title font-serif">Location & Address</h3>
+            <p class="entry-body">130, Model Town Road, Pritm Nagar, Model Town, Ludhiana, Punjab 141002</p>
           </div>
         </div>
+
+        <div class="contact-entry">
+          <div class="contact-icon-bubble">🕒</div>
+          <div>
+            <h3 class="entry-title font-serif">Opening Hours</h3>
+            <p class="entry-body">Monday – Sunday: 12:00 PM – 11:00 PM (Oven fires daily at 12 PM)</p>
+          </div>
+        </div>
+
+        <div class="contact-entry">
+          <div class="contact-icon-bubble">📞</div>
+          <div>
+            <h3 class="entry-title font-serif">Direct Phone & WhatsApp</h3>
+            <p class="entry-body"><a href="tel:+918360340447" style="color: var(--color-terracotta-glow); text-decoration: none; font-weight: 700;">+91 83603 40447</a></p>
+          </div>
+        </div>
+
+        <div class="contact-actions-row">
+          <a href="https://maps.google.com/?q=130+Model+Town+Road+Ludhiana" target="_blank" class="btn-pill-terracotta">
+            <span>Google Maps Directions</span>
+            <span>↗</span>
+          </a>
+          <button type="button" class="btn-pill-outline-luxury" (click)="openReservation()">
+            <span>Book Table</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Interactive Map Frame Card -->
+      <div class="findus-map-box">
+        <iframe 
+          class="luxury-map-frame"
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3424.123456789!2d75.8423!3d30.8987!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzDCsDUzJzU1LjMiTiA3NcKwNTAnMzMiRQ!5e0!3m2!1sen!2sin!4v1620000000000!5m2!1sen!2sin" 
+          allowfullscreen="" 
+          loading="lazy">
+        </iframe>
       </div>
     </div>
   </div>
 </section>
 
-<!-- Footer -->
-<footer class="luxury-footer-bar">
-  <div class="container footer-inner">
-    <div class="footer-brand-col">
-      <img src="/images/dmolto-logo.png" alt="D'Molto Pizzeria Logo" class="brand-logo-img">
-      <div class="brand-text">
-        <span class="brand-title">D’Molto</span>
-        <span class="brand-tagline">PIZZERIA NAPOLETANA</span>
+<!-- Luxury Footer -->
+<footer class="luxury-footer">
+  <div class="container">
+    <div class="footer-top-grid">
+      <div class="footer-brand-col">
+        <div class="nav-brand footer-logo">
+          <img src="/images/dmolto-logo.png" alt="D'Molto Pizzeria Logo" class="brand-logo-img">
+          <div class="brand-text">
+            <span class="brand-title">D’Molto</span>
+            <span class="brand-tagline">PIZZERIA NAPOLETANA</span>
+          </div>
+        </div>
+        <p class="footer-motto">
+          Artisanal 48-hour cold-proofed sourdough pizzas, San Marzano tomatoes, and wood-fired mastery in Model Town, Ludhiana.
+        </p>
+      </div>
+
+      <div class="footer-links-col">
+        <h4 class="footer-header font-serif">Quick Navigation</h4>
+        <ul class="footer-list">
+          <li><a href="javascript:void(0)" (click)="goToNav('home')">Home</a></li>
+          <li><a href="javascript:void(0)" (click)="goToNav('craft')">The Craft</a></li>
+          <li><a href="javascript:void(0)" (click)="goToNav('menu')">Signature Menu</a></li>
+          <li><a href="javascript:void(0)" (click)="goToNav('reservations')">Table Reservations</a></li>
+          <li><a href="javascript:void(0)" (click)="goToNav('find-us')">Find Us</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-links-col">
+        <h4 class="footer-header font-serif">Opening Hours</h4>
+        <ul class="footer-list">
+          <li>Mon – Thu: 12:00 PM – 11:00 PM</li>
+          <li>Fri – Sun: 12:00 PM – 11:30 PM</li>
+          <li>Oven Fires Daily at Noon</li>
+        </ul>
+      </div>
+
+      <div class="footer-newsletter-col">
+        <h4 class="footer-header font-serif">Join The Club</h4>
+        <p class="newsletter-sub">Get secret chef specials, tasting event invites, and weekend discounts.</p>
+        <form (submit)="$event.preventDefault()" class="newsletter-form">
+          <input type="email" placeholder="Enter your email" class="newsletter-input" required>
+          <button type="submit" class="newsletter-btn">Join</button>
+        </form>
       </div>
     </div>
 
-    <div class="footer-nav-col">
-      <button type="button" class="footer-link-btn" (click)="goToNav('home')">Home</button>
-      <button type="button" class="footer-link-btn" (click)="goToNav('craft')">The Craft</button>
-      <button type="button" class="footer-link-btn" (click)="goToNav('menu')">Menu</button>
-      <button type="button" class="footer-link-btn" (click)="goToNav('reservations')">Reservations</button>
-      <button type="button" class="footer-link-btn" (click)="goToNav('find-us')">Find Us</button>
-    </div>
-
-    <div class="footer-copy-col">
-      <p>© 2026 D’Molto Pizzeria Napoletana. All rights reserved. New Zealand Inspired • Fresh Ingredients • Bold Flavours.</p>
+    <div class="footer-sub-bar">
+      <span>© 2026 D’Molto Pizzeria Napoletana. All rights reserved.</span>
+      <span>Model Town Road, Ludhiana • New Zealand Inspired</span>
     </div>
   </div>
 </footer>

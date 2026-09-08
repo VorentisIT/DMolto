@@ -46,30 +46,12 @@ export class PizzaService {
 
   readonly heroPizzas: HeroPizza[] = [
     {
-      id: 'seafood',
-      name: 'Seafood pizza',
-      ingredients: 'tomato sauce, mozzarella cheese, cocktail shrimps, salmon, mussels, lemon, parsley.',
-      price: '$18.00',
-      weight: '230g',
-      image: '/images/seafood-pizza-hq.jpg',
-      thumb: '/images/thumb-seafood-hq.jpg'
-    },
-    {
-      id: 'veggie',
-      name: 'Vegetarian pizza',
-      ingredients: 'tomato sauce, mozzarella cheese, bell peppers, red onions, mushrooms, kalamata olives, oregano.',
-      price: '$16.50',
-      weight: '210g',
-      image: '/images/veggie-pizza-hq.jpg',
-      thumb: '/images/thumb-veggie-hq.jpg'
-    },
-    {
       id: 'margherita',
       name: 'Margherita Classica',
       ingredients: 'San Marzano D.O.P. tomatoes, fior di latte mozzarella, fresh sweet basil, cold-pressed EVOO.',
       price: '$15.00',
       weight: '200g',
-      image: '/images/margherita-pizza-hq.jpg',
+      image: '/images/hero-pizza.jpg',
       thumb: '/images/thumb-margherita-hq.jpg'
     },
     {
@@ -80,6 +62,33 @@ export class PizzaService {
       weight: '220g',
       image: '/images/diavola-pizza-hq.jpg',
       thumb: '/images/thumb-diavola-hq.jpg'
+    },
+    {
+      id: 'truffle',
+      name: 'Truffle & Burrata',
+      ingredients: 'wild forest porcini, white truffle oil glaze, creamy whole burrata crest, fresh thyme.',
+      price: '$19.50',
+      weight: '240g',
+      image: '/images/burrata-truffle.jpg',
+      thumb: '/images/burrata-truffle.jpg'
+    },
+    {
+      id: 'seafood',
+      name: 'Seafood Amalfi',
+      ingredients: 'tomato sauce, mozzarella cheese, cocktail shrimps, salmon, mussels, lemon, parsley.',
+      price: '$18.00',
+      weight: '230g',
+      image: '/images/seafood-pizza-hq.jpg',
+      thumb: '/images/thumb-seafood-hq.jpg'
+    },
+    {
+      id: 'veggie',
+      name: 'Vegetarian Ortolana',
+      ingredients: 'tomato sauce, mozzarella cheese, bell peppers, red onions, mushrooms, kalamata olives, oregano.',
+      price: '$16.50',
+      weight: '210g',
+      image: '/images/veggie-pizza-hq.jpg',
+      thumb: '/images/thumb-veggie-hq.jpg'
     }
   ];
 
@@ -95,7 +104,7 @@ export class PizzaService {
       description: 'San Marzano D.O.P. crushed tomatoes, fior di latte mozzarella, fresh sweet basil, cold-pressed EVOO.',
       price: 450,
       category: 'classics',
-      image: '/images/margherita-pizza-hq.jpg'
+      image: '/images/hero-pizza.jpg'
     },
     {
       id: 'p2',
@@ -123,7 +132,8 @@ export class PizzaService {
       subtitle: 'White Base Harmony',
       description: 'Four Italian cheeses: Gorgonzola dolce, aged Parmigiano Reggiano, scamorza, and fior di latte with wildflower honey.',
       price: 550,
-      category: 'classics'
+      category: 'classics',
+      image: '/images/raw-assembled.jpg'
     },
     {
       id: 'p5',
@@ -146,19 +156,49 @@ export class PizzaService {
     },
     {
       id: 'p7',
+      name: 'Burrata & Prosciutto',
+      subtitle: 'Charcuterie Perfection',
+      description: 'Creamy 125g pugliese burrata, 24-month aged Prosciutto di Parma, wild rocket, and balsamic glaze.',
+      price: 640,
+      category: 'signature',
+      image: '/images/burrata-truffle.jpg',
+      isSpecial: true
+    },
+    {
+      id: 'p8',
       name: 'Artisanal Tiramisù',
       subtitle: 'Dolci Craft',
       description: 'Savoiardi ladyfingers soaked in dark espresso & Marsala wine, layered with whipped mascarpone cream.',
       price: 320,
-      category: 'desserts'
+      category: 'desserts',
+      image: '/images/gallery-garnish.jpg'
     },
     {
-      id: 'p8',
+      id: 'p9',
+      name: 'Panna Cotta al Limone',
+      subtitle: 'Sweet Citrus',
+      description: 'Velvety vanilla bean panna cotta topped with organic Amalfi lemon compote and toasted pistachio crumble.',
+      price: 290,
+      category: 'desserts',
+      image: '/images/mozzarella.jpg'
+    },
+    {
+      id: 'p10',
+      name: 'Italian Aperol Spritz Mocktail',
+      subtitle: 'Refreshing Aperitivo',
+      description: 'Citrus blood orange infusion, sparkling soda, and fresh rosemary sprig over handcrafted ice.',
+      price: 240,
+      category: 'beverages',
+      image: '/images/gallery-bar.jpg'
+    },
+    {
+      id: 'p11',
       name: 'San Pellegrino Sparkling',
       subtitle: '750ml Glass Bottle',
       description: 'Natural sparkling mineral water sourced from the Italian Alps.',
       price: 180,
-      category: 'beverages'
+      category: 'beverages',
+      image: '/images/gallery-bar.jpg'
     }
   ]);
 
