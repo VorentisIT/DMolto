@@ -1,0 +1,312 @@
+<!-- Separate Modular Navbar Component -->
+<app-navbar></app-navbar>
+
+<main class="page-content-wrapper">
+  @switch (pizzaService.activeNavTab()) {
+    @case ('craft') {
+      <app-craft></app-craft>
+    }
+    @case ('menu') {
+      <app-menu-section></app-menu-section>
+    }
+    @case ('reservations') {
+      <app-reservations></app-reservations>
+    }
+    @case ('find-us') {
+      <app-location-footer></app-location-footer>
+    }
+    @default {
+      <app-hero></app-hero>
+      <app-craft></app-craft>
+      <app-menu-section></app-menu-section>
+      
+      <!-- Our Story Section -->
+      <section class="editorial-story-section" id="story-section">
+        <div class="container story-layout-grid">
+          <div class="story-visual-column">
+            <div class="story-image-frame">
+              <img 
+                src="/images/chef-craft.jpg" 
+                alt="Pizzaiolo stretching fresh sourdough pizza dough in front of roaring brick oven" 
+                class="story-hero-photo"
+                id="story-pizzaiolo-img"
+                loading="lazy">
+            </div>
+          </div>
+
+          <div class="story-narrative-column">
+            <span class="editorial-kicker">OUR STORY</span>
+            <h2 class="section-title font-serif">
+              The Alchemy of True<br>
+              <span class="text-orange font-italic">Neapolitan Pizza</span>
+            </h2>
+
+            <p class="story-lead-quote">
+              At D’Molto, pizza is more than food — it’s our heritage. Inspired by the cobblestone streets of Naples, we combine patience, passion, and fire to create a dining experience that feels like home in Italy.
+            </p>
+
+            <ul class="story-editorial-list">
+              <li class="story-list-item">
+                <span class="check-mark-circle">✓</span>
+                <div class="item-text-wrap">
+                  <strong>Authentic Neapolitan techniques</strong>
+                  <p>Hand-stretched without rolling pins, preserving delicate air pockets for the airy cornicione.</p>
+                </div>
+              </li>
+              <li class="story-list-item">
+                <span class="check-mark-circle">✓</span>
+                <div class="item-text-wrap">
+                  <strong>Slow-fermented sourdough</strong>
+                  <p>48-hour cold proofing yielding unmatched complexity and natural digestibility.</p>
+                </div>
+              </li>
+              <li class="story-list-item">
+                <span class="check-mark-circle">✓</span>
+                <div class="item-text-wrap">
+                  <strong>Fresh, seasonal ingredients</strong>
+                  <p>San Marzano tomatoes, imported Caputo Tipo 00 flour, and fresh daily fior di latte.</p>
+                </div>
+              </li>
+              <li class="story-list-item">
+                <span class="check-mark-circle">✓</span>
+                <div class="item-text-wrap">
+                  <strong>A warm, welcoming atmosphere</strong>
+                  <p>Crafted for laughter, milestone celebrations, date nights, and family gatherings.</p>
+                </div>
+              </li>
+            </ul>
+
+            <div class="story-action-composite">
+              <button type="button" class="btn-pill-terracotta" (click)="pizzaService.isStoryModalOpen.set(true)">
+                <span>Discover Our Story</span>
+                <span>→</span>
+              </button>
+
+              <div class="story-inset-polaroid">
+                <img src="/images/interior.jpg" alt="Warm Italian pizzeria dining room in Model Town Ludhiana" class="inset-polaroid-img" loading="lazy">
+                <span class="script-annotation polaroid-script">Tradition in Every Slice</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Atmosphere Section -->
+      <section class="atmosphere-gallery-section" id="experience-section">
+        <div class="container">
+          <div class="atmosphere-header text-center">
+            <span class="editorial-kicker text-gold">THE D’MOLTO EXPERIENCE</span>
+            <h2 class="section-title font-serif">More Than a Meal, A Memory.</h2>
+            <p class="section-subtitle">
+              Step into our candlelit Neapolitan pizzeria in Model Town. Feel the warmth of the roaring wood-fired oven and the aroma of baking sourdough.
+            </p>
+          </div>
+
+          <div class="atmosphere-grid">
+            <div class="atmosphere-card large-card">
+              <img src="/images/interior.jpg" alt="Rustic dining room with cozy leather booths and wood-fired oven glow" class="atmosphere-img" loading="lazy">
+              <div class="card-caption-overlay">
+                <span class="caption-kicker">ATMOSPHERE</span>
+                <h3 class="caption-title font-serif">Warm Candlelit Dining</h3>
+              </div>
+            </div>
+
+            <div class="atmosphere-card">
+              <img src="/images/gallery-bar.jpg" alt="Sleek Italian marble bar counter with craft cocktails" class="atmosphere-img" loading="lazy">
+              <div class="card-caption-overlay">
+                <span class="caption-kicker">BAR & LOUNGE</span>
+                <h3 class="caption-title font-serif">Italian Aperitivo Bar</h3>
+              </div>
+            </div>
+
+            <div class="atmosphere-card">
+              <img src="/images/gallery-garnish.jpg" alt="Chef garnishing pizza with fresh organic basil and olive oil" class="atmosphere-img" loading="lazy">
+              <div class="card-caption-overlay">
+                <span class="caption-kicker">HEARTH KITCHEN</span>
+                <h3 class="caption-title font-serif">Oven-Side Craft</h3>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <app-reservations></app-reservations>
+      <app-location-footer></app-location-footer>
+    }
+  }
+</main>
+
+<!-- ==========================================================================
+     MODALS: RESERVATION, CART, STORY & TOAST
+     ========================================================================== -->
+<!-- Reservation Modal -->
+@if (pizzaService.isReservationOpen()) {
+  <div class="modal-scrim" (click)="pizzaService.isReservationOpen.set(false)">
+    <div class="modal-card-luxury" (click)="$event.stopPropagation()">
+      <div class="modal-card-top">
+        <div>
+          <span class="editorial-kicker text-gold">TABLE CONCIERGE</span>
+          <h3 class="modal-card-title font-serif">Reserve at <span class="text-orange">D’Molto</span></h3>
+        </div>
+        <button type="button" class="modal-x-btn" (click)="pizzaService.isReservationOpen.set(false)">✕</button>
+      </div>
+
+      <form (submit)="submitReservation($event)" class="modal-luxury-form">
+        <div class="form-duo">
+          <div class="form-unit">
+            <label>Full Name *</label>
+            <input type="text" [(ngModel)]="resName" name="resName" placeholder="e.g. Prabhleen Singh" required>
+          </div>
+          <div class="form-unit">
+            <label>Phone Number *</label>
+            <input type="tel" [(ngModel)]="resPhone" name="resPhone" placeholder="e.g. +91 98765 43210" required>
+          </div>
+        </div>
+
+        <div class="form-duo">
+          <div class="form-unit">
+            <label>Party Size</label>
+            <select [(ngModel)]="resGuests" name="resGuests">
+              <option value="2 Guests (Date Night)">2 Guests (Date Night / Pair)</option>
+              <option value="1 Guest (Solo Dining)">1 Guest (Solo Dining)</option>
+              <option value="3-4 Guests (Family Table)">3-4 Guests (Family Table)</option>
+              <option value="5-6 Guests (Group)">5-6 Guests (Group Gathering)</option>
+              <option value="7+ Guests (Large Party)">7+ Guests (Celebration Party)</option>
+            </select>
+          </div>
+          <div class="form-unit">
+            <label>Date *</label>
+            <input type="date" [(ngModel)]="resDate" name="resDate" required>
+          </div>
+        </div>
+
+        <div class="form-unit">
+          <label>Preferred Time *</label>
+          <select [(ngModel)]="resTime" name="resTime">
+            <option value="12:30 PM (Lunch)">12:30 PM (Lunch)</option>
+            <option value="01:30 PM (Lunch)">01:30 PM (Lunch)</option>
+            <option value="04:30 PM (Coffee & High Tea)">04:30 PM (Coffee & High Tea)</option>
+            <option value="07:00 PM (Dinner)">07:00 PM (Dinner)</option>
+            <option value="07:30 PM (Dinner Prime)">07:30 PM (Dinner Prime)</option>
+            <option value="08:30 PM (Dinner Rush)">08:30 PM (Dinner Rush)</option>
+            <option value="09:30 PM (Late Feast)">09:30 PM (Late Feast)</option>
+          </select>
+        </div>
+
+        <div class="form-unit">
+          <label>Special Requests or Notes</label>
+          <textarea [(ngModel)]="resNotes" name="resNotes" rows="2" placeholder="e.g. Window booth preferred, celebration cake..."></textarea>
+        </div>
+
+        <button type="submit" class="btn-pill-terracotta btn-full-width">
+          <span>Confirm via WhatsApp Concierge</span>
+          <span>→</span>
+        </button>
+      </form>
+    </div>
+  </div>
+}
+
+<!-- Order Bag (Cart) Drawer -->
+@if (pizzaService.isCartOpen()) {
+  <div class="cart-scrim" (click)="pizzaService.isCartOpen.set(false)">
+    <div class="cart-drawer-panel" (click)="$event.stopPropagation()">
+      <div class="drawer-header-row">
+        <h3 class="drawer-title font-serif">Your Order Bag</h3>
+        <button type="button" class="modal-x-btn" (click)="pizzaService.isCartOpen.set(false)">✕</button>
+      </div>
+
+      <div class="drawer-items-content">
+        @if (pizzaService.cart().length === 0) {
+          <div class="empty-bag-notice">
+            <div class="empty-emoji">🍕</div>
+            <h4 class="font-serif">Your bag is feeling light</h4>
+            <p>Explore our menu and add your favorite wood-fired creations.</p>
+          </div>
+        } @else {
+          <div class="bag-items-list">
+            @for (item of pizzaService.cart(); track item.pizza.id; let i = $index) {
+              <div class="bag-item-card">
+                <img [src]="item.pizza.image || '/images/hero-pizza.jpg'" [alt]="item.pizza.name" class="bag-item-thumb">
+                <div class="bag-item-info">
+                  <h4 class="bag-item-name font-serif">{{ item.pizza.name }}</h4>
+                  <span class="bag-item-cost">₹{{ item.pizza.price * item.quantity }}</span>
+                  <div class="qty-stepper-luxury">
+                    <button type="button" (click)="pizzaService.updateQuantity(i, -1)">−</button>
+                    <span>{{ item.quantity }}</span>
+                    <button type="button" (click)="pizzaService.updateQuantity(i, 1)">+</button>
+                  </div>
+                </div>
+              </div>
+            }
+          </div>
+        }
+      </div>
+
+      @if (pizzaService.cart().length > 0) {
+        <div class="drawer-footer-band">
+          <div class="subtotal-line">
+            <span>Subtotal:</span>
+            <span class="subtotal-price font-serif">₹{{ pizzaService.cartTotalPrice() }}</span>
+          </div>
+          <button type="button" class="btn-pill-terracotta btn-full-width" (click)="checkoutViaWhatsApp()">
+            <span>Send Order via WhatsApp</span>
+            <span>→</span>
+          </button>
+        </div>
+      }
+    </div>
+  </div>
+}
+
+<!-- Story Video Modal -->
+@if (pizzaService.isStoryModalOpen()) {
+  <div class="modal-scrim" (click)="pizzaService.isStoryModalOpen.set(false)">
+    <div class="modal-card-luxury story-modal-size" (click)="$event.stopPropagation()">
+      <div class="modal-card-top">
+        <div>
+          <span class="editorial-kicker text-gold">THE D’MOLTO JOURNEY</span>
+          <h3 class="modal-card-title font-serif">Our Neapolitan Heritage</h3>
+        </div>
+        <button type="button" class="modal-x-btn" (click)="pizzaService.isStoryModalOpen.set(false)">✕</button>
+      </div>
+
+      <div class="story-modal-inner">
+        <img src="/images/chef-craft.jpg" alt="Artisan pizzaiolo stretching dough" class="story-modal-hero-img">
+        <p class="story-modal-body">
+          Before opening at 130 Model Town Road, we envisioned a sanctuary where the ancient craft of Naples could thrive without compromise.
+        </p>
+        <blockquote class="story-modal-quote font-serif">
+          "Right now, it’s quiet. Soon, these walls will witness first dates, family dinners, birthday wishes, endless conversations, and countless smiles. And we can’t wait to welcome them all."
+        </blockquote>
+      </div>
+    </div>
+  </div>
+}
+
+<!-- Toast Notification -->
+@if (pizzaService.toastMessage()) {
+  <div class="luxury-toast">
+    <span class="toast-sparkle">✨</span>
+    <span>{{ pizzaService.toastMessage() }}</span>
+  </div>
+}
+
+<!-- Floating Live WhatsApp Concierge Widget -->
+<a 
+  href="https://wa.me/918360340447?text=Hello%20D%27Molto%20Pizzeria%21%20I%27d%20like%20to%20inquire%20about%20today%27s%20fresh%20specials%20and%20table%20reservations." 
+  target="_blank" 
+  rel="noopener noreferrer" 
+  class="floating-live-concierge" 
+  title="Chat Live with D'Molto Pizzaiolo">
+  <div class="concierge-pulse"></div>
+  <div class="concierge-icon">
+    <svg viewBox="0 0 24 24" fill="currentColor">
+      <path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0 0 12.04 2z"/>
+    </svg>
+  </div>
+  <div class="concierge-info">
+    <span class="concierge-status"><span class="dot-online"></span> Live Kitchen</span>
+    <span class="concierge-title">Chat with Chef</span>
+  </div>
+</a>

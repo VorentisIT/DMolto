@@ -1,0 +1,985 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>D’Molto Pizza | Artisanal Wood-Fired Pizzeria & Cafe | Model Town, Ludhiana</title>
+  
+  <!-- SEO & OpenGraph Meta -->
+  <meta name="description" content="Experience authentic Neapolitan wood-fired pizza, 48-hour fermented sourdough crust, artisan antipasti, and specialty barista coffee at D'Molto Pizza in Model Town, Ludhiana.">
+  <meta name="keywords" content="D'Molto Pizza, Pizza Ludhiana, Wood Fired Pizza Model Town, Gourmet Pizza Ludhiana, Italian Restaurant Ludhiana, Sourdough Pizza Punjab">
+  <meta property="og:title" content="D’Molto Pizza | Artisanal Wood-Fired Pizzeria & Cafe">
+  <meta property="og:description" content="Passion baked at 450°C. Sourdough perfected by time. Visit us at 130 Model Town Road, Ludhiana.">
+  <meta property="og:image" content="assets/images/hero-pizza.jpg">
+  <meta property="og:type" content="restaurant">
+
+  <!-- Favicon -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220%22%20width=%2232%22%20height=%2232%22><text y=%2226%22 font-size=%2226%22>🍕</text></svg>">
+
+  <!-- Google Fonts: Playfair Display + Plus Jakarta Sans + Cinzel -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Lucide Icons CDN -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="index.css">
+
+  <!-- Schema.org JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Restaurant",
+    "name": "D'Molto Pizza",
+    "image": "assets/images/hero-pizza.jpg",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "130 Model Town Road, Pritm Nagar",
+      "addressLocality": "Ludhiana",
+      "addressRegion": "Punjab",
+      "postalCode": "141002",
+      "addressCountry": "IN"
+    },
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": 30.890307,
+      "longitude": 75.842072
+    },
+    "telephone": "+918360340447",
+    "servesCuisine": ["Italian", "Neapolitan Pizza", "Artisanal Sourdough", "Specialty Coffee"],
+    "priceRange": "₹₹",
+    "openingHoursSpecification": [
+      {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+        "opens": "11:00",
+        "closes": "23:00"
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+
+  <!-- Background Ember Particle Canvas -->
+  <canvas id="ember-canvas" aria-hidden="true"></canvas>
+
+  <!-- Top Announcement Bar with Live Status -->
+  <aside class="announcement-bar" id="announcement-bar">
+    <div class="announcement-content container">
+      <div class="live-status-pill" id="live-status-pill">
+        <span class="pulse-dot"></span>
+        <span id="live-status-text">Checking hours...</span>
+      </div>
+      <div class="announcement-message">
+        <span>📍 130 Model Town Road, Ludhiana</span>
+        <span class="separator">•</span>
+        <span>Wood-Fired Neapolitan & Specialty Coffee</span>
+        <span class="separator">•</span>
+        <a href="tel:+918360340447" class="announcement-link">Direct Line: +91 83603 40447</a>
+      </div>
+      <div class="announcement-social">
+        <a href="https://www.instagram.com/p/DbvelHqE-dp/" target="_blank" rel="noopener noreferrer" class="social-link" title="Visit our Instagram">
+          <i data-lucide="instagram"></i>
+          <span>@dmolto_pizza</span>
+        </a>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Navigation Header -->
+  <header class="site-header" id="site-header">
+    <div class="header-container container">
+      <!-- Brand Logo -->
+      <a href="#hero" class="brand-logo" id="brand-logo">
+        <span class="brand-mark">D’M</span>
+        <div class="brand-text-group">
+          <span class="brand-name">D’MOLTO</span>
+          <span class="brand-sub">PIZZERIA & CAFE • LUDHIANA</span>
+        </div>
+      </a>
+
+      <!-- Desktop Navigation -->
+      <nav class="desktop-nav" aria-label="Main Navigation">
+        <a href="#craft" class="nav-link">The Craft</a>
+        <a href="#menu" class="nav-link">Gourmet Menu</a>
+        <a href="#story" class="nav-link">Our Story</a>
+        <a href="#ambiance" class="nav-link">Ambiance</a>
+        <a href="#reserve" class="nav-link">Reservations</a>
+        <a href="#location" class="nav-link">Visit Us</a>
+      </nav>
+
+      <!-- Action Controls -->
+      <div class="header-actions">
+        <!-- Soundscape Audio Toggle -->
+        <button type="button" class="action-btn audio-btn" id="audio-toggle" title="Toggle warm woodfire oven soundscape" aria-label="Toggle ambient soundscape">
+          <i data-lucide="volume-x" id="audio-icon"></i>
+          <span class="audio-waves" id="audio-waves">
+            <span></span><span></span><span></span>
+          </span>
+        </button>
+
+        <!-- Cart Trigger -->
+        <button type="button" class="action-btn cart-btn" id="cart-toggle-btn" aria-label="View current order bag">
+          <i data-lucide="shopping-bag"></i>
+          <span class="cart-badge" id="cart-count">0</span>
+        </button>
+
+        <!-- CTA Reserve Table -->
+        <a href="#reserve" class="btn btn-primary nav-cta">
+          <span>Book a Table</span>
+          <i data-lucide="sparkles"></i>
+        </a>
+
+        <!-- Mobile Menu Hamburger -->
+        <button type="button" class="mobile-menu-btn" id="mobile-menu-toggle" aria-label="Open mobile navigation menu">
+          <i data-lucide="menu" id="hamburger-icon"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Navigation Drawer -->
+    <div class="mobile-nav-drawer" id="mobile-nav-drawer" aria-hidden="true">
+      <div class="mobile-nav-inner">
+        <a href="#craft" class="mobile-nav-link">The Craft</a>
+        <a href="#menu" class="mobile-nav-link">Gourmet Menu</a>
+        <a href="#story" class="mobile-nav-link">Our Story</a>
+        <a href="#ambiance" class="mobile-nav-link">Ambiance</a>
+        <a href="#reserve" class="mobile-nav-link">Reserve a Table</a>
+        <a href="#location" class="mobile-nav-link">Location & Map</a>
+        <div class="mobile-drawer-cta">
+          <a href="https://wa.me/918360340447?text=Hello%20D%27Molto%20Pizza%20Ludhiana!%20I%20would%20like%20to%20inquire%20about%20a%20table%20reservation." target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-block">
+            <i data-lucide="message-circle"></i>
+            <span>WhatsApp Reservation</span>
+          </a>
+          <a href="tel:+918360340447" class="btn btn-secondary btn-block">
+            <i data-lucide="phone-call"></i>
+            <span>Call +91 83603 40447</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- HERO SECTION -->
+    <section class="hero-section" id="hero">
+      <div class="container hero-grid">
+        <!-- Hero Text Column -->
+        <div class="hero-content">
+          <div class="badge-pill hero-badge">
+            <span class="badge-icon">🔥</span>
+            <span>Neapolitan Heritage • Model Town, Ludhiana</span>
+          </div>
+
+          <h1 class="hero-title">
+            Passion Baked at <span class="text-gradient-fire">450°C</span>.<br>
+            Sourdough Perfected by <span class="text-serif-italic">Time</span>.
+          </h1>
+
+          <p class="hero-description">
+            Welcome to <strong>D’Molto</strong> — Ludhiana’s destination for slow-fermented 48-hour sourdough pizzas, handcrafted creamy burrata, and genuine Italian craftsmanship. Each slice is kissed by woodfire flame and served with heartwarming hospitality.
+          </p>
+
+          <div class="hero-cta-group">
+            <a href="#menu" class="btn btn-primary btn-lg" id="hero-menu-cta">
+              <i data-lucide="utensils"></i>
+              <span>Explore Gourmet Menu</span>
+            </a>
+            <a href="#reserve" class="btn btn-glass btn-lg" id="hero-reserve-cta">
+              <i data-lucide="calendar-check"></i>
+              <span>Reserve Your Table</span>
+            </a>
+          </div>
+
+          <!-- Feature Metric Highlights -->
+          <div class="hero-stats-row">
+            <div class="stat-card">
+              <span class="stat-number">48h</span>
+              <span class="stat-label">Cold Fermented Dough</span>
+            </div>
+            <div class="stat-divider"></div>
+            <div class="stat-card">
+              <span class="stat-number">450°C</span>
+              <span class="stat-label">Stone Oven Heat</span>
+            </div>
+            <div class="stat-divider"></div>
+            <div class="stat-card">
+              <span class="stat-number">100%</span>
+              <span class="stat-label">San Marzano D.O.P</span>
+            </div>
+            <div class="stat-divider"></div>
+            <div class="stat-card">
+              <span class="stat-number">Pure</span>
+              <span class="stat-label">Fior di Latte & Bufala</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Hero Visual Showcase Column (3D Interactive Tilt) -->
+        <div class="hero-visual-wrapper">
+          <div class="hero-card-tilt" id="hero-tilt-card">
+            <div class="card-glow-layer"></div>
+            <div class="hero-img-container">
+              <img src="assets/images/hero-pizza.jpg" alt="Signature D'Molto Wood-Fired Neapolitan Pizza with bubbling cheese, fresh basil, and leopard charred sourdough crust" class="hero-main-img" width="700" height="420">
+              <div class="steam-container">
+                <span class="steam-cloud c1"></span>
+                <span class="steam-cloud c2"></span>
+                <span class="steam-cloud c3"></span>
+              </div>
+            </div>
+
+            <!-- Floating Interactive Badges -->
+            <div class="floating-tag tag-top-right">
+              <i data-lucide="flame" class="tag-icon"></i>
+              <div>
+                <span class="tag-heading">Live Wood-Fire</span>
+                <span class="tag-sub">Charred Leopard Crust</span>
+              </div>
+            </div>
+
+            <div class="floating-tag tag-bottom-left">
+              <span class="tag-emoji">🇮🇹</span>
+              <div>
+                <span class="tag-heading">Molto Delizioso</span>
+                <span class="tag-sub">Model Town Exclusive</span>
+              </div>
+            </div>
+
+            <div class="card-action-bar">
+              <div class="dish-name-badge">
+                <span class="dish-title">Margherita D’Molto Supreme</span>
+                <span class="dish-price">₹545</span>
+              </div>
+              <button type="button" class="btn btn-sm btn-primary quick-add-hero" data-dish-id="p1">
+                <i data-lucide="plus"></i>
+                <span>Add to Order</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Scroll Down Indicator -->
+      <a href="#craft" class="scroll-cue" aria-label="Scroll to craft section">
+        <span class="cue-text">Discover The Craft</span>
+        <i data-lucide="chevron-down" class="cue-icon"></i>
+      </a>
+    </section>
+
+    <!-- THE CRAFT & HERITAGE SECTION -->
+    <section class="craft-section section-padding" id="craft">
+      <div class="container">
+        <div class="section-header text-center">
+          <span class="section-kicker">Artisanal Philosophy</span>
+          <h2 class="section-title">The Alchemy of True <span class="text-gradient-fire">Neapolitan Pizza</span></h2>
+          <p class="section-subtitle">
+            At D’Molto, we reject shortcuts. Every pizza is a masterclass in slow food — respecting the natural rhythms of fermentation, authentic Italian ingredients, and intense woodfire heat.
+          </p>
+        </div>
+
+        <div class="craft-grid">
+          <!-- Pillar 1 -->
+          <article class="craft-card">
+            <div class="craft-card-icon">
+              <i data-lucide="hourglass"></i>
+            </div>
+            <span class="craft-step">01</span>
+            <h3 class="craft-heading">48-Hour Cold Fermentation</h3>
+            <p class="craft-text">
+              Our sourdough base matures slowly for two days, creating a cloud-like, airy cornicione (crust) that is intensely fragrant, easy on digestion, and bursting with complex flavor.
+            </p>
+            <div class="craft-pill">High Hydration Dough</div>
+          </article>
+
+          <!-- Pillar 2 -->
+          <article class="craft-card">
+            <div class="craft-card-icon">
+              <i data-lucide="sun"></i>
+            </div>
+            <span class="craft-step">02</span>
+            <h3 class="craft-heading">San Marzano D.O.P. Tomatoes</h3>
+            <p class="craft-text">
+              Grown in volcanic soils at the foot of Mount Vesuvius, hand-crushed with sea salt and cold-pressed extra virgin olive oil. Naturally sweet, low acidity, vibrant red perfection.
+            </p>
+            <div class="craft-pill">Campania Volcanic Soil</div>
+          </article>
+
+          <!-- Pillar 3 -->
+          <article class="craft-card">
+            <div class="craft-card-icon">
+              <i data-lucide="sparkles"></i>
+            </div>
+            <span class="craft-step">03</span>
+            <h3 class="craft-heading">Fior Di Latte & Fresh Burrata</h3>
+            <p class="craft-text">
+              Crafted fresh for decadent meltability without grease. From whole creamy burrata bursting over hot pies to delicate fior di latte that yields the iconic cheese pull.
+            </p>
+            <div class="craft-pill">Fresh Daily Artisan Cheese</div>
+          </article>
+
+          <!-- Pillar 4 -->
+          <article class="craft-card">
+            <div class="craft-card-icon">
+              <i data-lucide="flame"></i>
+            </div>
+            <span class="craft-step">04</span>
+            <h3 class="craft-heading">450°C Firebrick Stone Oven</h3>
+            <p class="craft-text">
+              Baked in under 90 seconds in our blazing stone hearth. The intense thermal shock caramelizes the dough, creates trademark leopard spotting, and seals in freshness.
+            </p>
+            <div class="craft-pill">Wood-Fired Blazing Hearth</div>
+          </article>
+        </div>
+
+        <!-- Craft Feature Banner with Chef Photography -->
+        <div class="craft-feature-banner">
+          <div class="banner-image-col">
+            <img src="assets/images/chef-craft.jpg" alt="Artisan pizzaiolo chef stretching sourdough pizza dough with flying flour" class="banner-img" loading="lazy" width="600" height="400">
+          </div>
+          <div class="banner-content-col">
+            <span class="banner-tag">Master Pizzaiolo’s Touch</span>
+            <h3 class="banner-title">Hand-Stretched with Reverence</h3>
+            <p class="banner-text">
+              We never use rolling pins or mechanical presses. Every dough ball is gently stretched by hand from the center outwards, preserving the delicate trapped air pockets that give Neapolitan pizza its legendary light-as-air crust.
+            </p>
+            <div class="banner-highlights">
+              <div class="highlight-item">
+                <i data-lucide="check-circle-2"></i>
+                <span>Zero artificial preservatives or commercial dough conditioners</span>
+              </div>
+              <div class="highlight-item">
+                <i data-lucide="check-circle-2"></i>
+                <span>Caputo Tipo 00 imported Italian flour</span>
+              </div>
+              <div class="highlight-item">
+                <i data-lucide="check-circle-2"></i>
+                <span>Fresh organic basil & cold-pressed EVOO</span>
+              </div>
+            </div>
+            <a href="#menu" class="btn btn-outline">Browse Signature Pies</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- INTERACTIVE GOURMET MENU SECTION -->
+    <section class="menu-section section-padding" id="menu">
+      <div class="container">
+        <div class="section-header text-center">
+          <span class="section-kicker">Culinary Selection</span>
+          <h2 class="section-title">Explore The <span class="text-gradient-fire">D’Molto Menu</span></h2>
+          <p class="section-subtitle">
+            From iconic wood-fired classics and indulgent burrata creations to artisanal pasta, specialty barista coffee, and refreshing spritz mocktails.
+          </p>
+        </div>
+
+        <!-- Category Filter Tabs -->
+        <div class="menu-filter-wrapper">
+          <div class="category-tabs" id="category-tabs" role="tablist">
+            <button type="button" class="tab-btn active" data-category="all" role="tab" aria-selected="true">
+              <span>All Creations</span>
+            </button>
+            <button type="button" class="tab-btn" data-category="wood-fired" role="tab" aria-selected="false">
+              <span>Wood-Fired Classics</span>
+            </button>
+            <button type="button" class="tab-btn" data-category="gourmet" role="tab" aria-selected="false">
+              <span>Chef's Gourmet</span>
+            </button>
+            <button type="button" class="tab-btn" data-category="antipasti" role="tab" aria-selected="false">
+              <span>Antipasti & Sides</span>
+            </button>
+            <button type="button" class="tab-btn" data-category="coffee" role="tab" aria-selected="false">
+              <span>Barista & Brews</span>
+            </button>
+            <button type="button" class="tab-btn" data-category="dolci" role="tab" aria-selected="false">
+              <span>Dolci & Desserts</span>
+            </button>
+            <button type="button" class="tab-btn" data-category="spritz" role="tab" aria-selected="false">
+              <span>Spritz & Mocktails</span>
+            </button>
+          </div>
+
+          <!-- Secondary Dietary Filter -->
+          <div class="dietary-filter" id="dietary-filter">
+            <span class="dietary-label">Preference:</span>
+            <button type="button" class="chip-btn active" data-diet="all">All</button>
+            <button type="button" class="chip-btn" data-diet="veg">🌱 Pure Veg</button>
+            <button type="button" class="chip-btn" data-diet="non-veg">🍗 Non-Veg</button>
+            <button type="button" class="chip-btn" data-diet="chef">⭐ Chef Special</button>
+          </div>
+        </div>
+
+        <!-- Menu Items Grid -->
+        <div class="menu-grid" id="menu-grid" aria-live="polite">
+          <!-- Dynamically populated by app.js -->
+        </div>
+
+        <!-- Menu Bottom Note -->
+        <div class="menu-footer-note text-center">
+          <p>
+            * Prices are subject to applicable taxes. Gluten-sensitive and vegan mozzarella modifications available upon request.
+          </p>
+          <div class="custom-pizza-cta">
+            <i data-lucide="sparkles"></i>
+            <span>Want to personalize your toppings or crust? Click on any pizza to open the <strong>Crust & Ingredient Customizer</strong>!</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- OUR STORY & INSTAGRAM CONNECTION SECTION -->
+    <section class="story-section section-padding" id="story">
+      <div class="container">
+        <div class="story-grid">
+          <!-- Text Column -->
+          <div class="story-content">
+            <div class="badge-pill">
+              <span>Our Journey in Ludhiana</span>
+            </div>
+            <h2 class="story-title">
+              "Soon, these walls will witness <span class="text-serif-italic">first dates, family dinners</span>, and countless smiles."
+            </h2>
+            <p class="story-lead">
+              Before the doors opened at 130 Model Town Road, we sat inside the quiet room and imagined what D’Molto would become.
+            </p>
+            <p class="story-body">
+              We didn't just want to build another restaurant in Ludhiana. We wanted to build a sanctuary — a place where friends linger over piping-hot slices, where couples celebrate quiet milestones over tiramisu, where children watch mesmerized as pizzas slide into the blazing oven, and where the rich aroma of roasted espresso beans fills the evening air.
+            </p>
+            <p class="story-quote">
+              <em>"Right now, it’s quiet. Soon, these walls will witness first dates, family dinners, birthday wishes, endless conversations, and countless smiles. And we can’t wait to welcome them all."</em>
+              <span class="quote-author">— From our early Instagram journal (@dmolto_pizza)</span>
+            </p>
+            <div class="story-actions">
+              <a href="https://www.instagram.com/p/DbvelHqE-dp/" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
+                <i data-lucide="instagram"></i>
+                <span>Join Our Community on Instagram</span>
+              </a>
+              <a href="#reserve" class="btn btn-glass">
+                <span>Book Your Table Now</span>
+              </a>
+            </div>
+          </div>
+
+          <!-- Visual Multi-Card Showcase -->
+          <div class="story-visual-col">
+            <div class="story-image-card main-story-card">
+              <img src="assets/images/interior.jpg" alt="D'Molto Pizza warm restaurant dining room filled with happy guests in Model Town Ludhiana" class="story-img" loading="lazy" width="600" height="400">
+              <div class="story-card-overlay">
+                <span class="overlay-tag">Model Town, Ludhiana</span>
+                <h4 class="overlay-title">Warm Dining, Timeless Memories</h4>
+              </div>
+            </div>
+
+            <div class="story-image-card sub-story-card">
+              <img src="assets/images/burrata-truffle.jpg" alt="Black summer truffle and creamy whole burrata pizza with refreshing Italian blood orange spritz" class="story-img" loading="lazy" width="600" height="400">
+              <div class="story-card-overlay">
+                <span class="overlay-tag">Signature Pairings</span>
+                <h4 class="overlay-title">Burrata Tartufo & Blood Orange Spritz</h4>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- AMBIANCE & EXPERIENCE SECTION -->
+    <section class="ambiance-section section-padding" id="ambiance">
+      <div class="container">
+        <div class="section-header text-center">
+          <span class="section-kicker">Atmosphere</span>
+          <h2 class="section-title">Designed for <span class="text-gradient-fire">Connection</span></h2>
+          <p class="section-subtitle">
+            Warm terracotta brick, glowing amber pendants, olive greenery, and the cozy crackle of genuine hardwood.
+          </p>
+        </div>
+
+        <div class="ambiance-features-grid">
+          <div class="ambiance-card">
+            <div class="ambiance-icon"><i data-lucide="heart"></i></div>
+            <h3 class="ambiance-card-title">Intimate Date Nights</h3>
+            <p class="ambiance-card-desc">Soft ambient lighting, quiet corners, and rich wine glasses paired with artisanal gourmet sourdough pizza.</p>
+          </div>
+
+          <div class="ambiance-card">
+            <div class="ambiance-icon"><i data-lucide="users"></i></div>
+            <h3 class="ambiance-card-title">Lively Family Dinners</h3>
+            <p class="ambiance-card-desc">Spacious plush booth seating for whole families to gather, share sharing platters, and celebrate milestones.</p>
+          </div>
+
+          <div class="ambiance-card">
+            <div class="ambiance-icon"><i data-lucide="coffee"></i></div>
+            <h3 class="ambiance-card-title">Specialty Barista Lounge</h3>
+            <p class="ambiance-card-desc">Premium roasted espresso, creamy flat whites, iced cortados, and classic Italian cannoli for afternoon work or chats.</p>
+          </div>
+
+          <div class="ambiance-card">
+            <div class="ambiance-icon"><i data-lucide="cake"></i></div>
+            <h3 class="ambiance-card-title">Birthday Celebrations</h3>
+            <p class="ambiance-card-desc">Personalized dessert platters and celebratory hospitality tailored to make your birthdays truly memorable.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TABLE RESERVATION BOOKING ENGINE -->
+    <section class="reserve-section section-padding" id="reserve">
+      <div class="container">
+        <div class="reserve-wrapper">
+          <div class="reserve-header text-center">
+            <span class="section-kicker">Reserve Your Experience</span>
+            <h2 class="section-title">Book a Table at <span class="text-gradient-fire">D’Molto</span></h2>
+            <p class="section-subtitle">
+              Secure your table in advance. We hold tables for 15 minutes past reservation time. Instant confirmation via direct WhatsApp integration.
+            </p>
+          </div>
+
+          <form class="reservation-form" id="reservation-form" novalidate>
+            <div class="form-grid">
+              <!-- Name -->
+              <div class="form-group">
+                <label for="res-name" class="form-label">
+                  <i data-lucide="user"></i>
+                  <span>Full Name *</span>
+                </label>
+                <input type="text" id="res-name" name="name" class="form-input" placeholder="e.g. Prabhleen Singh" required>
+              </div>
+
+              <!-- Phone -->
+              <div class="form-group">
+                <label for="res-phone" class="form-label">
+                  <i data-lucide="phone"></i>
+                  <span>Phone Number *</span>
+                </label>
+                <input type="tel" id="res-phone" name="phone" class="form-input" placeholder="e.g. +91 98765 43210" required>
+              </div>
+
+              <!-- Guests -->
+              <div class="form-group">
+                <label for="res-guests" class="form-label">
+                  <i data-lucide="users"></i>
+                  <span>Number of Guests *</span>
+                </label>
+                <select id="res-guests" name="guests" class="form-select" required>
+                  <option value="2 Guests (Table for Two)">2 Guests (Date Night / Pair)</option>
+                  <option value="1 Guest (Solo Dining)">1 Guest (Solo Dining)</option>
+                  <option value="3 Guests">3 Guests</option>
+                  <option value="4 Guests (Family Table)">4 Guests (Family Table)</option>
+                  <option value="5-6 Guests">5-6 Guests (Group)</option>
+                  <option value="7-8 Guests">7-8 Guests (Celebration)</option>
+                  <option value="9+ Guests (Large Party)">9+ Guests (Large Party Booking)</option>
+                </select>
+              </div>
+
+              <!-- Date -->
+              <div class="form-group">
+                <label for="res-date" class="form-label">
+                  <i data-lucide="calendar"></i>
+                  <span>Reservation Date *</span>
+                </label>
+                <input type="date" id="res-date" name="date" class="form-input" required>
+              </div>
+
+              <!-- Time Slot -->
+              <div class="form-group">
+                <label for="res-time" class="form-label">
+                  <i data-lucide="clock"></i>
+                  <span>Preferred Time Slot *</span>
+                </label>
+                <select id="res-time" name="time" class="form-select" required>
+                  <option value="12:30 PM (Lunch)">12:30 PM (Lunch)</option>
+                  <option value="01:30 PM (Lunch)">01:30 PM (Lunch)</option>
+                  <option value="02:30 PM (Late Lunch)">02:30 PM (Late Lunch)</option>
+                  <option value="04:30 PM (Coffee & High Tea)">04:30 PM (Coffee & High Tea)</option>
+                  <option value="06:30 PM (Early Dinner)">06:30 PM (Early Dinner)</option>
+                  <option value="07:30 PM (Dinner Rush)">07:30 PM (Dinner Rush)</option>
+                  <option value="08:30 PM (Dinner Prime)">08:30 PM (Dinner Prime)</option>
+                  <option value="09:30 PM (Late Evening Feast)">09:30 PM (Late Evening Feast)</option>
+                  <option value="10:00 PM (Last Seating)">10:00 PM (Last Seating)</option>
+                </select>
+              </div>
+
+              <!-- Occasion -->
+              <div class="form-group">
+                <label for="res-occasion" class="form-label">
+                  <i data-lucide="gift"></i>
+                  <span>Dining Occasion</span>
+                </label>
+                <select id="res-occasion" name="occasion" class="form-select">
+                  <option value="Casual Catchup">Casual Catchup / Everyday Meal</option>
+                  <option value="Romantic Date Night">Romantic Date Night ❤️</option>
+                  <option value="Birthday Celebration">Birthday Celebration 🎂</option>
+                  <option value="Anniversary">Anniversary Celebration 🥂</option>
+                  <option value="Family Reunion">Family Dinner Gathering 👨‍👩‍👧‍👦</option>
+                  <option value="Business Meeting">Business Dining</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Special Notes -->
+            <div class="form-group full-width">
+              <label for="res-notes" class="form-label">
+                <i data-lucide="file-text"></i>
+                <span>Special Requests or Dietary Requirements</span>
+              </label>
+              <textarea id="res-notes" name="notes" class="form-textarea" rows="2" placeholder="e.g., Booth seating preferred, celebration cake setup, allergies..."></textarea>
+            </div>
+
+            <!-- Submit Action -->
+            <div class="form-submit-row">
+              <button type="submit" class="btn btn-primary btn-lg" id="submit-reservation-btn">
+                <i data-lucide="send"></i>
+                <span>Confirm via WhatsApp Concierge</span>
+              </button>
+              <a href="tel:+918360340447" class="btn btn-glass btn-lg">
+                <i data-lucide="phone"></i>
+                <span>Or Call Directly: +91 83603 40447</span>
+              </a>
+            </div>
+
+            <p class="reservation-disclaimer text-center">
+              🔒 Your details are used solely to confirm your booking. No spam, ever.
+            </p>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <!-- LOCATION & GOOGLE MAPS HUB -->
+    <section class="location-section section-padding" id="location">
+      <div class="container">
+        <div class="section-header text-center">
+          <span class="section-kicker">Find Us in Ludhiana</span>
+          <h2 class="section-title">Visit <span class="text-gradient-fire">D’Molto Pizzeria</span></h2>
+          <p class="section-subtitle">
+            Located on Model Town Road, Ludhiana. Easy access, valet & street parking, and cozy indoor dining.
+          </p>
+        </div>
+
+        <div class="location-grid">
+          <!-- Info Details Card -->
+          <div class="location-info-card">
+            <div class="location-detail-item">
+              <div class="detail-icon"><i data-lucide="map-pin"></i></div>
+              <div class="detail-text">
+                <h4 class="detail-title">Address</h4>
+                <p class="detail-desc">130, Model Town Road, Pritm Nagar, Model Town, Ludhiana, Punjab 141002</p>
+                <a href="https://www.google.com/maps/place/D%E2%80%99Molto+Pizza/@30.8902415,75.8393836,17z/data=!4m6!3m5!1s0x391a832e8bfcb8a7:0xa0aeee596fcdb311!8m2!3d30.890307!4d75.842072!16s%2Fg%2F11zf7l0pnb!18m1!1e1" target="_blank" rel="noopener noreferrer" class="link-inline">
+                  <span>Get Live Directions on Google Maps</span>
+                  <i data-lucide="external-link"></i>
+                </a>
+              </div>
+            </div>
+
+            <div class="location-detail-item">
+              <div class="detail-icon"><i data-lucide="clock"></i></div>
+              <div class="detail-text">
+                <h4 class="detail-title">Service Hours</h4>
+                <p class="detail-desc">Monday – Sunday: 11:00 AM – 11:00 PM</p>
+                <div class="hours-badge" id="location-hours-badge">
+                  <span class="pulse-dot"></span>
+                  <span id="location-hours-status">Open Today: 11 AM - 11 PM</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="location-detail-item">
+              <div class="detail-icon"><i data-lucide="phone-call"></i></div>
+              <div class="detail-text">
+                <h4 class="detail-title">Reservations & Takeaway</h4>
+                <p class="detail-desc">+91 83603 40447</p>
+                <div class="quick-contact-btns">
+                  <a href="tel:+918360340447" class="btn btn-sm btn-primary">
+                    <i data-lucide="phone"></i>
+                    <span>Call Us</span>
+                  </a>
+                  <a href="https://wa.me/918360340447?text=Hello%20D%27Molto%20Pizza!%20I%20would%20like%20to%20place%20an%20order%20or%20inquire." target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-glass">
+                    <i data-lucide="message-circle"></i>
+                    <span>WhatsApp</span>
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <div class="location-detail-item">
+              <div class="detail-icon"><i data-lucide="shield-check"></i></div>
+              <div class="detail-text">
+                <h4 class="detail-title">Guest Amenities</h4>
+                <p class="detail-desc">Air-Conditioned Indoor Dining • Wood-Fire Viewing Counter • Free High-Speed Wi-Fi • Takeaway & Delivery</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Interactive Google Maps Visual Window -->
+          <div class="location-map-card">
+            <div class="map-container-mock">
+              <iframe 
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3423.8329623067167!2d75.8394977!3d30.890307!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x391a832e8bfcb8a7%3A0xa0aeee596fcdb311!2sD%E2%80%99Molto%20Pizza!5e0!3m2!1sen!2sin!4v1717000000000!5m2!1sen!2sin" 
+                title="D'Molto Pizza Google Map Location" 
+                class="map-iframe"
+                loading="lazy" 
+                referrerpolicy="no-referrer-when-downgrade">
+              </iframe>
+              <div class="map-floating-overlay">
+                <div class="map-badge">
+                  <span class="map-badge-icon">🍕</span>
+                  <div>
+                    <strong>D’Molto Pizza</strong>
+                    <p>Model Town, Ludhiana</p>
+                  </div>
+                </div>
+                <a href="https://www.google.com/maps/place/D%E2%80%99Molto+Pizza/@30.8902415,75.8393836,17z/data=!4m6!3m5!1s0x391a832e8bfcb8a7:0xa0aeee596fcdb311!8m2!3d30.890307!4d75.842072!16s%2Fg%2F11zf7l0pnb!18m1!1e1" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-primary">
+                  <span>Open in App</span>
+                  <i data-lucide="arrow-up-right"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- CART & ORDER DRAWER -->
+  <div class="cart-drawer-overlay" id="cart-drawer-overlay" aria-hidden="true">
+    <div class="cart-drawer" id="cart-drawer" role="dialog" aria-label="Order Cart">
+      <div class="cart-drawer-header">
+        <div class="drawer-title-group">
+          <i data-lucide="shopping-bag"></i>
+          <h3 class="drawer-title">Your Order Bag</h3>
+        </div>
+        <button type="button" class="drawer-close-btn" id="cart-drawer-close" aria-label="Close cart drawer">
+          <i data-lucide="x"></i>
+        </button>
+      </div>
+
+      <div class="cart-drawer-body" id="cart-items-container">
+        <!-- Dynamically rendered cart items -->
+        <div class="empty-cart-state" id="empty-cart-state">
+          <div class="empty-cart-icon">🍕</div>
+          <h4>Your bag is feeling light</h4>
+          <p>Explore our wood-fired pizzas, appetizers, and specialty barista drinks to add your favorites.</p>
+          <a href="#menu" class="btn btn-sm btn-primary" onclick="closeCart()">View Menu</a>
+        </div>
+      </div>
+
+      <div class="cart-drawer-footer" id="cart-drawer-footer">
+        <div class="cart-summary-row">
+          <span>Subtotal</span>
+          <span class="cart-total-price" id="cart-subtotal">₹0</span>
+        </div>
+        <div class="cart-summary-row fee-row">
+          <span>Packaging & GST</span>
+          <span>Calculated at checkout</span>
+        </div>
+        <button type="button" class="btn btn-primary btn-block checkout-btn" id="checkout-whatsapp-btn">
+          <i data-lucide="message-circle"></i>
+          <span>Send Order via WhatsApp Concierge</span>
+        </button>
+        <p class="cart-helper-text">
+          Orders are confirmed instantly with the D’Molto kitchen team at +91 83603 40447.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- CUSTOMIZE CRUST & TOPPINGS MODAL -->
+  <div class="modal-overlay" id="customize-modal-overlay" aria-hidden="true">
+    <div class="customize-modal" id="customize-modal" role="dialog" aria-label="Customize Pizza">
+      <div class="modal-header">
+        <div class="modal-title-group">
+          <span class="modal-kicker">Personalize Your Pie</span>
+          <h3 class="modal-dish-name" id="modal-dish-name">Margherita D’Molto</h3>
+        </div>
+        <button type="button" class="modal-close-btn" id="modal-close-btn" aria-label="Close customizer">
+          <i data-lucide="x"></i>
+        </button>
+      </div>
+
+      <div class="modal-body">
+        <div class="modal-dish-preview">
+          <img src="assets/images/hero-pizza.jpg" alt="Dish preview" id="modal-dish-img" class="modal-preview-img">
+          <p class="modal-dish-desc" id="modal-dish-desc">Hand-crushed San Marzano tomatoes, fresh fior di latte mozzarella, fragrant basil leaves, and cold-pressed olive oil.</p>
+        </div>
+
+        <!-- Crust Selection Option -->
+        <div class="modal-section" id="crust-section">
+          <h4 class="modal-section-title">1. Select Sourdough Crust</h4>
+          <div class="option-grid">
+            <label class="custom-radio-card">
+              <input type="radio" name="crust-choice" value="Classic 48hr Neapolitan Sourdough" checked>
+              <div class="radio-content">
+                <span class="radio-name">Classic 48hr Neapolitan</span>
+                <span class="radio-desc">Fluffy airy cornicione, charred leopard spots</span>
+                <span class="radio-price">Included</span>
+              </div>
+            </label>
+
+            <label class="custom-radio-card">
+              <input type="radio" name="crust-choice" value="Formaggio Stuffed Crust (+₹95)">
+              <div class="radio-content">
+                <span class="radio-name">Formaggio Stuffed Crust</span>
+                <span class="radio-desc">Crust rolled with molten mozzarella & herbs</span>
+                <span class="radio-price">+₹95</span>
+              </div>
+            </label>
+
+            <label class="custom-radio-card">
+              <input type="radio" name="crust-choice" value="Thin & Crisp Romana Sourdough">
+              <div class="radio-content">
+                <span class="radio-name">Crisp Romana Style</span>
+                <span class="radio-desc">Ultra-thin, crunchier edge</span>
+                <span class="radio-price">Included</span>
+              </div>
+            </label>
+          </div>
+        </div>
+
+        <!-- Extra Artisanal Toppings -->
+        <div class="modal-section">
+          <h4 class="modal-section-title">2. Enhance with Artisan Extras</h4>
+          <div class="checkbox-grid">
+            <label class="custom-checkbox-card">
+              <input type="checkbox" name="topping-extra" value="Fresh Whole Burrata Ball" data-price="140">
+              <div class="checkbox-content">
+                <span class="cb-name">Creamy Burrata Ball</span>
+                <span class="cb-price">+₹140</span>
+              </div>
+            </label>
+
+            <label class="custom-checkbox-card">
+              <input type="checkbox" name="topping-extra" value="Black Summer Truffle Oil Drizzle" data-price="90">
+              <div class="checkbox-content">
+                <span class="cb-name">Truffle Oil Drizzle</span>
+                <span class="cb-price">+₹90</span>
+              </div>
+            </label>
+
+            <label class="custom-checkbox-card">
+              <input type="checkbox" name="topping-extra" value="Wild Sautéed Garlic Mushrooms" data-price="85">
+              <div class="checkbox-content">
+                <span class="cb-name">Wild Garlic Mushrooms</span>
+                <span class="cb-price">+₹85</span>
+              </div>
+            </label>
+
+            <label class="custom-checkbox-card">
+              <input type="checkbox" name="topping-extra" value="Hot Calabrian Chilli Infused Honey" data-price="60">
+              <div class="checkbox-content">
+                <span class="cb-name">Hot Chilli Honey</span>
+                <span class="cb-price">+₹60</span>
+              </div>
+            </label>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <div class="modal-total-wrapper">
+          <span class="modal-total-label">Total Price</span>
+          <span class="modal-calculated-price" id="modal-calculated-price">₹545</span>
+        </div>
+        <button type="button" class="btn btn-primary btn-lg" id="modal-add-btn">
+          <i data-lucide="plus"></i>
+          <span>Add Custom Pie to Bag</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- TOAST NOTIFICATION CONTAINER -->
+  <div class="toast-container" id="toast-container" aria-live="assertive"></div>
+
+  <!-- SITE FOOTER -->
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <!-- Brand Col -->
+      <div class="footer-col brand-col">
+        <div class="brand-logo footer-logo">
+          <span class="brand-mark">D’M</span>
+          <div class="brand-text-group">
+            <span class="brand-name">D’MOLTO</span>
+            <span class="brand-sub">PIZZERIA & CAFE</span>
+          </div>
+        </div>
+        <p class="footer-brand-desc">
+          Ludhiana's premier home of gourmet wood-fired pizza, cold-fermented sourdough, and warm hospitality. Creating unforgettable memories one slice at a time.
+        </p>
+        <div class="footer-social-links">
+          <a href="https://www.instagram.com/p/DbvelHqE-dp/" target="_blank" rel="noopener noreferrer" class="footer-social-icon" aria-label="Instagram">
+            <i data-lucide="instagram"></i>
+          </a>
+          <a href="https://www.google.com/maps/place/D%E2%80%99Molto+Pizza/@30.8902415,75.8393836,17z/data=!4m6!3m5!1s0x391a832e8bfcb8a7:0xa0aeee596fcdb311!8m2!3d30.890307!4d75.842072!16s%2Fg%2F11zf7l0pnb" target="_blank" rel="noopener noreferrer" class="footer-social-icon" aria-label="Google Maps">
+            <i data-lucide="map-pin"></i>
+          </a>
+          <a href="https://wa.me/918360340447" target="_blank" rel="noopener noreferrer" class="footer-social-icon" aria-label="WhatsApp">
+            <i data-lucide="message-circle"></i>
+          </a>
+          <a href="tel:+918360340447" class="footer-social-icon" aria-label="Phone">
+            <i data-lucide="phone"></i>
+          </a>
+        </div>
+      </div>
+
+      <!-- Quick Links -->
+      <div class="footer-col">
+        <h4 class="footer-heading">Quick Navigation</h4>
+        <ul class="footer-nav-list">
+          <li><a href="#hero">Back to Top</a></li>
+          <li><a href="#craft">The Artisanal Craft</a></li>
+          <li><a href="#menu">Gourmet Pizza Menu</a></li>
+          <li><a href="#story">The D’Molto Story</a></li>
+          <li><a href="#reserve">Reserve a Table</a></li>
+          <li><a href="#location">Find Location & Hours</a></li>
+        </ul>
+      </div>
+
+      <!-- Hours & Location -->
+      <div class="footer-col">
+        <h4 class="footer-heading">Visit & Contact</h4>
+        <p class="footer-info-text">
+          <strong>Location:</strong><br>
+          130 Model Town Road, Pritm Nagar,<br>
+          Model Town, Ludhiana, Punjab 141002
+        </p>
+        <p class="footer-info-text">
+          <strong>Operating Hours:</strong><br>
+          Monday – Sunday: 11:00 AM – 11:00 PM
+        </p>
+        <p class="footer-info-text">
+          <strong>Contact Line:</strong><br>
+          <a href="tel:+918360340447" class="footer-phone-link">+91 83603 40447</a>
+        </p>
+      </div>
+
+      <!-- Heritage Note -->
+      <div class="footer-col">
+        <h4 class="footer-heading">The D’Molto Promise</h4>
+        <p class="footer-info-text">
+          Every pizza is fermented for 48 hours and fired at 450°C using genuine Italian beechwood and stone. No compromise on flour, cheese, or craft.
+        </p>
+        <div class="footer-stamp">
+          <span>MADE WITH AMORE IN LUDHIANA ❤️</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bottom Copyright Bar -->
+    <div class="footer-bottom">
+      <div class="container footer-bottom-inner">
+        <p>&copy; 2026 D’Molto Pizza. All rights reserved. Crafted with UI/UX Pro Max & 21st.dev.</p>
+        <div class="footer-policy-links">
+          <a href="#hero">Dine-in & Takeaway</a>
+          <span>•</span>
+          <a href="#reserve">Private Events & Catering</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Main JavaScript File -->
+  <script src="app.js"></script>
+</body>
+</html>

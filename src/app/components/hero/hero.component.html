@@ -1,0 +1,146 @@
+<section class="hero-mockup-section" id="hero-section">
+  <div class="container hero-mockup-layout">
+    <!-- Left Column: Dynamic Pizza Details & Carousel -->
+    <div class="hero-mockup-left" id="hero-left-content">
+      @if (pizzaService.heroMode() === 'story') {
+        <!-- Mode 1: Attractive Home Brand Storytelling -->
+        <div class="hero-story-mode-content hero-animated-text">
+          <span class="editorial-kicker text-gold">NEW ZEALAND INSPIRED • GOURMET PIZZAS</span>
+
+          <h1 class="hero-main-title font-serif">
+            Home of <span class="text-orange">Gourmet Pizzas</span>.<br>
+            <span class="text-orange font-italic">New Zealand</span> Inspired.
+          </h1>
+
+          <div class="hero-tagline-badge">
+            <span>✦ Fresh Ingredients</span>
+            <span class="badge-dot">•</span>
+            <span>✦ Bold Flavours</span>
+          </div>
+
+          <p class="hero-lead-text">
+            At D’Molto, we craft extraordinary gourmet pizzas using fresh, premium ingredients and bold flavours — combining time-honored artisanal sourdough with vibrant New Zealand culinary inspiration.
+          </p>
+
+          <!-- CTA Buttons -->
+          <div class="hero-actions-row">
+            <button type="button" class="btn-pill-terracotta" (click)="goToNav('craft')">
+              <span>Explore The Craft</span>
+              <span class="cta-arrow">→</span>
+            </button>
+            <button type="button" class="btn-pill-outline-luxury" (click)="openStoryModal()">
+              <span class="play-dot">▶</span>
+              <span>Watch Our Story</span>
+            </button>
+          </div>
+
+          <!-- Metrics Row -->
+          <div class="hero-stats-band">
+            <div class="stat-cell">
+              <span class="stat-num">450°C</span>
+              <span class="stat-desc">Stone Oven</span>
+            </div>
+            <div class="stat-divider"></div>
+            <div class="stat-cell">
+              <span class="stat-num">100%</span>
+              <span class="stat-desc">Sourdough</span>
+            </div>
+            <div class="stat-divider"></div>
+            <div class="stat-cell">
+              <span class="stat-num">Fresh</span>
+              <span class="stat-desc">Ingredients</span>
+            </div>
+            <div class="stat-divider"></div>
+            <div class="stat-cell">
+              <span class="stat-num">Pure</span>
+              <span class="stat-desc">Italian Tradition</span>
+            </div>
+          </div>
+        </div>
+      } @else {
+        <!-- Mode 2: Interactive Pizza Showcase (Matching Mockup) -->
+        <div class="hero-pizza-mode-content hero-animated-text">
+          <div class="hero-mode-header-row">
+            <span class="editorial-kicker text-gold">D'MOLTO SIGNATURE CREATION</span>
+            <button type="button" class="btn-story-mode-chip" (click)="showBrandStory()" title="Back to brand story">
+              ← Our Story
+            </button>
+          </div>
+
+          <!-- Main Title -->
+          <h1 class="hero-pizza-headline font-serif">
+            {{ pizzaService.selectedHeroPizza().name }}
+          </h1>
+
+          <!-- Ingredients List -->
+          <div class="hero-ingredients-group">
+            <span class="ingredients-title">Ingredients:</span>
+            <p class="ingredients-desc">{{ pizzaService.selectedHeroPizza().ingredients }}</p>
+          </div>
+
+          <!-- Price & Go to Menu Button Row -->
+          <div class="hero-price-action-row">
+            <span class="hero-pizza-cost font-serif">{{ pizzaService.selectedHeroPizza().price }}</span>
+            <button type="button" class="btn-pill-terracotta btn-hero-order" (click)="goToNav('menu')">
+              <span>GO TO MENU</span>
+              <span class="cta-arrow">→</span>
+            </button>
+          </div>
+        </div>
+      }
+
+      <!-- Bottom Pizza Selector Carousel -->
+      <div class="hero-bottom-carousel-bar">
+        <div class="carousel-arch-card" [class.highlighted]="pizzaService.heroMode() === 'pizza'">
+          <div class="arch-circle-wrap">
+            <img [src]="pizzaService.selectedHeroPizza().thumb" [alt]="pizzaService.selectedHeroPizza().name" class="arch-circle-img">
+          </div>
+          <span class="arch-pizza-title">{{ pizzaService.selectedHeroPizza().name }}</span>
+          <span class="arch-pizza-weight">{{ pizzaService.selectedHeroPizza().weight }}</span>
+        </div>
+
+        <div class="carousel-circle-previews">
+          @for (pizza of pizzaService.heroPizzas; track pizza.id; let i = $index) {
+            @if (i !== pizzaService.selectedHeroPizzaIndex()) {
+              <button 
+                type="button" 
+                class="circle-preview-btn" 
+                (click)="selectHeroPizza(i)" 
+                [title]="'Select ' + pizza.name">
+                <img [src]="pizza.thumb" [alt]="pizza.name" class="preview-pizza-img">
+              </button>
+            }
+          }
+        </div>
+
+        <div class="carousel-arrow-stack">
+          <button type="button" class="arrow-circle-btn" (click)="nextHeroPizza()" title="Next Pizza">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+              <polyline points="12 5 19 12 12 19"></polyline>
+            </svg>
+          </button>
+          <button type="button" class="arrow-circle-btn" (click)="prevHeroPizza()" title="Previous Pizza">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="19" y1="12" x2="5" y2="12"></line>
+              <polyline points="12 19 5 12 12 5"></polyline>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right Column: Giant Pizza Disk -->
+    <div class="hero-mockup-right">
+      <div class="hero-giant-pizza-stage">
+        <div class="giant-pizza-ring-outline"></div>
+        <div class="hero-giant-pizza-frame" id="hero-giant-pizza">
+          <img 
+            [src]="pizzaService.selectedHeroPizza().image" 
+            [alt]="pizzaService.selectedHeroPizza().name" 
+            class="hero-giant-pizza-img">
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

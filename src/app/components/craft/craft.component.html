@@ -1,0 +1,75 @@
+<!-- ==========================================================================
+     THE CRAFT DEDICATED PAGE VIEW WITH DETAILED CULINARY DATA
+     ========================================================================== -->
+<section class="craft-editorial-section" id="assembly-stage">
+  <div class="container craft-editorial-layout">
+    <!-- Left Column: Simple & Attractive Detailed Content -->
+    <div class="craft-left-content">
+      <span class="editorial-kicker text-gold">OUR ARTISANAL CRAFT</span>
+      
+      <h2 class="craft-main-heading font-serif">
+        Crafted with Passion.<br>
+        <span class="text-orange">Baked to Perfection.</span>
+      </h2>
+
+      <p class="craft-lead-description">
+        At D’Molto, every pizza is made with 48-hour cold fermented sourdough, fresh artisan produce, and bold flavours — baked hot in our 450°C stone hearth oven for an unforgettable crust.
+      </p>
+
+      <!-- Simple Clean Highlights -->
+      <ul class="craft-simple-highlights">
+        <li><span class="highlight-bullet">✦</span> <strong>48-Hour Sourdough Fermentation</strong> — Slow-rested Caputo 00 dough for a light, digestible crust.</li>
+        <li><span class="highlight-bullet">✦</span> <strong>San Marzano D.O.P. & Fior di Latte</strong> — Hand-crushed volcanic tomatoes and fresh daily mozzarella.</li>
+        <li><span class="highlight-bullet">✦</span> <strong>450°C Stone Hearth Bake</strong> — High-heat wood-fired oven creating trademark leopard char.</li>
+      </ul>
+
+      <!-- Detailed Craft Interactive Tabs -->
+      <div class="craft-pillars-tab-row">
+        @for (pillar of craftPillars; track pillar.id; let i = $index) {
+          <button 
+            type="button" 
+            class="craft-tab-btn" 
+            [class.active]="selectedIndex() === i"
+            (click)="selectPillar(i)">
+            <span class="tab-title">{{ pillar.title }}</span>
+          </button>
+        }
+      </div>
+
+      <!-- Selected Pillar Detailed Box -->
+      <div class="craft-active-pillar-detail">
+        <span class="detail-badge">{{ activePillar().badge }}</span>
+        <h3 class="detail-tagline font-serif">{{ activePillar().tagline }}</h3>
+        <p class="detail-desc">{{ activePillar().description }}</p>
+      </div>
+
+      <!-- Action Buttons -->
+      <div class="craft-actions-bar">
+        <button type="button" class="btn-pill-terracotta" (click)="goToMenu()">
+          <span>Discover Our Signature Menu</span>
+          <span class="cta-arrow">→</span>
+        </button>
+        <button type="button" class="btn-pill-outline-luxury" (click)="openReservation()">
+          <span>Book a Table</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Right Column: High-Res Culinary Photo Showcase -->
+    <div class="craft-right-showcase">
+      <div class="craft-showcase-frame">
+        <img 
+          [src]="activePillar().image" 
+          [alt]="activePillar().title" 
+          class="craft-showcase-photo">
+        
+        <div class="craft-photo-overlay-gradient"></div>
+        
+        <div class="craft-photo-caption-badge">
+          <span class="badge-fire-icon">✦</span>
+          <span class="badge-text">{{ activePillar().badge }}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

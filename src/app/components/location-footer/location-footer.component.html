@@ -1,0 +1,94 @@
+<!-- ==========================================================================
+     7. LOCATION & FOOTER DEDICATED PAGE VIEW
+     ========================================================================== -->
+<section class="location-editorial-section" id="location-section">
+  <div class="container location-layout-grid">
+    <!-- Left Column: Detailed Address & Hours -->
+    <div class="location-text-card">
+      <span class="editorial-kicker text-gold">FIND US IN LUDHIANA</span>
+      <h2 class="section-title font-serif">Visit Our <span class="text-orange">Pizzeria</span></h2>
+      <p class="section-subtitle">
+        Step into our rustic Naples hearth. Located in the heart of Model Town, Ludhiana — serving artisanal Neapolitan sourdough pizzas daily.
+      </p>
+
+      <div class="location-details-list">
+        <div class="location-detail-cell">
+          <span class="cell-icon">📍</span>
+          <div class="cell-content">
+            <strong>Address & Location</strong>
+            <p>130, Model Town Road, Pritm Nagar, Model Town, Ludhiana, Punjab 141002</p>
+          </div>
+        </div>
+
+        <div class="location-detail-cell">
+          <span class="cell-icon">🕒</span>
+          <div class="cell-content">
+            <strong>Opening Hours</strong>
+            <p>Monday – Sunday: 12:00 PM – 11:00 PM (Oven fires at 12 PM)</p>
+          </div>
+        </div>
+
+        <div class="location-detail-cell">
+          <span class="cell-icon">📞</span>
+          <div class="cell-content">
+            <strong>Reservations & Direct Call</strong>
+            <p><a href="tel:+918360340447" class="location-link">+91 83603 40447</a></p>
+          </div>
+        </div>
+      </div>
+
+      <div class="location-actions-row">
+        <a href="https://maps.google.com/?q=130+Model+Town+Road+Ludhiana" target="_blank" class="btn-pill-terracotta">
+          <span>Get Google Maps Directions</span>
+          <span>↗</span>
+        </a>
+        <button type="button" class="btn-pill-outline-luxury" (click)="openReservation()">
+          <span>Book a Table</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Right Column: Interactive Map Preview Card -->
+    <div class="location-map-card">
+      <div class="map-frame-wrapper">
+        <img src="/images/interior.jpg" alt="D'Molto Ludhiana Pizzeria hearth interior" class="map-bg-photo">
+        <div class="map-overlay-badge">
+          <span class="map-pin-icon">📍</span>
+          <div class="map-badge-text">
+            <strong>D'Molto Pizzeria</strong>
+            <span>130 Model Town Road, Ludhiana</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="luxury-footer-bar">
+  <div class="container footer-inner">
+    <div class="footer-brand-col">
+      <div class="brand-badge-box">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="flame-icon">
+          <path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"></path>
+        </svg>
+      </div>
+      <div class="brand-text">
+        <span class="brand-title">D’Molto</span>
+        <span class="brand-tagline">PIZZERIA NAPOLETANA</span>
+      </div>
+    </div>
+
+    <div class="footer-nav-col">
+      <button type="button" class="footer-link-btn" (click)="goToNav('home')">Home</button>
+      <button type="button" class="footer-link-btn" (click)="goToNav('craft')">The Craft</button>
+      <button type="button" class="footer-link-btn" (click)="goToNav('menu')">Menu</button>
+      <button type="button" class="footer-link-btn" (click)="goToNav('reservations')">Reservations</button>
+      <button type="button" class="footer-link-btn" (click)="goToNav('find-us')">Find Us</button>
+    </div>
+
+    <div class="footer-copy-col">
+      <p>© 2026 D’Molto Pizzeria Napoletana. All rights reserved. New Zealand Inspired • Fresh Ingredients • Bold Flavours.</p>
+    </div>
+  </div>
+</footer>

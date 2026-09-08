@@ -1,0 +1,77 @@
+<!-- ==========================================================================
+     6. TABLE RESERVATIONS DEDICATED PAGE VIEW
+     ========================================================================== -->
+<section class="reservations-luxury-section" id="reservations-section">
+  <div class="container reservations-layout">
+    <!-- Left Column: Form -->
+    <div class="reservation-form-card">
+      <span class="editorial-kicker text-gold">JOIN US AT THE TABLE</span>
+      <h2 class="section-title font-serif">Reserve Your <span class="text-orange">Experience</span></h2>
+      <p class="section-subtitle">
+        Whether it's an intimate date night, family milestone, or casual dinner, reserve your table in advance for live oven-side seating.
+      </p>
+
+      <form (submit)="submitReservation($event)" class="luxury-res-form">
+        <div class="form-row-2col">
+          <div class="input-group">
+            <label>Full Name *</label>
+            <input type="text" [(ngModel)]="resName" name="resName" placeholder="e.g. Marco Rossi" required class="res-input">
+          </div>
+          <div class="input-group">
+            <label>Phone Number *</label>
+            <input type="tel" [(ngModel)]="resPhone" name="resPhone" placeholder="e.g. +91 98765 43210" required class="res-input">
+          </div>
+        </div>
+
+        <div class="form-row-3col">
+          <div class="input-group">
+            <label>Party Size</label>
+            <select [(ngModel)]="resGuests" name="resGuests" class="res-select">
+              <option value="1 Guest">1 Guest</option>
+              <option value="2 Guests">2 Guests (Couple Table)</option>
+              <option value="4 Guests">4 Guests (Family Table)</option>
+              <option value="6 Guests">6 Guests (Party Booth)</option>
+              <option value="8+ Guests">8+ Guests (Large Group)</option>
+            </select>
+          </div>
+          <div class="input-group">
+            <label>Date</label>
+            <input type="date" [(ngModel)]="resDate" name="resDate" class="res-input">
+          </div>
+          <div class="input-group">
+            <label>Preferred Time</label>
+            <select [(ngModel)]="resTime" name="resTime" class="res-select">
+              <option value="12:30 PM">12:30 PM (Lunch)</option>
+              <option value="01:30 PM">01:30 PM (Lunch)</option>
+              <option value="07:00 PM">07:00 PM (Dinner)</option>
+              <option value="07:30 PM">07:30 PM (Dinner)</option>
+              <option value="08:30 PM">08:30 PM (Prime Dinner)</option>
+              <option value="09:30 PM">09:30 PM (Late Night)</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="input-group">
+          <label>Special Requests or Dietary Preferences</label>
+          <textarea [(ngModel)]="resNotes" name="resNotes" rows="3" placeholder="Window seating, vegan cheese, birthday celebration, candle setup..." class="res-textarea"></textarea>
+        </div>
+
+        <button type="submit" class="btn-pill-terracotta btn-full-width">
+          <span>Confirm Table Reservation via WhatsApp</span>
+          <span>→</span>
+        </button>
+      </form>
+    </div>
+
+    <!-- Right Column: Visual Atmosphere Photo Frame -->
+    <div class="reservation-visual-card">
+      <div class="reservation-photo-frame">
+        <img src="/images/reservation-table.jpg" alt="Luxury candlelit dining table at D'Molto Neapolitan Pizzeria" class="reservation-photo-img">
+        <div class="reservation-photo-overlay">
+          <span class="photo-overlay-title font-serif">Neapolitan Hospitality</span>
+          <p class="photo-overlay-desc">Fresh sourdough, candlelight, and Neapolitan music await your arrival.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

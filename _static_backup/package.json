@@ -1,0 +1,19 @@
+{
+  "name": "dmolto-pizza",
+  "version": "1.0.0",
+  "description": "D'Molto Pizza - Flagship Artisanal Wood-Fired Pizzeria & Cafe, Model Town, Ludhiana",
+  "scripts": {
+    "dev": "npx serve -l 3000 .",
+    "start": "npx serve -l 3000 ."
+  },
+  "keywords": [
+    "pizza",
+    "dmolto",
+    "ludhiana",
+    "wood-fired",
+    "artisanal",
+    "italian-restaurant"
+  ],
+  "author": "D'Molto Pizza",
+  "license": "MIT"
+}
