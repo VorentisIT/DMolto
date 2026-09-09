@@ -24,16 +24,6 @@ export class MenuSectionComponent {
   readonly displayedCards = computed(() => {
     let items = this.pizzaService.filteredMenuItems();
     if (!items.length) items = this.pizzaService.menuItems();
-
-    if (this.layoutMode() === 'ribbon') {
-      const offset = this.pizzaService.menuSliceOffset() % items.length;
-      const result: PizzaItem[] = [];
-      for (let i = 0; i < 4; i++) {
-        result.push(items[(offset + i) % items.length]);
-      }
-      return result;
-    }
-
     return items;
   });
 
@@ -57,9 +47,11 @@ export class MenuSectionComponent {
   }
 
   scrollMenuTrack(direction: 'left' | 'right'): void {
-    const track = this.menuScrollTrack()?.nativeElement;
+    const track = this.menuScrollTrack()?.nativeElement || 
+                  (document.querySelector('.menu-grid-showcase-container') as HTMLElement) || 
+                  (document.querySelector('.full-menu-grid') as HTMLElement);
     if (!track) return;
-    const scrollAmount = direction === 'left' ? -380 : 380;
+    const scrollAmount = direction === 'left' ? -320 : 320;
     track.scrollBy({ left: scrollAmount, behavior: 'smooth' });
   }
 }

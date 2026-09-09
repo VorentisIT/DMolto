@@ -859,6 +859,82 @@ html, body, main, .page-content-wrapper, section {
   transform: translateX(4px);
 }
 
+/* Filter Bar & Arrow Slider Controls Above Menu Cards */
+.menu-filter-slider-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 24px;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.menu-section-filter-bar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  overflow-x: auto;
+  padding-bottom: 4px;
+  scrollbar-width: none;
+}
+
+.menu-section-filter-bar::-webkit-scrollbar {
+  display: none;
+}
+
+.menu-filter-chip {
+  padding: 8px 18px;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: #A9A49B;
+  font-size: 0.84rem;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.3s ease;
+}
+
+.menu-filter-chip:hover {
+  border-color: #FF641A;
+  color: #F5EFE4;
+}
+
+.menu-filter-chip.active {
+  background: #FF641A;
+  color: #FFFFFF;
+  border-color: #FF641A;
+  box-shadow: 0 4px 16px rgba(255, 100, 26, 0.4);
+}
+
+.menu-slider-arrows-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.slider-nav-arrow-btn {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  color: #F5EFE4;
+  font-size: 1.3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.slider-nav-arrow-btn:hover, .slider-nav-arrow-btn.active-orange {
+  background: #FF641A;
+  color: #FFFFFF;
+  border-color: #FF641A;
+  box-shadow: 0 4px 14px rgba(255, 100, 26, 0.4);
+}
+
 /* Menu Showcase Wrapper with Right Vertical Slider */
 .menu-showcase-wrapper {
   display: flex;
@@ -867,22 +943,31 @@ html, body, main, .page-content-wrapper, section {
 }
 
 .menu-grid-showcase-container {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  display: flex;
+  flex-direction: row;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  scroll-snap-type: x mandatory;
   gap: 20px;
   flex: 1;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+  padding: 10px 4px 20px 4px;
 }
 
-@media (max-width: 1200px) {
-  .menu-grid-showcase-container {
-    grid-template-columns: repeat(2, 1fr);
-  }
+.menu-grid-showcase-container::-webkit-scrollbar {
+  display: none;
+}
+
+.menu-grid-showcase-container .luxury-pizza-card {
+  min-width: 275px;
+  max-width: 295px;
+  width: 285px;
+  scroll-snap-align: start;
+  flex-shrink: 0;
 }
 
 @media (max-width: 640px) {
-  .menu-grid-showcase-container {
-    grid-template-columns: 1fr;
-  }
   .menu-showcase-wrapper {
     flex-direction: column;
   }
@@ -1489,6 +1574,8 @@ select, option, input[type="date"] {
   background-color: #141716 !important;
   color: #F5EFE4 !important;
   font-family: var(--font-sans) !important;
+  max-width: 100% !important;
+  box-sizing: border-box !important;
 }
 
 option {
@@ -1496,6 +1583,9 @@ option {
   color: #F5EFE4 !important;
   padding: 12px 16px !important;
   font-size: 0.92rem !important;
+  max-width: 100% !important;
+  white-space: normal !important;
+  word-wrap: break-word !important;
 }
 
 option:hover, option:focus, option:active, option:checked {
@@ -1503,20 +1593,44 @@ option:hover, option:focus, option:active, option:checked {
   color: #FFFFFF !important;
 }
 
-.res-input-select, .res-input-date {
+select.res-input-select, select.widget-select, select.inquiry-input, .res-input-select {
+  background-color: transparent !important;
+  border: none;
+  color: var(--text-ivory) !important;
+  font-family: var(--font-sans);
+  font-size: 0.92rem;
+  width: 100% !important;
+  max-width: 100% !important;
+  box-sizing: border-box !important;
+  text-overflow: ellipsis !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  outline: none;
+  cursor: pointer;
+  -webkit-appearance: none !important;
+  -moz-appearance: none !important;
+  appearance: none !important;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23FF641A' stroke-width='2.5'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E") !important;
+  background-repeat: no-repeat !important;
+  background-position: right 8px center !important;
+  padding-right: 24px !important;
+}
+
+.res-input-date {
   background: transparent;
   border: none;
   color: var(--text-ivory);
   font-family: var(--font-sans);
   font-size: 0.92rem;
   width: 100%;
+  max-width: 100%;
   outline: none;
   cursor: pointer;
 }
 
 .res-input-select option {
-  background: #141716;
-  color: #F5EFE4;
+  background: #141716 !important;
+  color: #F5EFE4 !important;
 }
 
 .form-select-group {
@@ -2482,7 +2596,10 @@ option:hover, option:focus, option:active, option:checked {
 
 .reservation-modal-backdrop {
   justify-content: center;
-  padding: 20px;
+  align-items: flex-start;
+  padding: 24px 14px;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
 }
 
 .cart-drawer-panel {
@@ -2742,16 +2859,18 @@ option:hover, option:focus, option:active, option:checked {
 }
 
 .reservation-modal-dialog {
-  width: 540px;
-  max-width: 95vw;
+  width: 520px;
+  max-width: 94vw;
+  margin: auto 0;
   background: #141716;
-  border: 1px solid rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.18);
   border-radius: 24px;
-  padding: 32px 28px;
+  padding: 28px 24px;
   position: relative;
-  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.9);
-  max-height: 90vh;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.95);
+  max-height: 85vh;
   overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
 }
 
 .modal-res-header {
@@ -2775,6 +2894,44 @@ option:hover, option:focus, option:active, option:checked {
 
 .inquiry-form-group.full-width {
   grid-column: span 2;
+}
+
+/* Modal Luxury Interactive Option Selection Chips */
+.res-chips-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+  width: 100%;
+}
+
+.res-chips-grid.time-chips {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.res-chip-btn {
+  padding: 10px 6px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: #A9A49B;
+  font-size: 0.84rem;
+  font-weight: 600;
+  cursor: pointer;
+  text-align: center;
+  transition: all 0.25s ease;
+  white-space: nowrap;
+}
+
+.res-chip-btn:hover {
+  border-color: #FF641A;
+  color: #F5EFE4;
+}
+
+.res-chip-btn.active {
+  background: #FF641A;
+  color: #FFFFFF;
+  border-color: #FF641A;
+  box-shadow: 0 4px 14px rgba(255, 100, 26, 0.4);
 }
 
 @media (max-width: 560px) {
@@ -2888,6 +3045,328 @@ option:hover, option:focus, option:active, option:checked {
   .widget-submit-btn {
     justify-content: center;
     height: 42px;
+  }
+}
+
+/* ==========================================================================
+   PURPOSE-BUILT MOBILE DESIGN STYLESHEET (390px VIEWPORT & BREAKPOINTS)
+   ========================================================================== */
+@media (max-width: 768px) {
+  .menu-vertical-slider-bar {
+    display: none !important;
+  }
+
+  /* 1. Mobile Header & Top Ribbon */
+  .navbar-top-info-ribbon {
+    font-size: 0.68rem;
+    padding: 4px 0;
+  }
+  .top-info-flex {
+    justify-content: center;
+    gap: 8px;
+  }
+  .info-right {
+    display: none;
+  }
+  .navbar-inner {
+    height: 70px;
+    padding: 0 16px;
+  }
+  .brand-logo-img {
+    width: 38px;
+    height: 38px;
+  }
+  .brand-title {
+    font-size: 1.28rem;
+  }
+  .brand-tagline {
+    font-size: 0.52rem;
+  }
+  .nav-menu, .nav-action-cta-btn {
+    display: none !important;
+  }
+
+  /* 2. Mobile Hero Section */
+  .hero-mockup-section {
+    padding-top: 130px;
+    padding-bottom: 35px;
+  }
+  .hero-mockup-layout {
+    grid-template-columns: 1fr;
+    gap: 28px;
+    text-align: center;
+  }
+  .hero-main-title {
+    font-size: clamp(2.1rem, 7.5vw, 2.6rem);
+    line-height: 1.15;
+  }
+  .hero-lead-text {
+    font-size: 0.92rem;
+    line-height: 1.5;
+    margin: 12px auto 20px auto;
+  }
+  .hero-actions-row {
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  .hero-actions-row button {
+    width: 100%;
+    max-width: 280px;
+    justify-content: center;
+  }
+  .hero-booking-widget {
+    margin: 20px auto 0 auto;
+    width: 100%;
+  }
+  .hero-giant-pizza-stage {
+    min-height: 320px;
+    margin-top: 10px;
+  }
+  .hero-giant-pizza-frame {
+    width: 290px;
+    height: 290px;
+    margin: 0 auto;
+  }
+  .hero-handwritten-note {
+    display: none;
+  }
+  .hero-stats-band {
+    display: flex;
+    overflow-x: auto;
+    gap: 12px;
+    padding-bottom: 8px;
+    margin-top: 24px;
+    justify-content: flex-start;
+    scrollbar-width: none;
+  }
+  .hero-stats-band::-webkit-scrollbar {
+    display: none;
+  }
+  .stat-cell {
+    flex-shrink: 0;
+    min-width: 130px;
+    padding: 10px 14px;
+  }
+
+  /* 3. Mobile Category Navigation Slider */
+  .category-nav-section {
+    padding: 10px 0 20px 0;
+    margin-top: 0;
+  }
+  .category-layout-row {
+    width: 100%;
+    border-radius: 18px;
+    padding: 10px 12px;
+    justify-content: flex-start;
+  }
+  .category-pills-wrap {
+    justify-content: flex-start;
+    gap: 10px;
+    width: 100%;
+  }
+  .category-card-pill {
+    padding: 10px 14px;
+    min-width: 82px;
+  }
+  .category-thumb-img {
+    width: 42px;
+    height: 42px;
+  }
+
+  /* 4. Mobile Subpage Hero Banners */
+  .subpage-hero-banner {
+    padding: 140px 16px 18px 16px;
+  }
+  .subpage-title {
+    font-size: 2.1rem;
+  }
+  .subpage-subtitle {
+    font-size: 0.9rem;
+  }
+
+  /* 5. Mobile Menu Section & Horizontal Swipeable Carousel */
+  .full-menu-section, .menu-ribbon-section {
+    padding: 25px 0 40px 0;
+  }
+  .menu-grid-showcase-container,
+  .full-menu-grid {
+    display: flex !important;
+    flex-direction: row !important;
+    overflow-x: auto !important;
+    scroll-snap-type: x mandatory !important;
+    gap: 16px !important;
+    padding: 10px 4px 20px 4px !important;
+    scrollbar-width: none !important;
+    -webkit-overflow-scrolling: touch !important;
+  }
+  .menu-grid-showcase-container::-webkit-scrollbar,
+  .full-menu-grid::-webkit-scrollbar {
+    display: none !important;
+  }
+  .luxury-pizza-card,
+  .menu-pizza-card,
+  .grid-card,
+  .full-grid-card {
+    min-width: 275px !important;
+    max-width: 285px !important;
+    width: 285px !important;
+    scroll-snap-align: start !important;
+    flex-shrink: 0 !important;
+  }
+  .menu-showcase-wrapper {
+    flex-direction: column !important;
+  }
+  .menu-vertical-slider-bar {
+    display: none !important;
+  }
+
+  /* 6. Mobile Experience Section */
+  .experience-section {
+    padding: 30px 0;
+  }
+  .experience-layout {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+  .experience-steps-col {
+    display: flex;
+    flex-direction: row;
+    overflow-x: auto;
+    gap: 10px;
+    padding-bottom: 8px;
+    scrollbar-width: none;
+  }
+  .experience-steps-col::-webkit-scrollbar {
+    display: none;
+  }
+  .step-nav-item {
+    flex-shrink: 0;
+    white-space: nowrap;
+    padding: 8px 16px;
+  }
+
+  /* 7. Mobile Craft Editorial Section */
+  .craft-editorial-section {
+    padding: 35px 0;
+  }
+  .craft-editorial-layout {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+  .craft-editorial-media {
+    order: 2;
+  }
+  .craft-editorial-content {
+    order: 1;
+    text-align: center;
+  }
+
+  /* 8. Mobile Mosaic Gallery Grid */
+  .gallery-mosaic-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  .mosaic-wide, .mosaic-medium {
+    grid-column: auto;
+    height: 230px;
+  }
+
+  /* 9. Mobile Table Reservation Section & Modal Overlay */
+  .reservation-section {
+    padding: 30px 0;
+  }
+  .reservation-panel-card {
+    padding: 24px 16px !important;
+    border-radius: 20px !important;
+  }
+  .reservation-title {
+    font-size: 1.8rem !important;
+  }
+  .reservation-subtitle {
+    font-size: 0.88rem !important;
+    margin-bottom: 24px !important;
+  }
+  .reservation-horizontal-form {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 12px !important;
+    padding: 14px !important;
+    border-radius: 20px !important;
+  }
+  .form-select-group {
+    width: 100% !important;
+    box-sizing: border-box !important;
+    padding: 10px 16px !important;
+  }
+  .res-submit-btn {
+    width: 100% !important;
+    height: 46px !important;
+    justify-content: center !important;
+    border-radius: 24px !important;
+  }
+  .reservation-modal-backdrop {
+    align-items: flex-start !important;
+    padding: 12px 10px !important;
+    overflow-y: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+  }
+  .reservation-modal-dialog {
+    width: 94vw !important;
+    max-width: 440px !important;
+    padding: 20px 14px !important;
+    border-radius: 20px !important;
+    margin: 10px auto !important;
+    max-height: 86vh !important;
+    overflow-y: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+  }
+  .modal-res-grid {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 12px !important;
+  }
+  .inquiry-form-group.full-width {
+    grid-column: span 1 !important;
+  }
+  .modal-res-title {
+    font-size: 1.45rem !important;
+  }
+  .modal-res-sub {
+    font-size: 0.8rem !important;
+    margin-bottom: 14px !important;
+  }
+
+  /* Dedicated Touch Scroller Indicator for Small Screen Phones */
+  .reservation-modal-dialog::-webkit-scrollbar {
+    width: 5px !important;
+    display: block !important;
+  }
+  .reservation-modal-dialog::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.06) !important;
+    border-radius: 4px !important;
+  }
+  .reservation-modal-dialog::-webkit-scrollbar-thumb {
+    background: #FF641A !important;
+    border-radius: 4px !important;
+  }
+
+  /* 10. Mobile Location Section */
+  .location-section {
+    padding: 30px 0;
+  }
+  .location-split-grid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  /* 11. Mobile Multi-Column Footer */
+  .footer-dark-section {
+    padding: 40px 0 20px 0;
+  }
+  .footer-columns-grid {
+    grid-template-columns: 1fr;
+    gap: 32px;
   }
 }
 

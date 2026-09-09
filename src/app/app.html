@@ -24,7 +24,8 @@
         <a href="javascript:void(0)" class="mobile-nav-link" [class.active]="pizzaService.activeNavTab() === 'contact'" (click)="pizzaService.activeNavTab.set('contact'); pizzaService.isMobileMenuOpen.set(false); scrollToTop()">Contact</a>
       </nav>
       <div class="mobile-nav-footer">
-        <button type="button" class="btn-orange-pill btn-full-width" (click)="pizzaService.isMobileMenuOpen.set(false); pizzaService.isReservationOpen.set(true)">
+        <button type="button" class="btn-orange-pill btn-full-width" (click)="pizzaService.isMobileMenuOpen.set(false); pizzaService.openReservation()">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16" style="margin-right: 6px; vertical-align: middle;"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
           <span>Reserve a Table</span>
           <span>→</span>
         </button>
@@ -42,83 +43,7 @@
     <!-- 2. HERO SECTION -->
     <app-hero></app-hero>
 
-    <!-- 3. PIZZA CATEGORY NAVIGATION -->
-    <section class="category-nav-section" id="category-section">
-      <div class="container category-layout-row">
-        <div class="category-pills-wrap">
-          <button 
-            type="button" 
-            class="category-card-pill" 
-            [class.active]="pizzaService.activeCategory() === 'all'" 
-            (click)="pizzaService.activeCategory.set('all')">
-            <img src="/images/dmollo-hero-pizza.png" alt="All Pizzas" class="category-thumb-img">
-            <span>All Pizzas</span>
-          </button>
-          <button 
-            type="button" 
-            class="category-card-pill" 
-            [class.active]="pizzaService.activeCategory() === 'classic'" 
-            (click)="pizzaService.activeCategory.set('classic')">
-            <img src="/images/dmollo-hero-pizza.jpg" alt="Classic" class="category-thumb-img">
-            <span>Classic</span>
-          </button>
-          <button 
-            type="button" 
-            class="category-card-pill" 
-            [class.active]="pizzaService.activeCategory() === 'veg'" 
-            (click)="pizzaService.activeCategory.set('veg')">
-            <img src="/images/dmollo-experience-pizza.jpg" alt="Veg" class="category-thumb-img">
-            <span>Veg</span>
-          </button>
-          <button 
-            type="button" 
-            class="category-card-pill" 
-            [class.active]="pizzaService.activeCategory() === 'non-veg'" 
-            (click)="pizzaService.activeCategory.set('non-veg')">
-            <img src="/images/dmollo-dining.jpg" alt="Non-Veg" class="category-thumb-img">
-            <span>Non-Veg</span>
-          </button>
-          <button 
-            type="button" 
-            class="category-card-pill" 
-            [class.active]="pizzaService.activeCategory() === 'special'" 
-            (click)="pizzaService.activeCategory.set('special')">
-            <img src="/images/dmollo-ambience-detail.jpg" alt="Chef's Special" class="category-thumb-img">
-            <span>Chef's Special</span>
-          </button>
-          <button 
-            type="button" 
-            class="category-card-pill" 
-            [class.active]="pizzaService.activeCategory() === 'sides'" 
-            (click)="pizzaService.activeCategory.set('sides')">
-            <img src="/images/dmollo-pizzaiolo.jpg" alt="Sides" class="category-thumb-img">
-            <span>Sides</span>
-          </button>
-          <button 
-            type="button" 
-            class="category-card-pill" 
-            [class.active]="pizzaService.activeCategory() === 'desserts'" 
-            (click)="pizzaService.activeCategory.set('desserts')">
-            <img src="/images/dmollo-ambience-main.jpg" alt="Desserts" class="category-thumb-img">
-            <span>Desserts</span>
-          </button>
-          <button 
-            type="button" 
-            class="category-card-pill" 
-            [class.active]="pizzaService.activeCategory() === 'beverages'" 
-            (click)="pizzaService.activeCategory.set('beverages')">
-            <img src="/images/gallery-bar.jpg" alt="Beverages" class="category-thumb-img">
-            <span>Beverages</span>
-          </button>
-        </div>
 
-        <div class="category-handwritten script-annotation">
-          Pizza<br>
-          For Every<br>
-          Mood ⤴
-        </div>
-      </div>
-    </section>
 
     <!-- 4. OUR STORY SECTION -->
     <app-craft></app-craft>
@@ -161,7 +86,7 @@
               {{ activeStep.description }}
             </p>
 
-            <button type="button" class="btn-orange-pill" (click)="pizzaService.isReservationOpen.set(true)">
+            <button type="button" class="btn-orange-pill" (click)="pizzaService.openReservation()">
               <span>See the Process</span>
               <span>→</span>
             </button>
@@ -366,7 +291,9 @@
         <div class="location-split-grid">
           <div class="location-info-card glass-card-21st">
             <div class="info-row">
-              <span class="info-icon">📍</span>
+              <span class="info-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#FF641A" stroke-width="2" width="20" height="20"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+              </span>
               <div class="info-content">
                 <strong>Location & Address</strong>
                 <p>D’Molto Pizza, 130, Model Town Rd,<br>Pritm Nagar, Model Town, Ludhiana, Punjab 141002</p>
@@ -374,7 +301,9 @@
             </div>
 
             <div class="info-row">
-              <span class="info-icon">🕒</span>
+              <span class="info-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#FF641A" stroke-width="2" width="20" height="20"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+              </span>
               <div class="info-content">
                 <strong>Opening Hours</strong>
                 <p>Mon – Sun · 11:00 AM – 11:00 PM</p>
@@ -382,7 +311,9 @@
             </div>
 
             <div class="info-row">
-              <span class="info-icon">✉️</span>
+              <span class="info-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#FF641A" stroke-width="2" width="20" height="20"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+              </span>
               <div class="info-content">
                 <strong>Email Us</strong>
                 <p>hello@dmollo.com</p>
@@ -390,7 +321,9 @@
             </div>
 
             <div class="info-row">
-              <span class="info-icon">📞</span>
+              <span class="info-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#FF641A" stroke-width="2" width="20" height="20"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+              </span>
               <div class="info-content">
                 <strong>Call Us</strong>
                 <p>+91 98123 45678</p>
@@ -399,7 +332,10 @@
 
             <div class="location-actions-row">
               <a href="https://www.google.com/maps?q=D%E2%80%99Molto+Pizza,+130,+Model+Town+Rd,+Pritm+Nagar,+Model+Town,+Ludhiana,+Punjab+141002" target="_blank" class="btn-orange-pill">Get Directions</a>
-              <button type="button" class="btn-outline-pill" (click)="pizzaService.isReservationOpen.set(true)">Book a Table</button>
+              <button type="button" class="btn-outline-pill" (click)="pizzaService.openReservation()">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="15" height="15" style="margin-right: 6px; vertical-align: middle;"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+                <span>Book a Table</span>
+              </button>
             </div>
           </div>
 
@@ -448,47 +384,7 @@
       </div>
     </div>
 
-    <!-- Category Nav Section -->
-    <section class="category-nav-section">
-      <div class="container category-layout-row">
-        <div class="category-pills-wrap">
-          <button type="button" class="category-card-pill" [class.active]="pizzaService.activeCategory() === 'all'" (click)="pizzaService.activeCategory.set('all')">
-            <img src="/images/dmollo-hero-pizza.png" alt="All Pizzas" class="category-thumb-img">
-            <span>All Pizzas</span>
-          </button>
-          <button type="button" class="category-card-pill" [class.active]="pizzaService.activeCategory() === 'classic'" (click)="pizzaService.activeCategory.set('classic')">
-            <img src="/images/dmollo-hero-pizza.jpg" alt="Classic" class="category-thumb-img">
-            <span>Classic</span>
-          </button>
-          <button type="button" class="category-card-pill" [class.active]="pizzaService.activeCategory() === 'veg'" (click)="pizzaService.activeCategory.set('veg')">
-            <img src="/images/dmollo-experience-pizza.jpg" alt="Veg" class="category-thumb-img">
-            <span>Veg</span>
-          </button>
-          <button type="button" class="category-card-pill" [class.active]="pizzaService.activeCategory() === 'non-veg'" (click)="pizzaService.activeCategory.set('non-veg')">
-            <img src="/images/dmollo-dining.jpg" alt="Non-Veg" class="category-thumb-img">
-            <span>Non-Veg</span>
-          </button>
-          <button type="button" class="category-card-pill" [class.active]="pizzaService.activeCategory() === 'special'" (click)="pizzaService.activeCategory.set('special')">
-            <img src="/images/dmollo-ambience-detail.jpg" alt="Chef's Special" class="category-thumb-img">
-            <span>Chef's Special</span>
-          </button>
-          <button type="button" class="category-card-pill" [class.active]="pizzaService.activeCategory() === 'sides'" (click)="pizzaService.activeCategory.set('sides')">
-            <img src="/images/dmollo-pizzaiolo.jpg" alt="Sides" class="category-thumb-img">
-            <span>Sides</span>
-          </button>
-          <button type="button" class="category-card-pill" [class.active]="pizzaService.activeCategory() === 'desserts'" (click)="pizzaService.activeCategory.set('desserts')">
-            <img src="/images/dmollo-ambience-main.jpg" alt="Desserts" class="category-thumb-img">
-            <span>Desserts</span>
-          </button>
-          <button type="button" class="category-card-pill" [class.active]="pizzaService.activeCategory() === 'beverages'" (click)="pizzaService.activeCategory.set('beverages')">
-            <img src="/images/gallery-bar.jpg" alt="Beverages" class="category-thumb-img">
-            <span>Beverages</span>
-          </button>
-        </div>
-      </div>
-    </section>
-
-    <!-- Menu Showcase -->
+    <!-- Menu Showcase with Category Filter Bar & Slide Track -->
     <app-menu-section></app-menu-section>
 
     <!-- Reservation CTA Section -->
@@ -578,7 +474,8 @@
           <p class="ambience-desc">
             At D’Molto, every seat is designed for memorable conversations, shared laughter, and exceptional food crafted with heart.
           </p>
-          <button type="button" class="btn-orange-pill" (click)="pizzaService.isReservationOpen.set(true)">
+          <button type="button" class="btn-orange-pill" (click)="pizzaService.openReservation()">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16" style="margin-right: 6px; vertical-align: middle;"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
             <span>Reserve Table</span>
             <span>→</span>
           </button>
@@ -711,7 +608,8 @@
               {{ activeStep.description }}
             </p>
 
-            <button type="button" class="btn-orange-pill" (click)="pizzaService.isReservationOpen.set(true)">
+            <button type="button" class="btn-orange-pill" (click)="pizzaService.openReservation()">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16" style="margin-right: 6px; vertical-align: middle;"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
               <span>Reserve a Table</span>
               <span>→</span>
             </button>
@@ -1011,7 +909,9 @@
         <div class="location-split-grid">
           <div class="location-info-card glass-card-21st">
             <div class="info-row">
-              <span class="info-icon">📍</span>
+              <span class="info-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#FF641A" stroke-width="2" width="20" height="20"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+              </span>
               <div class="info-content">
                 <strong>Location & Address</strong>
                 <p>D’Molto Pizza, 130, Model Town Rd,<br>Pritm Nagar, Model Town, Ludhiana, Punjab 141002</p>
@@ -1019,7 +919,9 @@
             </div>
 
             <div class="info-row">
-              <span class="info-icon">🕒</span>
+              <span class="info-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#FF641A" stroke-width="2" width="20" height="20"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+              </span>
               <div class="info-content">
                 <strong>Opening Hours</strong>
                 <p>Mon – Sun · 11:00 AM – 11:00 PM</p>
@@ -1027,7 +929,9 @@
             </div>
 
             <div class="info-row">
-              <span class="info-icon">✉️</span>
+              <span class="info-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#FF641A" stroke-width="2" width="20" height="20"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+              </span>
               <div class="info-content">
                 <strong>Email Us</strong>
                 <p>hello@dmollo.com</p>
@@ -1035,7 +939,9 @@
             </div>
 
             <div class="info-row">
-              <span class="info-icon">📞</span>
+              <span class="info-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#FF641A" stroke-width="2" width="20" height="20"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+              </span>
               <div class="info-content">
                 <strong>Call Us</strong>
                 <p>+91 98123 45678</p>
@@ -1044,7 +950,10 @@
 
             <div class="location-actions-row">
               <a href="https://www.google.com/maps?q=D%E2%80%99Molto+Pizza,+130,+Model+Town+Rd,+Pritm+Nagar,+Model+Town,+Ludhiana,+Punjab+141002" target="_blank" class="btn-orange-pill">Get Directions</a>
-              <button type="button" class="btn-outline-pill" (click)="pizzaService.isReservationOpen.set(true)">Book a Table</button>
+              <button type="button" class="btn-outline-pill" (click)="pizzaService.openReservation()">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="15" height="15" style="margin-right: 6px; vertical-align: middle;"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+                <span>Book a Table</span>
+              </button>
             </div>
           </div>
 
@@ -1122,7 +1031,8 @@
             </div>
 
             <div style="margin-top: 32px;">
-              <button type="button" class="btn-orange-pill btn-full-width" (click)="pizzaService.isReservationOpen.set(true)">
+              <button type="button" class="btn-orange-pill btn-full-width" (click)="pizzaService.openReservation()">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16" style="margin-right: 6px; vertical-align: middle;"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
                 <span>Reserve Table Online</span>
                 <span>→</span>
               </button>
@@ -1313,28 +1223,28 @@
               <input type="tel" [(ngModel)]="pizzaService.resPhone" name="modalResPhone" placeholder="+91 98123 45678" class="inquiry-input" required>
             </div>
             <div class="inquiry-form-group">
-              <label class="inquiry-label">Guests</label>
-              <select [(ngModel)]="pizzaService.resGuests" name="modalResGuests" class="inquiry-input res-input-select" required>
-                <option value="2 Guests">2 Guests (Couple)</option>
-                <option value="4 Guests">4 Guests (Family)</option>
-                <option value="6 Guests">6 Guests (Party)</option>
-                <option value="8+ Guests">8+ Guests (VIP Hall)</option>
-              </select>
-            </div>
-            <div class="inquiry-form-group">
               <label class="inquiry-label">Preferred Date</label>
               <input type="date" [(ngModel)]="pizzaService.resDate" name="modalResDate" class="inquiry-input res-input-date" required>
             </div>
             <div class="inquiry-form-group full-width">
+              <label class="inquiry-label">Party Size (Guests)</label>
+              <div class="res-chips-grid">
+                <button type="button" class="res-chip-btn" [class.active]="pizzaService.resGuests === '2 Guests'" (click)="pizzaService.resGuests = '2 Guests'">2 Guests</button>
+                <button type="button" class="res-chip-btn" [class.active]="pizzaService.resGuests === '4 Guests'" (click)="pizzaService.resGuests = '4 Guests'">4 Guests</button>
+                <button type="button" class="res-chip-btn" [class.active]="pizzaService.resGuests === '6 Guests'" (click)="pizzaService.resGuests = '6 Guests'">6 Guests</button>
+                <button type="button" class="res-chip-btn" [class.active]="pizzaService.resGuests === '8+ Guests'" (click)="pizzaService.resGuests = '8+ Guests'">8+ VIP</button>
+              </div>
+            </div>
+            <div class="inquiry-form-group full-width">
               <label class="inquiry-label">Preferred Time Slot</label>
-              <select [(ngModel)]="pizzaService.resTime" name="modalResTime" class="inquiry-input res-input-select" required>
-                <option value="12:30 PM">12:30 PM (Lunch)</option>
-                <option value="01:30 PM">01:30 PM (Lunch)</option>
-                <option value="07:00 PM">07:00 PM (Dinner)</option>
-                <option value="07:30 PM">07:30 PM (Dinner Prime)</option>
-                <option value="08:30 PM">08:30 PM (Dinner Rush)</option>
-                <option value="09:30 PM">09:30 PM (Late Feast)</option>
-              </select>
+              <div class="res-chips-grid time-chips">
+                <button type="button" class="res-chip-btn" [class.active]="pizzaService.resTime === '12:30 PM'" (click)="pizzaService.resTime = '12:30 PM'">12:30 PM</button>
+                <button type="button" class="res-chip-btn" [class.active]="pizzaService.resTime === '01:30 PM'" (click)="pizzaService.resTime = '01:30 PM'">01:30 PM</button>
+                <button type="button" class="res-chip-btn" [class.active]="pizzaService.resTime === '07:00 PM'" (click)="pizzaService.resTime = '07:00 PM'">07:00 PM</button>
+                <button type="button" class="res-chip-btn" [class.active]="pizzaService.resTime === '07:30 PM'" (click)="pizzaService.resTime = '07:30 PM'">07:30 PM</button>
+                <button type="button" class="res-chip-btn" [class.active]="pizzaService.resTime === '08:30 PM'" (click)="pizzaService.resTime = '08:30 PM'">08:30 PM</button>
+                <button type="button" class="res-chip-btn" [class.active]="pizzaService.resTime === '09:30 PM'" (click)="pizzaService.resTime = '09:30 PM'">09:30 PM</button>
+              </div>
             </div>
           </div>
 
