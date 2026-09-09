@@ -1,4 +1,4 @@
-import { Component, ViewEncapsulation } from '@angular/core';
+import { Component, ViewEncapsulation, HostListener, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { PizzaService } from '../../services/pizza.service';
@@ -12,16 +12,24 @@ import { PizzaService } from '../../services/pizza.service';
   encapsulation: ViewEncapsulation.None
 })
 export class NavbarComponent {
+  readonly isScrolled = signal<boolean>(false);
+
   constructor(public pizzaService: PizzaService) {}
 
-  navigateToSection(tab: string, elementId: string, event: Event): void {
-    event.preventDefault();
+  @HostListener('window:scroll', [])
+  onWindowScroll(): void {
+    if (typeof window !== 'undefined') {
+      this.isScrolled.set(window.scrollY > 40);
+    }
+  }
+
+  navigateToSection(tab: string, elementId?: string, event?: Event): void {
+    if (event) event.preventDefault();
     this.pizzaService.activeNavTab.set(tab);
     this.pizzaService.isMobileMenuOpen.set(false);
 
-    const el = document.getElementById(elementId);
-    if (el) {
-      el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    if (typeof window !== 'undefined') {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   }
 

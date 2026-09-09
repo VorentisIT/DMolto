@@ -17,7 +17,11 @@ export class LocationFooterComponent {
     this.pizzaService.isReservationOpen.set(true);
   }
 
-  goToNav(tab: string): void {
+  goToNav(tab: string, event?: Event): void {
+    if (event) event.preventDefault();
     this.pizzaService.activeNavTab.set(tab);
+    if (typeof window !== 'undefined') {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
   }
 }

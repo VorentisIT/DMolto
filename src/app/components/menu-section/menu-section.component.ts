@@ -21,6 +21,22 @@ export class MenuSectionComponent {
     return this.pizzaService.activeNavTab() === 'menu' ? 'grid' : 'ribbon';
   });
 
+  readonly displayedCards = computed(() => {
+    let items = this.pizzaService.filteredMenuItems();
+    if (!items.length) items = this.pizzaService.menuItems();
+
+    if (this.layoutMode() === 'ribbon') {
+      const offset = this.pizzaService.menuSliceOffset() % items.length;
+      const result: PizzaItem[] = [];
+      for (let i = 0; i < 4; i++) {
+        result.push(items[(offset + i) % items.length]);
+      }
+      return result;
+    }
+
+    return items;
+  });
+
   constructor(public pizzaService: PizzaService) {}
 
   setCategory(category: string): void {
@@ -31,7 +47,8 @@ export class MenuSectionComponent {
     this.layoutOverride.set(mode);
   }
 
-  addToCart(pizza: PizzaItem): void {
+  addToCart(pizza: PizzaItem, event?: Event): void {
+    if (event) event.stopPropagation();
     this.pizzaService.addToCart(pizza);
   }
 

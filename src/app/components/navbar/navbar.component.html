@@ -1,68 +1,79 @@
-<!-- Top Live Kitchen Broadcast Bar -->
-<div class="live-kitchen-bar" id="live-broadcast-bar">
-  <div class="container live-bar-inner">
-    <div class="live-pulse-indicator">
-      <span class="pulse-radar"></span>
-      <span class="pulse-text">LIVE FROM D’MOLTO HEARTH</span>
-    </div>
-    <div class="live-address-item">
-      <span class="status-icon">📍</span>
-      <span class="address-text">130, Model Town Road, Pritm Nagar, Model Town, Ludhiana, Punjab</span>
-    </div>
-    <div class="live-time-item">
-      <span class="status-icon">🕒</span>
-      <span>Ludhiana: <strong>Open Now</strong></span>
-      <span class="open-badge">Until 11 PM</span>
+<!-- Navigation Bar -->
+<header class="luxury-navbar" [class.scrolled]="isScrolled()" id="site-header">
+  <!-- Top Luxury Info Ribbon (Location & Timings) -->
+  <div class="navbar-top-info-ribbon">
+    <div class="container top-info-flex">
+      <div class="info-left">
+        <span class="info-pill">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="svg-top-icon"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+          <span>42 Via Napoli, Little Italy</span>
+        </span>
+        <span class="info-sep">•</span>
+        <span class="info-pill">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="svg-top-icon"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+          <span>Open Daily: 11:00 AM – 11:00 PM</span>
+        </span>
+      </div>
+      <div class="info-right">
+        <span class="info-pill">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="svg-top-icon"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+          <span>Bookings: (555) 234-5678</span>
+        </span>
+      </div>
     </div>
   </div>
-</div>
 
-<!-- Top Minimal Luxury Sticky Navbar -->
-<header class="luxury-navbar" id="site-header">
   <div class="container navbar-inner">
-    <!-- Brand Mark & Identity: D'Molto Pizzeria Napoletana -->
+    <!-- Left: Logo & Subtitle -->
     <a href="#hero-section" class="nav-brand" (click)="navigateToSection('home', 'hero-section', $event)">
-      <img src="/images/dmolto-logo.png" alt="D'Molto Pizzeria Logo" class="brand-logo-img">
+      <img src="/images/dmolto-logo.png" alt="D'Mollo Pizzeria Logo" class="brand-logo-img">
       <div class="brand-text">
-        <span class="brand-title">D’Molto</span>
-        <span class="brand-tagline">PIZZERIA NAPOLETANA</span>
+        <span class="brand-title">D’Mollo</span>
+        <span class="brand-tagline">PIZZERIA & KITCHEN</span>
       </div>
     </a>
 
-    <!-- Center Navigation Links -->
+    <!-- Center: Navigation Links -->
     <nav class="nav-menu" aria-label="Main Navigation">
       <a href="#hero-section" class="nav-item" [class.active]="pizzaService.activeNavTab() === 'home'" (click)="navigateToSection('home', 'hero-section', $event)">Home</a>
-      <a href="#assembly-stage" class="nav-item" [class.active]="pizzaService.activeNavTab() === 'craft'" (click)="navigateToSection('craft', 'assembly-stage', $event)">The Craft</a>
       <a href="#menu-ribbon" class="nav-item" [class.active]="pizzaService.activeNavTab() === 'menu'" (click)="navigateToSection('menu', 'menu-ribbon', $event)">Menu</a>
-      <a href="#reservations-section" class="nav-item" [class.active]="pizzaService.activeNavTab() === 'reservations'" (click)="navigateToSection('reservations', 'reservations-section', $event)">Reservations</a>
-      <a href="#location-section" class="nav-item" [class.active]="pizzaService.activeNavTab() === 'find-us'" (click)="navigateToSection('find-us', 'location-section', $event)">Find Us</a>
+      <a href="#story-section" class="nav-item" [class.active]="pizzaService.activeNavTab() === 'about'" (click)="navigateToSection('about', 'story-section', $event)">About</a>
+      <a href="#experience-section" class="nav-item" [class.active]="pizzaService.activeNavTab() === 'experience'" (click)="navigateToSection('experience', 'experience-section', $event)">Experience</a>
+      <a href="#ambience-section" class="nav-item" [class.active]="pizzaService.activeNavTab() === 'gallery'" (click)="navigateToSection('gallery', 'ambience-section', $event)">Gallery</a>
+      <a href="#location-section" class="nav-item" [class.active]="pizzaService.activeNavTab() === 'contact'" (click)="navigateToSection('contact', 'location-section', $event)">Contact</a>
     </nav>
 
-    <!-- Header Actions -->
+    <!-- Right: Unified Action Buttons Group -->
     <div class="nav-actions">
       <!-- Search Trigger -->
-      <button type="button" class="action-icon-btn" (click)="toggleSearch()" title="Search menu" aria-label="Search menu">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <button type="button" class="nav-action-icon-btn" (click)="toggleSearch()" title="Search menu" aria-label="Search menu">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18">
           <circle cx="11" cy="11" r="8"></circle>
           <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
         </svg>
       </button>
 
-      <!-- Cart Trigger -->
-      <button type="button" class="action-icon-btn cart-btn" (click)="openCart()" title="View bag" aria-label="View bag">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <!-- Cart Bag Badge Button -->
+      <button type="button" class="nav-action-icon-btn cart-badge-trigger" (click)="openCart()" title="View Order Bag" aria-label="Order Bag">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18">
           <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
           <line x1="3" y1="6" x2="21" y2="6"></line>
           <path d="M16 10a4 4 0 0 1-8 0"></path>
         </svg>
         @if (pizzaService.cartTotalCount() > 0) {
-          <span class="cart-pill-count">{{ pizzaService.cartTotalCount() }}</span>
+          <span class="cart-count-pill">{{ pizzaService.cartTotalCount() }}</span>
         }
       </button>
 
-      <!-- Book a Table Primary Button -->
-      <button type="button" class="btn-pill-terracotta nav-cta-btn" (click)="openReservation()">
-        <span>Book a Table</span>
+      <!-- Professional Reserve Table Pill Button -->
+      <button type="button" class="nav-action-cta-btn" (click)="openReservation()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="15" height="15">
+          <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+          <line x1="16" y1="2" x2="16" y2="6"></line>
+          <line x1="8" y1="2" x2="8" y2="6"></line>
+          <line x1="3" y1="10" x2="21" y2="10"></line>
+        </svg>
+        <span>Reserve Table</span>
       </button>
 
       <!-- Mobile Menu Hamburger Button -->
@@ -76,7 +87,7 @@
     </div>
   </div>
 
-  <!-- Search Dropdown Bar -->
+  <!-- Search Input Bar -->
   @if (pizzaService.isSearchOpen()) {
     <div class="search-drop-bar container">
       <div class="search-input-field">
@@ -97,6 +108,4 @@
       </div>
     </div>
   }
-
-  <!-- Mobile Navigation Drawer: rendered at app root level in app.html for proper position:fixed -->
 </header>

@@ -80,5 +80,8 @@ export class CraftComponent {
 
   goToMenu(): void {
     this.pizzaService.activeNavTab.set('menu');
+    if (typeof window !== 'undefined') {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
   }
 }
