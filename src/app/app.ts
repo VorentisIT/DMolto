@@ -53,7 +53,6 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { HeroComponent } from './components/hero/hero.component';
 import { CraftComponent } from './components/craft/craft.component';
 import { MenuSectionComponent } from './components/menu-section/menu-section.component';
-import { ReservationsComponent } from './components/reservations/reservations.component';
 import { LocationFooterComponent } from './components/location-footer/location-footer.component';
 import { PizzaService } from './services/pizza.service';
 
@@ -67,7 +66,6 @@ import { PizzaService } from './services/pizza.service';
     HeroComponent,
     CraftComponent,
     MenuSectionComponent,
-    ReservationsComponent,
     LocationFooterComponent
   ],
   templateUrl: './app.html',
@@ -85,6 +83,12 @@ export class App implements AfterViewInit, OnDestroy {
   readonly isCartOpen = signal<boolean>(false);
   readonly isStoryModalOpen = signal<boolean>(false);
   readonly isMobileMenuOpen = signal<boolean>(false);
+
+  scrollToTop(): void {
+    if (isPlatformBrowser(this.platformId)) {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  }
   readonly toastMessage = signal<string | null>(null);
 
   // Craft Section State & Pillars (Left Content + Right Image)
@@ -470,7 +474,7 @@ export class App implements AfterViewInit, OnDestroy {
     });
     gsap.ticker.lagSmoothing(0);
 
-    // 1. HERO SCROLL TRANSITION TIMELINE (Pizza shifts down & hides on scroll) - disabled on mobile
+    // 1. HERO SCROLL TRANSITION TIMELINE (Pizza rotates, ingredients drift, scroll badge fades)
     if (isPlatformBrowser(this.platformId) && window.innerWidth > 768) {
       const heroTl = gsap.timeline({
         scrollTrigger: {
@@ -482,17 +486,30 @@ export class App implements AfterViewInit, OnDestroy {
       });
 
       heroTl.to('#hero-left-content', {
-        opacity: 0,
-        y: -60,
+        opacity: 0.2,
+        y: -40,
         ease: 'power1.out'
       }, 0);
 
       heroTl.to('#hero-giant-pizza', {
-        y: 160,
-        rotation: 24,
-        scale: 0.82,
-        opacity: 0,
+        y: 120,
+        rotation: 18,
+        scale: 0.85,
+        opacity: 0.7,
         ease: 'power1.inOut'
+      }, 0);
+
+      heroTl.to('.floating-particle', {
+        y: -60,
+        x: 20,
+        rotation: 30,
+        ease: 'power1.out'
+      }, 0);
+
+      heroTl.to('#hero-scroll-badge', {
+        opacity: 0,
+        scale: 0.5,
+        ease: 'power1.out'
       }, 0);
     }
 

@@ -1,30 +1,31 @@
-<!-- Separate Modular Navbar Component -->
+<!-- 1. NAVIGATION BAR -->
 <app-navbar></app-navbar>
 
-<!-- Mobile Navigation Drawer — at ROOT level so position:fixed covers full viewport -->
+<!-- Mobile Navigation Drawer -->
 @if (pizzaService.isMobileMenuOpen()) {
   <div class="mobile-nav-scrim" (click)="pizzaService.isMobileMenuOpen.set(false)">
     <div class="mobile-nav-panel" (click)="$event.stopPropagation()">
       <div class="mobile-nav-top">
         <div class="nav-brand">
-          <img src="/images/dmolto-logo.png" alt="D'Molto Pizzeria Logo" class="brand-logo-img">
+          <img src="/images/dmolto-logo.png" alt="D'Mollo Pizzeria Logo" class="brand-logo-img">
           <div class="brand-text">
-            <span class="brand-title">D'Molto</span>
-            <span class="brand-tagline">PIZZERIA NAPOLETANA</span>
+            <span class="brand-title">D’Mollo</span>
+            <span class="brand-tagline">PIZZERIA & KITCHEN</span>
           </div>
         </div>
         <button type="button" class="modal-x-btn" (click)="pizzaService.isMobileMenuOpen.set(false)">✕</button>
       </div>
       <nav class="mobile-nav-links">
-        <a href="#hero-section" class="mobile-nav-link" [class.active]="pizzaService.activeNavTab() === 'home'" (click)="pizzaService.activeNavTab.set('home'); pizzaService.isMobileMenuOpen.set(false)">Home</a>
-        <a href="#assembly-stage" class="mobile-nav-link" [class.active]="pizzaService.activeNavTab() === 'craft'" (click)="pizzaService.activeNavTab.set('craft'); pizzaService.isMobileMenuOpen.set(false)">The Craft</a>
-        <a href="#menu-ribbon" class="mobile-nav-link" [class.active]="pizzaService.activeNavTab() === 'menu'" (click)="pizzaService.activeNavTab.set('menu'); pizzaService.isMobileMenuOpen.set(false)">Menu</a>
-        <a href="#reservations-section" class="mobile-nav-link" [class.active]="pizzaService.activeNavTab() === 'reservations'" (click)="pizzaService.activeNavTab.set('reservations'); pizzaService.isMobileMenuOpen.set(false)">Reservations</a>
-        <a href="#location-section" class="mobile-nav-link" [class.active]="pizzaService.activeNavTab() === 'find-us'" (click)="pizzaService.activeNavTab.set('find-us'); pizzaService.isMobileMenuOpen.set(false)">Find Us</a>
+        <a href="javascript:void(0)" class="mobile-nav-link" [class.active]="pizzaService.activeNavTab() === 'home'" (click)="pizzaService.activeNavTab.set('home'); pizzaService.isMobileMenuOpen.set(false); scrollToTop()">Home</a>
+        <a href="javascript:void(0)" class="mobile-nav-link" [class.active]="pizzaService.activeNavTab() === 'menu'" (click)="pizzaService.activeNavTab.set('menu'); pizzaService.isMobileMenuOpen.set(false); scrollToTop()">Menu</a>
+        <a href="javascript:void(0)" class="mobile-nav-link" [class.active]="pizzaService.activeNavTab() === 'about'" (click)="pizzaService.activeNavTab.set('about'); pizzaService.isMobileMenuOpen.set(false); scrollToTop()">About</a>
+        <a href="javascript:void(0)" class="mobile-nav-link" [class.active]="pizzaService.activeNavTab() === 'experience'" (click)="pizzaService.activeNavTab.set('experience'); pizzaService.isMobileMenuOpen.set(false); scrollToTop()">Experience</a>
+        <a href="javascript:void(0)" class="mobile-nav-link" [class.active]="pizzaService.activeNavTab() === 'gallery'" (click)="pizzaService.activeNavTab.set('gallery'); pizzaService.isMobileMenuOpen.set(false); scrollToTop()">Gallery</a>
+        <a href="javascript:void(0)" class="mobile-nav-link" [class.active]="pizzaService.activeNavTab() === 'contact'" (click)="pizzaService.activeNavTab.set('contact'); pizzaService.isMobileMenuOpen.set(false); scrollToTop()">Contact</a>
       </nav>
       <div class="mobile-nav-footer">
-        <button type="button" class="btn-pill-terracotta btn-full-width" (click)="pizzaService.isMobileMenuOpen.set(false); pizzaService.isReservationOpen.set(true)">
-          <span>Book a Table</span>
+        <button type="button" class="btn-orange-pill btn-full-width" (click)="pizzaService.isMobileMenuOpen.set(false); pizzaService.isReservationOpen.set(true)">
+          <span>Reserve a Table</span>
           <span>→</span>
         </button>
       </div>
@@ -33,379 +34,1316 @@
 }
 
 <main class="page-content-wrapper">
-  @switch (pizzaService.activeNavTab()) {
-    @case ('craft') {
-      <div class="standalone-page-view">
-        <app-craft></app-craft>
-        <app-location-footer></app-location-footer>
+
+  <!-- =========================================================================
+       1. HOME PAGE VIEW
+     ========================================================================= -->
+  @if (pizzaService.activeNavTab() === 'home') {
+    <!-- 2. HERO SECTION -->
+    <app-hero></app-hero>
+
+    <!-- 3. PIZZA CATEGORY NAVIGATION -->
+    <section class="category-nav-section" id="category-section">
+      <div class="container category-layout-row">
+        <div class="category-pills-wrap">
+          <button 
+            type="button" 
+            class="category-card-pill" 
+            [class.active]="pizzaService.activeCategory() === 'all'" 
+            (click)="pizzaService.activeCategory.set('all')">
+            <img src="/images/dmollo-hero-pizza.png" alt="All Pizzas" class="category-thumb-img">
+            <span>All Pizzas</span>
+          </button>
+          <button 
+            type="button" 
+            class="category-card-pill" 
+            [class.active]="pizzaService.activeCategory() === 'classic'" 
+            (click)="pizzaService.activeCategory.set('classic')">
+            <img src="/images/dmollo-hero-pizza.jpg" alt="Classic" class="category-thumb-img">
+            <span>Classic</span>
+          </button>
+          <button 
+            type="button" 
+            class="category-card-pill" 
+            [class.active]="pizzaService.activeCategory() === 'veg'" 
+            (click)="pizzaService.activeCategory.set('veg')">
+            <img src="/images/dmollo-experience-pizza.jpg" alt="Veg" class="category-thumb-img">
+            <span>Veg</span>
+          </button>
+          <button 
+            type="button" 
+            class="category-card-pill" 
+            [class.active]="pizzaService.activeCategory() === 'non-veg'" 
+            (click)="pizzaService.activeCategory.set('non-veg')">
+            <img src="/images/dmollo-dining.jpg" alt="Non-Veg" class="category-thumb-img">
+            <span>Non-Veg</span>
+          </button>
+          <button 
+            type="button" 
+            class="category-card-pill" 
+            [class.active]="pizzaService.activeCategory() === 'special'" 
+            (click)="pizzaService.activeCategory.set('special')">
+            <img src="/images/dmollo-ambience-detail.jpg" alt="Chef's Special" class="category-thumb-img">
+            <span>Chef's Special</span>
+          </button>
+          <button 
+            type="button" 
+            class="category-card-pill" 
+            [class.active]="pizzaService.activeCategory() === 'sides'" 
+            (click)="pizzaService.activeCategory.set('sides')">
+            <img src="/images/dmollo-pizzaiolo.jpg" alt="Sides" class="category-thumb-img">
+            <span>Sides</span>
+          </button>
+          <button 
+            type="button" 
+            class="category-card-pill" 
+            [class.active]="pizzaService.activeCategory() === 'desserts'" 
+            (click)="pizzaService.activeCategory.set('desserts')">
+            <img src="/images/dmollo-ambience-main.jpg" alt="Desserts" class="category-thumb-img">
+            <span>Desserts</span>
+          </button>
+          <button 
+            type="button" 
+            class="category-card-pill" 
+            [class.active]="pizzaService.activeCategory() === 'beverages'" 
+            (click)="pizzaService.activeCategory.set('beverages')">
+            <img src="/images/gallery-bar.jpg" alt="Beverages" class="category-thumb-img">
+            <span>Beverages</span>
+          </button>
+        </div>
+
+        <div class="category-handwritten script-annotation">
+          Pizza<br>
+          For Every<br>
+          Mood ⤴
+        </div>
       </div>
-    }
-    @case ('menu') {
-      <div class="standalone-page-view">
-        <app-menu-section></app-menu-section>
-        <app-location-footer></app-location-footer>
-      </div>
-    }
-    @case ('reservations') {
-      <div class="standalone-page-view">
-        <app-reservations></app-reservations>
-        <app-location-footer></app-location-footer>
-      </div>
-    }
-    @case ('find-us') {
-      <div class="standalone-page-view">
-        <app-location-footer></app-location-footer>
-      </div>
-    }
-    @default {
-      <app-hero></app-hero>
-      <app-craft></app-craft>
-      <app-menu-section></app-menu-section>
-      
-      <!-- Our Story Section -->
-      <section class="editorial-story-section" id="story-section">
-        <div class="container story-layout-grid">
-          <div class="story-visual-column">
-            <div class="story-image-frame">
-              <img 
-                src="/images/chef-craft.jpg" 
-                alt="Pizzaiolo stretching fresh sourdough pizza dough in front of roaring brick oven" 
-                class="story-hero-photo"
-                id="story-pizzaiolo-img"
-                loading="lazy">
+    </section>
+
+    <!-- 4. OUR STORY SECTION -->
+    <app-craft></app-craft>
+
+    <!-- 5. MENU SECTION -->
+    <app-menu-section></app-menu-section>
+
+    <!-- 6. INGREDIENT / EXPERIENCE SECTION -->
+    <section class="experience-section" id="experience-section" [style.background]="pizzaService.activeExperienceStepBackground()">
+      <div class="container experience-layout">
+        <div class="experience-steps-col">
+          @for (step of pizzaService.experienceSteps; track step.id; let idx = $index) {
+            <div 
+              class="step-nav-item" 
+              [class.active]="pizzaService.activeExperienceStepIndex() === idx"
+              (click)="pizzaService.selectExperienceStep(idx)">
+              <span class="step-num-badge font-serif">{{ step.num }}</span>
+              <span class="step-name">{{ step.title }}</span>
             </div>
+          }
+        </div>
+
+        @if (pizzaService.activeExperienceStep(); as activeStep) {
+          <div class="experience-center-visual">
+            <img 
+              [src]="activeStep.image" 
+              [alt]="activeStep.title" 
+              class="experience-pizza-img fade-step-img">
           </div>
 
-          <div class="story-narrative-column">
-            <span class="editorial-kicker">OUR STORY</span>
-            <h2 class="section-title font-serif">
-              The Alchemy of True<br>
-              <span class="text-orange font-italic">Neapolitan Pizza</span>
+          <div class="experience-right-col">
+            <span class="editorial-kicker text-gold">THE D'MOLLO EXPERIENCE</span>
+            
+            <h2 class="experience-heading font-serif">
+              {{ activeStep.headingText }}<br>
+              <span class="text-orange">{{ activeStep.headingAccent }}</span>
             </h2>
 
-            <p class="story-lead-quote">
-              At D’Molto, pizza is more than food — it’s our heritage. Inspired by the cobblestone streets of Naples, we combine patience, passion, and fire to create a dining experience that feels like home in Italy.
+            <p class="experience-desc">
+              {{ activeStep.description }}
             </p>
 
-            <ul class="story-editorial-list">
-              <li class="story-list-item">
-                <span class="check-mark-circle">✓</span>
-                <div class="item-text-wrap">
-                  <strong>Authentic Neapolitan techniques</strong>
-                  <p>Hand-stretched without rolling pins, preserving delicate air pockets for the airy cornicione.</p>
-                </div>
-              </li>
-              <li class="story-list-item">
-                <span class="check-mark-circle">✓</span>
-                <div class="item-text-wrap">
-                  <strong>Slow-fermented sourdough</strong>
-                  <p>48-hour cold proofing yielding unmatched complexity and natural digestibility.</p>
-                </div>
-              </li>
-              <li class="story-list-item">
-                <span class="check-mark-circle">✓</span>
-                <div class="item-text-wrap">
-                  <strong>Fresh, seasonal ingredients</strong>
-                  <p>San Marzano tomatoes, imported Caputo Tipo 00 flour, and fresh daily fior di latte.</p>
-                </div>
-              </li>
-              <li class="story-list-item">
-                <span class="check-mark-circle">✓</span>
-                <div class="item-text-wrap">
-                  <strong>A warm, welcoming atmosphere</strong>
-                  <p>Crafted for laughter, milestone celebrations, date nights, and family gatherings.</p>
-                </div>
-              </li>
-            </ul>
-
-            <div class="story-action-composite">
-              <button type="button" class="btn-pill-terracotta" (click)="pizzaService.isStoryModalOpen.set(true)">
-                <span>Discover Our Story</span>
-                <span>→</span>
-              </button>
-
-              <div class="story-inset-polaroid">
-                <img src="/images/interior.jpg" alt="Warm Italian pizzeria dining room in Model Town Ludhiana" class="inset-polaroid-img" loading="lazy">
-                <span class="script-annotation polaroid-script">Tradition in Every Slice</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- The D'Molto Experience Bento Section -->
-      <section class="atmosphere-gallery-section" id="experience-section">
-        <div class="container">
-          <div class="experience-header-container">
-            <div class="experience-title-block">
-              <span class="editorial-kicker text-gold">THE D’MOLTO EXPERIENCE</span>
-              <h2 class="section-title font-serif">More Than a Meal, <span class="text-orange">A Memory.</span></h2>
-              <p class="section-subtitle">
-                Step into our candlelit Neapolitan pizzeria in Model Town. Feel the warmth of the roaring 450°C wood-fired oven, Italian acoustic melodies, and the aroma of 48-hour fermented sourdough.
-              </p>
-
-              <div class="experience-badges-row">
-                <span class="exp-badge-pill">✦ Candlelit Dining</span>
-                <span class="exp-badge-pill">✦ Live Hearth Bake</span>
-                <span class="exp-badge-pill">✦ Italian Aperitivo Bar</span>
-              </div>
-            </div>
-
-            <div class="exp-script-annotation">
-              <span class="script-annotation">Every Evening<br>Tells a Story</span>
-            </div>
-          </div>
-
-          <!-- Asymmetric Bento Showcase Grid -->
-          <div class="experience-bento-grid">
-            <!-- Hero Bento Card: Warm Dining Room -->
-            <div class="bento-hero-card">
-              <img src="/images/interior.jpg" alt="Rustic dining room with cozy leather booths and wood-fired oven glow" class="bento-card-photo" loading="lazy">
-              <div class="bento-gradient-overlay"></div>
-              <div class="bento-content-body">
-                <span class="bento-kicker-tag">THE AMBIANCE • MODEL TOWN</span>
-                <h3 class="bento-card-title font-serif">Warm Candlelit Dining</h3>
-                <p class="bento-card-desc">
-                  Curated leather booths, soft acoustic ambiance, and an open hearth view created for romantic date nights, family milestones, and grand celebrations.
-                </p>
-              </div>
-            </div>
-
-            <!-- Right Column Stack of Secondary Cards -->
-            <div class="bento-right-column" style="display: flex; flex-direction: column; gap: 24px;">
-              <div class="bento-sub-row">
-                <!-- Card 2: Bar & Lounge -->
-                <div class="bento-item-card">
-                  <img src="/images/gallery-bar.jpg" alt="Sleek Italian marble bar counter with craft cocktails" class="bento-card-photo" loading="lazy">
-                  <div class="bento-gradient-overlay"></div>
-                  <span class="bento-kicker-tag" style="background: rgba(200, 155, 83, 0.9);">APERITIVO & WINE</span>
-                  <h4 class="bento-item-title font-serif">Italian Aperitivo Bar</h4>
-                  <span class="bento-item-sub">Craft Cocktails & Wine Pairings</span>
-                </div>
-
-                <!-- Card 3: Oven-Side Craft -->
-                <div class="bento-item-card">
-                  <img src="/images/gallery-garnish.jpg" alt="Chef garnishing pizza with fresh organic basil and olive oil" class="bento-card-photo" loading="lazy">
-                  <div class="bento-gradient-overlay"></div>
-                  <span class="bento-kicker-tag" style="background: rgba(34, 139, 34, 0.9);">HEARTH KITCHEN</span>
-                  <h4 class="bento-item-title font-serif">Oven-Side Craft</h4>
-                  <span class="bento-item-sub">San Marzano & Fior Di Latte</span>
-                </div>
-              </div>
-
-              <!-- Card 4: Editorial Guest Review Card -->
-              <div class="bento-editorial-review-card">
-                <div>
-                  <div class="review-stars-row">
-                    <span class="stars-gold">★★★★★</span>
-                    <span class="review-score-tag">5.0 / 5.0 (480+ Reviews)</span>
-                  </div>
-                  <blockquote class="editorial-review-quote">
-                    “The crust has that signature Neapolitan airy chew and delicate leopard char. Paired with candlelight and warm Italian hospitality — D'Molto is easily the finest pizzeria in Ludhiana.”
-                  </blockquote>
-                </div>
-
-                <div class="review-author-cell">
-                  <div class="author-avatar-initial">P</div>
-                  <div>
-                    <span class="author-name-text">Prabhleen & Simran S.</span>
-                    <span class="author-location-text">Verified Model Town Dining Guests</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Bottom CTA Bar -->
-          <div class="experience-cta-bar">
-            <button type="button" class="btn-pill-terracotta" (click)="pizzaService.isReservationOpen.set(true)">
-              <span>Reserve Your Table Experience</span>
+            <button type="button" class="btn-orange-pill" (click)="pizzaService.isReservationOpen.set(true)">
+              <span>See the Process</span>
               <span>→</span>
             </button>
-            <button type="button" class="btn-pill-outline-luxury" (click)="pizzaService.activeNavTab.set('menu')">
-              <span>View Signature Menu</span>
-            </button>
-          </div>
-        </div>
-      </section>
 
-      <app-reservations></app-reservations>
-      <app-location-footer></app-location-footer>
-    }
-  }
-</main>
-
-<!-- ==========================================================================
-     MODALS: RESERVATION, CART, STORY & TOAST
-     ========================================================================== -->
-<!-- Reservation Modal -->
-@if (pizzaService.isReservationOpen()) {
-  <div class="modal-scrim" (click)="pizzaService.isReservationOpen.set(false)">
-    <div class="modal-card-luxury" (click)="$event.stopPropagation()">
-      <div class="modal-card-top">
-        <div>
-          <span class="editorial-kicker text-gold">TABLE CONCIERGE</span>
-          <h3 class="modal-card-title font-serif">Reserve at <span class="text-orange">D’Molto</span></h3>
-        </div>
-        <button type="button" class="modal-x-btn" (click)="pizzaService.isReservationOpen.set(false)">✕</button>
-      </div>
-
-      <form (submit)="submitReservation($event)" class="modal-luxury-form">
-        <div class="form-duo">
-          <div class="form-unit">
-            <label>Full Name *</label>
-            <input type="text" [(ngModel)]="resName" name="resName" placeholder="e.g. Prabhleen Singh" required>
-          </div>
-          <div class="form-unit">
-            <label>Phone Number *</label>
-            <input type="tel" [(ngModel)]="resPhone" name="resPhone" placeholder="e.g. +91 98765 43210" required>
-          </div>
-        </div>
-
-        <div class="form-duo">
-          <div class="form-unit">
-            <label>Party Size</label>
-            <select [(ngModel)]="resGuests" name="resGuests">
-              <option value="2 Guests (Date Night)">2 Guests (Date Night / Pair)</option>
-              <option value="1 Guest (Solo Dining)">1 Guest (Solo Dining)</option>
-              <option value="3-4 Guests (Family Table)">3-4 Guests (Family Table)</option>
-              <option value="5-6 Guests (Group)">5-6 Guests (Group Gathering)</option>
-              <option value="7+ Guests (Large Party)">7+ Guests (Celebration Party)</option>
-            </select>
-          </div>
-          <div class="form-unit">
-            <label>Date *</label>
-            <input type="date" [(ngModel)]="resDate" name="resDate" required>
-          </div>
-        </div>
-
-        <div class="form-unit">
-          <label>Preferred Time *</label>
-          <select [(ngModel)]="resTime" name="resTime">
-            <option value="12:30 PM (Lunch)">12:30 PM (Lunch)</option>
-            <option value="01:30 PM (Lunch)">01:30 PM (Lunch)</option>
-            <option value="04:30 PM (Coffee & High Tea)">04:30 PM (Coffee & High Tea)</option>
-            <option value="07:00 PM (Dinner)">07:00 PM (Dinner)</option>
-            <option value="07:30 PM (Dinner Prime)">07:30 PM (Dinner Prime)</option>
-            <option value="08:30 PM (Dinner Rush)">08:30 PM (Dinner Rush)</option>
-            <option value="09:30 PM (Late Feast)">09:30 PM (Late Feast)</option>
-          </select>
-        </div>
-
-        <div class="form-unit">
-          <label>Special Requests or Notes</label>
-          <textarea [(ngModel)]="resNotes" name="resNotes" rows="2" placeholder="e.g. Window booth preferred, celebration cake..."></textarea>
-        </div>
-
-        <button type="submit" class="btn-pill-terracotta btn-full-width">
-          <span>Confirm via WhatsApp Concierge</span>
-          <span>→</span>
-        </button>
-      </form>
-    </div>
-  </div>
-}
-
-<!-- Order Bag (Cart) Drawer -->
-@if (pizzaService.isCartOpen()) {
-  <div class="cart-scrim" (click)="pizzaService.isCartOpen.set(false)">
-    <div class="cart-drawer-panel" (click)="$event.stopPropagation()">
-      <div class="drawer-header-row">
-        <h3 class="drawer-title font-serif">Your Order Bag</h3>
-        <button type="button" class="modal-x-btn" (click)="pizzaService.isCartOpen.set(false)">✕</button>
-      </div>
-
-      <div class="drawer-items-content">
-        @if (pizzaService.cart().length === 0) {
-          <div class="empty-bag-notice">
-            <div class="empty-emoji">🍕</div>
-            <h4 class="font-serif">Your bag is feeling light</h4>
-            <p>Explore our menu and add your favorite wood-fired creations.</p>
-          </div>
-        } @else {
-          <div class="bag-items-list">
-            @for (item of pizzaService.cart(); track item.pizza.id; let i = $index) {
-              <div class="bag-item-card">
-                <img [src]="item.pizza.image || '/images/hero-pizza.jpg'" [alt]="item.pizza.name" class="bag-item-thumb">
-                <div class="bag-item-info">
-                  <h4 class="bag-item-name font-serif">{{ item.pizza.name }}</h4>
-                  <span class="bag-item-cost">₹{{ item.pizza.price * item.quantity }}</span>
-                  <div class="qty-stepper-luxury">
-                    <button type="button" (click)="pizzaService.updateQuantity(i, -1)">−</button>
-                    <span>{{ item.quantity }}</span>
-                    <button type="button" (click)="pizzaService.updateQuantity(i, 1)">+</button>
-                  </div>
-                </div>
-              </div>
-            }
+            <div class="experience-handwritten script-annotation">
+              {{ activeStep.handwritten }}
+            </div>
           </div>
         }
       </div>
+    </section>
 
-      @if (pizzaService.cart().length > 0) {
-        <div class="drawer-footer-band">
-          <div class="subtotal-line">
-            <span>Subtotal:</span>
-            <span class="subtotal-price font-serif">₹{{ pizzaService.cartTotalPrice() }}</span>
+    <!-- 7. AMBIENCE & GALLERY SECTION -->
+    <section class="ambience-section" id="ambience-section">
+      <div class="container">
+        <div class="menu-editorial-header" style="margin-bottom: 28px;">
+          <div class="menu-header-left">
+            <span class="editorial-kicker text-gold">OUR AMBIENCE & GALLERY</span>
+            <h2 class="ambience-heading font-serif" style="margin-bottom: 0;">
+              More Than a Meal. A <span class="text-orange font-italic">Memory.</span>
+            </h2>
           </div>
-          <button type="button" class="btn-pill-terracotta btn-full-width" (click)="checkoutViaWhatsApp()">
-            <span>Send Order via WhatsApp</span>
+          <div class="menu-header-right">
+            <p class="ambience-desc" style="margin-bottom: 0;">
+              Step into a warm and inviting space where good food meets great company. Whether it's a cozy dinner, a celebration, or a catch-up with friends.
+            </p>
+          </div>
+        </div>
+
+        <!-- 9-CARD MOSAIC GALLERY SHOWCASE (EXACT REFERENCE PATTERN & WIDTH) -->
+        <div class="gallery-mosaic-grid">
+          <!-- ROW 1: Wide + Medium -->
+          <div class="mosaic-card mosaic-wide" (click)="pizzaService.openPizzaDetails(pizzaService.menuItems()[0])">
+            <img src="/images/dmollo-hero-bg-cover.jpg" alt="Wood Fired Oven" class="mosaic-img" (error)="$any($event.target).src = '/images/dmollo-dining.jpg'">
+            <div class="mosaic-badge-top">STONE HEARTH</div>
+            <div class="mosaic-content">
+              <span class="mosaic-kicker">🔥 WOOD FIRED OVEN</span>
+              <h3 class="mosaic-title font-serif">The 450°C Beechwood Stone Hearth</h3>
+              <p class="mosaic-sub">90-second Neapolitan pizza bakes over beechwood embers</p>
+              <span class="mosaic-action">Click to view full photo →</span>
+            </div>
+          </div>
+
+          <div class="mosaic-card mosaic-medium" (click)="pizzaService.openPizzaDetails(pizzaService.menuItems()[1])">
+            <img src="/images/dmollo-pizzaiolo.jpg" alt="Master Pizzaiolo" class="mosaic-img" (error)="$any($event.target).src = '/images/dmollo-dining.jpg'">
+            <div class="mosaic-badge-top">SIGNATURE CRAFT</div>
+            <div class="mosaic-content">
+              <span class="mosaic-kicker">👨‍🍳 MASTER PIZZAIOLO</span>
+              <h3 class="mosaic-title font-serif">48-Hour Cold Fermented Dough</h3>
+              <p class="mosaic-sub">Hand-stretched cornicione with wild sourdough starter</p>
+              <span class="mosaic-action">Click to view full photo →</span>
+            </div>
+          </div>
+
+          <!-- ROW 2: 3 Medium Cards -->
+          <div class="mosaic-card mosaic-medium" (click)="pizzaService.openPizzaDetails(pizzaService.menuItems()[2])">
+            <img src="/images/dmollo-ambience-detail.jpg" alt="Pizza Detail" class="mosaic-img" (error)="$any($event.target).src = '/images/dmollo-dining.jpg'">
+            <div class="mosaic-badge-top">D.O.P. INGREDIENTS</div>
+            <div class="mosaic-content">
+              <span class="mosaic-kicker">🍅 VOLCANIC SOIL</span>
+              <h3 class="mosaic-title font-serif">San Marzano & Fior Di Latte</h3>
+              <p class="mosaic-sub">Campania plum tomatoes & fresh local artisan mozzarella</p>
+              <span class="mosaic-action">Click to view full photo →</span>
+            </div>
+          </div>
+
+          <div class="mosaic-card mosaic-medium" (click)="pizzaService.openPizzaDetails(pizzaService.menuItems()[3])">
+            <img src="/images/dmollo-ambience-main.jpg" alt="Main Dining Hall" class="mosaic-img" (error)="$any($event.target).src = '/images/dmollo-dining.jpg'">
+            <div class="mosaic-badge-top">MAIN DINING</div>
+            <div class="mosaic-content">
+              <span class="mosaic-kicker">🍷 AMBIENCE</span>
+              <h3 class="mosaic-title font-serif">Warm Candlelit Dining Hall</h3>
+              <p class="mosaic-sub">Cozy ambient lighting, rustic timber & wine pairings</p>
+              <span class="mosaic-action">Click to view full photo →</span>
+            </div>
+          </div>
+
+          <div class="mosaic-card mosaic-medium" (click)="pizzaService.openPizzaDetails(pizzaService.menuItems()[4])">
+            <img src="/images/dmollo-dining.jpg" alt="Friends Dining" class="mosaic-img" (error)="$any($event.target).src = '/images/dmollo-dining.jpg'">
+            <div class="mosaic-badge-top">GUEST MOMENTS</div>
+            <div class="mosaic-content">
+              <span class="mosaic-kicker">🥂 TABLE RESERVATION</span>
+              <h3 class="mosaic-title font-serif">Memorable Family & Date Evenings</h3>
+              <p class="mosaic-sub">Bringing loved ones together, one slice at a time</p>
+              <span class="mosaic-action">Click to view full photo →</span>
+            </div>
+          </div>
+
+          <!-- ROW 3: Wide + Medium -->
+          <div class="mosaic-card mosaic-wide" (click)="pizzaService.openPizzaDetails(pizzaService.menuItems()[2])">
+            <img src="/images/burrata-truffle.jpg" alt="Truffle Burrata" class="mosaic-img" (error)="$any($event.target).src = '/images/dmollo-dining.jpg'">
+            <div class="mosaic-badge-top special-orange-badge">CHEF'S SPECIAL</div>
+            <div class="mosaic-content">
+              <span class="mosaic-kicker">🌟 SIGNATURE PIE</span>
+              <h3 class="mosaic-title font-serif">Wild Porcini & White Truffle Burrata</h3>
+              <p class="mosaic-sub">Whole burrata crest, white truffle oil & forest mushrooms</p>
+              <span class="mosaic-action">Click to view full photo →</span>
+            </div>
+          </div>
+
+          <div class="mosaic-card mosaic-medium" (click)="pizzaService.openPizzaDetails(pizzaService.menuItems()[1])">
+            <img src="/images/diavola-pizza-hq.jpg" alt="Spicy Diavola" class="mosaic-img" (error)="$any($event.target).src = '/images/dmollo-dining.jpg'">
+            <div class="mosaic-badge-top">FIERY & BOLD</div>
+            <div class="mosaic-content">
+              <span class="mosaic-kicker">🌶️ CALABRIAN CHILI</span>
+              <h3 class="mosaic-title font-serif">Diavola Piccante & Smoked Scamorza</h3>
+              <p class="mosaic-sub">Spicy artisanal salami & pickled Calabrian chilies</p>
+              <span class="mosaic-action">Click to view full photo →</span>
+            </div>
+          </div>
+
+          <!-- ROW 4: Medium + Wide -->
+          <div class="mosaic-card mosaic-medium" (click)="pizzaService.openPizzaDetails(pizzaService.menuItems()[0])">
+            <img src="/images/margherita-pizza-hq.jpg" alt="Margherita Classica" class="mosaic-img" (error)="$any($event.target).src = '/images/dmollo-dining.jpg'">
+            <div class="mosaic-badge-top">TRADITION</div>
+            <div class="mosaic-content">
+              <span class="mosaic-kicker">🌿 FRESH BASIL</span>
+              <h3 class="mosaic-title font-serif">Margherita Classica Neapolitan</h3>
+              <p class="mosaic-sub">Sweet basil leaves, cold-pressed extra virgin olive oil</p>
+              <span class="mosaic-action">Click to view full photo →</span>
+            </div>
+          </div>
+
+          <div class="mosaic-card mosaic-wide" (click)="pizzaService.openPizzaDetails(pizzaService.menuItems()[8])">
+            <img src="/images/gallery-bar.jpg" alt="Beverage Bar" class="mosaic-img" (error)="$any($event.target).src = '/images/dmollo-dining.jpg'">
+            <div class="mosaic-badge-top">VIP LOUNGE</div>
+            <div class="mosaic-content">
+              <span class="mosaic-kicker">☕ BEVERAGE BAR</span>
+              <h3 class="mosaic-title font-serif">Artisanal Coffee & Italian Wine Lounge</h3>
+              <p class="mosaic-sub">Organic espresso brews, blood orange spritz & dolci</p>
+              <span class="mosaic-action">Click to view full photo →</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 8. RESERVATION SECTION -->
+    <section class="reservation-section" id="reservations-section">
+      <div class="container">
+        <div class="reservation-panel-card">
+          <div class="reservation-bg-overlay"></div>
+          <img src="/images/dmollo-dining.jpg" alt="Restaurant Table Ambient Scene" class="reservation-bg-img">
+
+          <div class="reservation-content-wrap">
+            <div class="reservation-header text-center">
+              <span class="editorial-kicker text-gold">BOOK A TABLE</span>
+              <h2 class="reservation-title font-serif">
+                Reserve Your <span class="text-orange font-italic">Experience</span>
+              </h2>
+              <p class="reservation-subtitle">
+                Great food brings people together. Book your table and let us make your moments special.
+              </p>
+            </div>
+
+            <form class="reservation-horizontal-form" (submit)="pizzaService.submitReservation($event)">
+              <div class="form-select-group">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#FF641A" stroke-width="2" width="18" height="18" class="form-svg-icon"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle></svg>
+                <select class="res-input-select" [(ngModel)]="pizzaService.resGuests" name="guests">
+                  <option value="2 Guests">2 People</option>
+                  <option value="4 Guests">4 People</option>
+                  <option value="6 Guests">6 People</option>
+                  <option value="8+ Party">8+ Party</option>
+                </select>
+              </div>
+
+              <div class="form-select-group">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#FF641A" stroke-width="2" width="18" height="18" class="form-svg-icon"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+                <input type="date" class="res-input-date" [(ngModel)]="pizzaService.resDate" name="date">
+              </div>
+
+              <div class="form-select-group">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#FF641A" stroke-width="2" width="18" height="18" class="form-svg-icon"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                <select class="res-input-select" [(ngModel)]="pizzaService.resTime" name="time">
+                  <option value="06:00 PM">06:00 PM</option>
+                  <option value="07:00 PM">07:00 PM</option>
+                  <option value="08:00 PM">08:00 PM</option>
+                  <option value="09:00 PM">09:00 PM</option>
+                </select>
+              </div>
+
+              <button type="submit" class="btn-orange-pill res-submit-btn">
+                <span>Reserve a Table</span>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+              </button>
+            </form>
+
+            <div class="reservation-handwritten script-annotation text-center">
+              A Warm Table Awaits You
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 9. LOCATION & FIND US SECTION -->
+    <section class="location-section" id="location-section">
+      <div class="container">
+        <span class="editorial-kicker text-gold">FIND US</span>
+        <h2 class="section-title font-serif">Visit Our <span class="text-orange">Pizzeria</span></h2>
+
+        <div class="location-split-grid">
+          <div class="location-info-card glass-card-21st">
+            <div class="info-row">
+              <span class="info-icon">📍</span>
+              <div class="info-content">
+                <strong>Location & Address</strong>
+                <p>D’Molto Pizza, 130, Model Town Rd,<br>Pritm Nagar, Model Town, Ludhiana, Punjab 141002</p>
+              </div>
+            </div>
+
+            <div class="info-row">
+              <span class="info-icon">🕒</span>
+              <div class="info-content">
+                <strong>Opening Hours</strong>
+                <p>Mon – Sun · 11:00 AM – 11:00 PM</p>
+              </div>
+            </div>
+
+            <div class="info-row">
+              <span class="info-icon">✉️</span>
+              <div class="info-content">
+                <strong>Email Us</strong>
+                <p>hello@dmollo.com</p>
+              </div>
+            </div>
+
+            <div class="info-row">
+              <span class="info-icon">📞</span>
+              <div class="info-content">
+                <strong>Call Us</strong>
+                <p>+91 98123 45678</p>
+              </div>
+            </div>
+
+            <div class="location-actions-row">
+              <a href="https://www.google.com/maps?q=D%E2%80%99Molto+Pizza,+130,+Model+Town+Rd,+Pritm+Nagar,+Model+Town,+Ludhiana,+Punjab+141002" target="_blank" class="btn-orange-pill">Get Directions</a>
+              <button type="button" class="btn-outline-pill" (click)="pizzaService.isReservationOpen.set(true)">Book a Table</button>
+            </div>
+          </div>
+
+          <div class="location-map-card">
+            <iframe 
+              class="google-map-iframe"
+              src="https://maps.google.com/maps?q=D'Molto%20Pizza,%20130,%20Model%20Town%20Rd,%20Pritm%20Nagar,%20Model%20Town,%20Ludhiana,%20Punjab%20141002&t=&z=16&ie=UTF8&iwloc=&output=embed" 
+              width="100%" 
+              height="100%" 
+              style="border:0; width:100%; height:100%; border-radius: 24px;" 
+              allowfullscreen="" 
+              loading="lazy" 
+              referrerpolicy="no-referrer-when-downgrade">
+            </iframe>
+            
+            <div class="map-floating-venue-card glass-card-21st">
+              <img src="/images/dmollo-dining.jpg" alt="D'Mollo Pizzeria" class="venue-card-img">
+              <div class="venue-card-info">
+                <strong>D’Molto Pizza</strong>
+                <p>130 Model Town Rd, Ludhiana, Punjab</p>
+              </div>
+              <a href="https://www.google.com/maps?q=D%E2%80%99Molto+Pizza,+130,+Model+Town+Rd,+Pritm+Nagar,+Model+Town,+Ludhiana,+Punjab+141002" target="_blank" class="venue-arrow-btn">→</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 10. FOOTER -->
+    <app-location-footer></app-location-footer>
+  }
+
+  <!-- =========================================================================
+       2. DEDICATED MENU PAGE VIEW
+     ========================================================================= -->
+  @if (pizzaService.activeNavTab() === 'menu') {
+    <div class="subpage-hero-banner">
+      <div class="container">
+        <div class="subpage-breadcrumb font-mono">
+          <span class="subpage-breadcrumb-link" (click)="pizzaService.activeNavTab.set('home'); scrollToTop()">HOME</span>
+          <span>/</span>
+          <span>MENU</span>
+        </div>
+        <h1 class="subpage-title font-serif">Our Artisanal <span class="text-orange">Menu</span></h1>
+        <p class="subpage-subtitle">Handcrafted 48-Hour Sourdough Pizzas, Fresh Volcanic Tomatoes, Fior Di Latte & Fine Beverages</p>
+      </div>
+    </div>
+
+    <!-- Category Nav Section -->
+    <section class="category-nav-section">
+      <div class="container category-layout-row">
+        <div class="category-pills-wrap">
+          <button type="button" class="category-card-pill" [class.active]="pizzaService.activeCategory() === 'all'" (click)="pizzaService.activeCategory.set('all')">
+            <img src="/images/dmollo-hero-pizza.png" alt="All Pizzas" class="category-thumb-img">
+            <span>All Pizzas</span>
+          </button>
+          <button type="button" class="category-card-pill" [class.active]="pizzaService.activeCategory() === 'classic'" (click)="pizzaService.activeCategory.set('classic')">
+            <img src="/images/dmollo-hero-pizza.jpg" alt="Classic" class="category-thumb-img">
+            <span>Classic</span>
+          </button>
+          <button type="button" class="category-card-pill" [class.active]="pizzaService.activeCategory() === 'veg'" (click)="pizzaService.activeCategory.set('veg')">
+            <img src="/images/dmollo-experience-pizza.jpg" alt="Veg" class="category-thumb-img">
+            <span>Veg</span>
+          </button>
+          <button type="button" class="category-card-pill" [class.active]="pizzaService.activeCategory() === 'non-veg'" (click)="pizzaService.activeCategory.set('non-veg')">
+            <img src="/images/dmollo-dining.jpg" alt="Non-Veg" class="category-thumb-img">
+            <span>Non-Veg</span>
+          </button>
+          <button type="button" class="category-card-pill" [class.active]="pizzaService.activeCategory() === 'special'" (click)="pizzaService.activeCategory.set('special')">
+            <img src="/images/dmollo-ambience-detail.jpg" alt="Chef's Special" class="category-thumb-img">
+            <span>Chef's Special</span>
+          </button>
+          <button type="button" class="category-card-pill" [class.active]="pizzaService.activeCategory() === 'sides'" (click)="pizzaService.activeCategory.set('sides')">
+            <img src="/images/dmollo-pizzaiolo.jpg" alt="Sides" class="category-thumb-img">
+            <span>Sides</span>
+          </button>
+          <button type="button" class="category-card-pill" [class.active]="pizzaService.activeCategory() === 'desserts'" (click)="pizzaService.activeCategory.set('desserts')">
+            <img src="/images/dmollo-ambience-main.jpg" alt="Desserts" class="category-thumb-img">
+            <span>Desserts</span>
+          </button>
+          <button type="button" class="category-card-pill" [class.active]="pizzaService.activeCategory() === 'beverages'" (click)="pizzaService.activeCategory.set('beverages')">
+            <img src="/images/gallery-bar.jpg" alt="Beverages" class="category-thumb-img">
+            <span>Beverages</span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Menu Showcase -->
+    <app-menu-section></app-menu-section>
+
+    <!-- Reservation CTA Section -->
+    <section class="reservation-section">
+      <div class="container">
+        <div class="reservation-panel-card">
+          <div class="reservation-bg-overlay"></div>
+          <img src="/images/dmollo-dining.jpg" alt="Restaurant Table Ambient Scene" class="reservation-bg-img">
+
+          <div class="reservation-content-wrap">
+            <div class="reservation-header text-center">
+              <span class="editorial-kicker text-gold">BOOK A TABLE</span>
+              <h2 class="reservation-title font-serif">
+                Taste True <span class="text-orange font-italic">Neapolitan</span> Craft
+              </h2>
+              <p class="reservation-subtitle">
+                Reserve your table online and experience hot, freshly baked sourdough pizzas right out of our stone oven.
+              </p>
+            </div>
+
+            <form class="reservation-horizontal-form" (submit)="pizzaService.submitReservation($event)">
+              <div class="form-select-group">
+                <span class="form-icon">👥</span>
+                <select class="res-input-select" [(ngModel)]="pizzaService.resGuests" name="guests">
+                  <option value="2 Guests">2 People</option>
+                  <option value="4 Guests">4 People</option>
+                  <option value="6 Guests">6 People</option>
+                  <option value="8+ Party">8+ Party</option>
+                </select>
+              </div>
+
+              <div class="form-select-group">
+                <span class="form-icon">📅</span>
+                <input type="date" class="res-input-date" [(ngModel)]="pizzaService.resDate" name="date">
+              </div>
+
+              <div class="form-select-group">
+                <span class="form-icon">🕒</span>
+                <select class="res-input-select" [(ngModel)]="pizzaService.resTime" name="time">
+                  <option value="06:00 PM">06:00 PM</option>
+                  <option value="07:00 PM">07:00 PM</option>
+                  <option value="08:00 PM">08:00 PM</option>
+                  <option value="09:00 PM">09:00 PM</option>
+                </select>
+              </div>
+
+              <button type="submit" class="btn-orange-pill res-submit-btn">
+                <span>Reserve a Table</span>
+                <span>→</span>
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <app-location-footer></app-location-footer>
+  }
+
+  <!-- =========================================================================
+       3. DEDICATED ABOUT PAGE VIEW
+     ========================================================================= -->
+  @if (pizzaService.activeNavTab() === 'about') {
+    <div class="subpage-hero-banner">
+      <div class="container">
+        <div class="subpage-breadcrumb font-mono">
+          <span class="subpage-breadcrumb-link" (click)="pizzaService.activeNavTab.set('home'); scrollToTop()">HOME</span>
+          <span>/</span>
+          <span>ABOUT US</span>
+        </div>
+        <h1 class="subpage-title font-serif">Our Story & <span class="text-orange">Heritage</span></h1>
+        <p class="subpage-subtitle">Bringing authentic Neapolitan stone-hearth wood-fired pizza mastery to Ludhiana with passion and unyielding commitment.</p>
+      </div>
+    </div>
+
+    <!-- Our Craft Showcase Component -->
+    <app-craft></app-craft>
+
+    <!-- Ambience Section -->
+    <section class="ambience-section">
+      <div class="container ambience-layout">
+        <div class="ambience-left-col">
+          <span class="editorial-kicker text-gold">OUR ATMOSPHERE</span>
+          <h2 class="ambience-heading font-serif">
+            A Place Built Around <span class="text-orange font-italic">Community.</span>
+          </h2>
+          <p class="ambience-desc">
+            At D’Molto, every seat is designed for memorable conversations, shared laughter, and exceptional food crafted with heart.
+          </p>
+          <button type="button" class="btn-orange-pill" (click)="pizzaService.isReservationOpen.set(true)">
+            <span>Reserve Table</span>
             <span>→</span>
           </button>
         </div>
-      }
-    </div>
-  </div>
-}
 
-<!-- Story Video Modal -->
-@if (pizzaService.isStoryModalOpen()) {
-  <div class="modal-scrim" (click)="pizzaService.isStoryModalOpen.set(false)">
-    <div class="modal-card-luxury story-modal-size" (click)="$event.stopPropagation()">
-      <div class="modal-card-top">
-        <div>
-          <span class="editorial-kicker text-gold">THE D’MOLTO JOURNEY</span>
-          <h3 class="modal-card-title font-serif">Our Neapolitan Heritage</h3>
+        <div class="ambience-bento-grid">
+          <div class="bento-card bento-hero">
+            <img src="/images/dmollo-ambience-main.jpg" alt="D'Mollo Pizzeria Main Dining Hall" class="bento-img">
+            <div class="bento-badge-top">MAIN DINING HALL</div>
+            <div class="bento-caption">
+              <strong>Atmosphere & Fireplace</strong>
+              <span>Cozy Neapolitan Ambience</span>
+            </div>
+          </div>
+          <div class="bento-card bento-tall">
+            <img src="/images/dmollo-pizzaiolo.jpg" alt="Master Pizzaiolo at Wood Hearth" class="bento-img">
+            <div class="bento-badge-top special-orange-badge">450°C STONE HEARTH</div>
+            <div class="bento-caption">
+              <strong>Master Pizzaiolo Craft</strong>
+              <span>Wood-Fired Hearth</span>
+            </div>
+          </div>
+          <div class="bento-card bento-wide">
+            <img src="/images/dmollo-ambience-detail.jpg" alt="Wood-fired Crust Detail" class="bento-img">
+            <div class="bento-badge-top">NEAPOLITAN CRUST</div>
+            <div class="bento-caption">
+              <strong>Fresh Italian Sugo</strong>
+              <span>Fior Di Latte Mozzarella</span>
+            </div>
+          </div>
         </div>
-        <button type="button" class="modal-x-btn" (click)="pizzaService.isStoryModalOpen.set(false)">✕</button>
       </div>
+    </section>
 
-      <div class="story-modal-inner">
-        <img src="/images/chef-craft.jpg" alt="Artisan pizzaiolo stretching dough" class="story-modal-hero-img">
-        <p class="story-modal-body">
-          Before opening at 130 Model Town Road, we envisioned a sanctuary where the ancient craft of Naples could thrive without compromise.
-        </p>
-        <blockquote class="story-modal-quote font-serif">
-          "Right now, it’s quiet. Soon, these walls will witness first dates, family dinners, birthday wishes, endless conversations, and countless smiles. And we can’t wait to welcome them all."
-        </blockquote>
+    <!-- Reservation Section -->
+    <section class="reservation-section">
+      <div class="container">
+        <div class="reservation-panel-card">
+          <div class="reservation-bg-overlay"></div>
+          <img src="/images/dmollo-dining.jpg" alt="Restaurant Table Ambient Scene" class="reservation-bg-img">
+
+          <div class="reservation-content-wrap">
+            <div class="reservation-header text-center">
+              <span class="editorial-kicker text-gold">VISIT US</span>
+              <h2 class="reservation-title font-serif">
+                Join Us at <span class="text-orange font-italic">D’Molto</span>
+              </h2>
+            </div>
+            <form class="reservation-horizontal-form" (submit)="pizzaService.submitReservation($event)">
+              <div class="form-select-group">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#FF641A" stroke-width="2" width="18" height="18" class="form-svg-icon"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle></svg>
+                <select class="res-input-select" [(ngModel)]="pizzaService.resGuests" name="guests">
+                  <option value="2 Guests">2 People</option>
+                  <option value="4 Guests">4 People</option>
+                  <option value="6 Guests">6 People</option>
+                </select>
+              </div>
+              <div class="form-select-group">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#FF641A" stroke-width="2" width="18" height="18" class="form-svg-icon"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+                <input type="date" class="res-input-date" [(ngModel)]="pizzaService.resDate" name="date">
+              </div>
+              <div class="form-select-group">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#FF641A" stroke-width="2" width="18" height="18" class="form-svg-icon"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                <select class="res-input-select" [(ngModel)]="pizzaService.resTime" name="time">
+                  <option value="07:00 PM">07:00 PM</option>
+                  <option value="08:00 PM">08:00 PM</option>
+                </select>
+              </div>
+              <button type="submit" class="btn-orange-pill res-submit-btn">
+                <span>Book Table</span>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <app-location-footer></app-location-footer>
+  }
+
+  <!-- =========================================================================
+       4. DEDICATED EXPERIENCE PAGE VIEW
+     ========================================================================= -->
+  @if (pizzaService.activeNavTab() === 'experience') {
+    <div class="subpage-hero-banner">
+      <div class="container">
+        <div class="subpage-breadcrumb font-mono">
+          <span class="subpage-breadcrumb-link" (click)="pizzaService.activeNavTab.set('home'); scrollToTop()">HOME</span>
+          <span>/</span>
+          <span>EXPERIENCE</span>
+        </div>
+        <h1 class="subpage-title font-serif">The D'Molto <span class="text-orange">Experience</span></h1>
+        <p class="subpage-subtitle">A 4-Step Masterclass in Neapolitan Craftsmanship: From 48-Hour Cold Fermentation to 450°C Dome Hearth Bakes.</p>
       </div>
     </div>
-  </div>
-}
 
-<!-- Toast Notification -->
-@if (pizzaService.toastMessage()) {
-  <div class="luxury-toast">
-    <span class="toast-sparkle">✨</span>
-    <span>{{ pizzaService.toastMessage() }}</span>
-  </div>
-}
+    <!-- Full Interactive Experience Section -->
+    <section class="experience-section" [style.background]="pizzaService.activeExperienceStepBackground()">
+      <div class="container experience-layout">
+        <div class="experience-steps-col">
+          @for (step of pizzaService.experienceSteps; track step.id; let idx = $index) {
+            <div 
+              class="step-nav-item" 
+              [class.active]="pizzaService.activeExperienceStepIndex() === idx"
+              (click)="pizzaService.selectExperienceStep(idx)">
+              <span class="step-num-badge font-serif">{{ step.num }}</span>
+              <span class="step-name">{{ step.title }}</span>
+            </div>
+          }
+        </div>
 
-<!-- Floating Live WhatsApp Concierge Widget -->
-<a 
-  href="https://wa.me/918360340447?text=Hello%20D%27Molto%20Pizzeria%21%20I%27d%20like%20to%20inquire%20about%20today%27s%20fresh%20specials%20and%20table%20reservations." 
-  target="_blank" 
-  rel="noopener noreferrer" 
-  class="floating-live-concierge" 
-  title="Chat Live with D'Molto Pizzaiolo">
-  <div class="concierge-pulse"></div>
-  <div class="concierge-icon">
-    <svg viewBox="0 0 24 24" fill="currentColor">
-      <path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0 0 12.04 2z"/>
-    </svg>
-  </div>
-  <div class="concierge-info">
-    <span class="concierge-status"><span class="dot-online"></span> Live Kitchen</span>
-    <span class="concierge-title">Chat with Chef</span>
-  </div>
-</a>
+        @if (pizzaService.activeExperienceStep(); as activeStep) {
+          <div class="experience-center-visual">
+            <img 
+              [src]="activeStep.image" 
+              [alt]="activeStep.title" 
+              class="experience-pizza-img fade-step-img">
+          </div>
+
+          <div class="experience-right-col">
+            <span class="editorial-kicker text-gold">THE D'MOLLO EXPERIENCE</span>
+            
+            <h2 class="experience-heading font-serif">
+              {{ activeStep.headingText }}<br>
+              <span class="text-orange">{{ activeStep.headingAccent }}</span>
+            </h2>
+
+            <p class="experience-desc">
+              {{ activeStep.description }}
+            </p>
+
+            <button type="button" class="btn-orange-pill" (click)="pizzaService.isReservationOpen.set(true)">
+              <span>Reserve a Table</span>
+              <span>→</span>
+            </button>
+
+            <div class="experience-handwritten script-annotation">
+              {{ activeStep.handwritten }}
+            </div>
+          </div>
+        }
+      </div>
+    </section>
+
+    <!-- Craft Pillars Section -->
+    <app-craft></app-craft>
+
+    <!-- Reservation Section -->
+    <section class="reservation-section">
+      <div class="container">
+        <div class="reservation-panel-card">
+          <div class="reservation-bg-overlay"></div>
+          <img src="/images/dmollo-dining.jpg" alt="Restaurant Table Ambient Scene" class="reservation-bg-img">
+
+          <div class="reservation-content-wrap">
+            <div class="reservation-header text-center">
+              <span class="editorial-kicker text-gold">SEE IT LIVE</span>
+              <h2 class="reservation-title font-serif">
+                Experience the <span class="text-orange font-italic">Hearth</span>
+              </h2>
+            </div>
+            <form class="reservation-horizontal-form" (submit)="pizzaService.submitReservation($event)">
+              <div class="form-select-group">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#FF641A" stroke-width="2" width="18" height="18" class="form-svg-icon"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle></svg>
+                <select class="res-input-select" [(ngModel)]="pizzaService.resGuests" name="guests">
+                  <option value="2 Guests">2 People</option>
+                  <option value="4 Guests">4 People</option>
+                </select>
+              </div>
+              <div class="form-select-group">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#FF641A" stroke-width="2" width="18" height="18" class="form-svg-icon"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+                <input type="date" class="res-input-date" [(ngModel)]="pizzaService.resDate" name="date">
+              </div>
+              <div class="form-select-group">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#FF641A" stroke-width="2" width="18" height="18" class="form-svg-icon"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                <select class="res-input-select" [(ngModel)]="pizzaService.resTime" name="time">
+                  <option value="07:00 PM">07:00 PM</option>
+                  <option value="08:00 PM">08:00 PM</option>
+                </select>
+              </div>
+              <button type="submit" class="btn-orange-pill res-submit-btn">
+                <span>Book Experience</span>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <app-location-footer></app-location-footer>
+  }
+
+  <!-- =========================================================================
+       5. DEDICATED GALLERY PAGE VIEW
+     ========================================================================= -->
+  @if (pizzaService.activeNavTab() === 'gallery') {
+    <div class="subpage-hero-banner">
+      <div class="container">
+        <div class="subpage-breadcrumb font-mono">
+          <span class="subpage-breadcrumb-link" (click)="pizzaService.activeNavTab.set('home'); scrollToTop()">HOME</span>
+          <span>/</span>
+          <span>GALLERY & AMBIENCE</span>
+        </div>
+        <h1 class="subpage-title font-serif">Ambience & <span class="text-orange">Gallery</span></h1>
+        <p class="subpage-subtitle">Step Into a Warm Atmosphere Where Handcrafted Flavors Meet Unforgettable Dining Moments.</p>
+      </div>
+    </div>
+
+    <!-- Ambience Showcase -->
+    <section class="ambience-section">
+      <div class="container ambience-layout">
+        <div class="ambience-left-col">
+          <span class="editorial-kicker text-gold">OUR AMBIENCE</span>
+          <h2 class="ambience-heading font-serif">
+            More Than a Meal.<br>
+            A <span class="text-orange font-italic">Memory.</span>
+          </h2>
+          <p class="ambience-desc">
+            Step into a warm and inviting space where good food meets great company. Whether it's a cozy dinner, a celebration, or a catch-up with friends.
+          </p>
+        </div>
+
+        <div class="ambience-bento-grid">
+          <div class="bento-card bento-hero">
+            <img src="/images/dmollo-ambience-main.jpg" alt="D'Mollo Pizzeria Main Dining Hall" class="bento-img">
+            <div class="bento-badge-top">MAIN DINING HALL</div>
+            <div class="bento-caption">
+              <strong>Atmosphere & Fireplace</strong>
+              <span>Cozy Neapolitan Ambience</span>
+            </div>
+          </div>
+          <div class="bento-card bento-tall">
+            <img src="/images/dmollo-pizzaiolo.jpg" alt="Master Pizzaiolo at Wood Hearth" class="bento-img">
+            <div class="bento-badge-top special-orange-badge">450°C STONE HEARTH</div>
+            <div class="bento-caption">
+              <strong>Master Pizzaiolo Craft</strong>
+              <span>Wood-Fired Hearth</span>
+            </div>
+          </div>
+          <div class="bento-card bento-wide">
+            <img src="/images/dmollo-ambience-detail.jpg" alt="Wood-fired Crust Detail" class="bento-img">
+            <div class="bento-badge-top">NEAPOLITAN CRUST</div>
+            <div class="bento-caption">
+              <strong>Fresh Italian Sugo</strong>
+              <span>Fior Di Latte Mozzarella</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 9-CARD MOSAIC GALLERY SHOWCASE (EXACT REFERENCE PATTERN) -->
+    <section class="container" style="padding-bottom: 80px;">
+      <div class="gallery-mosaic-grid">
+        <!-- ROW 1: Wide + Medium -->
+        <div class="mosaic-card mosaic-wide" (click)="pizzaService.openPizzaDetails(pizzaService.menuItems()[0])">
+          <img src="/images/dmollo-hero-bg-cover.jpg" alt="Wood Fired Oven" class="mosaic-img" (error)="$any($event.target).src = '/images/dmollo-dining.jpg'">
+          <div class="mosaic-badge-top">STONE HEARTH</div>
+          <div class="mosaic-content">
+            <span class="mosaic-kicker">🔥 WOOD FIRED OVEN</span>
+            <h3 class="mosaic-title font-serif">The 450°C Beechwood Stone Hearth</h3>
+            <p class="mosaic-sub">90-second Neapolitan pizza bakes over beechwood embers</p>
+            <span class="mosaic-action">Click to view full photo →</span>
+          </div>
+        </div>
+
+        <div class="mosaic-card mosaic-medium" (click)="pizzaService.openPizzaDetails(pizzaService.menuItems()[1])">
+          <img src="/images/dmollo-pizzaiolo.jpg" alt="Master Pizzaiolo" class="mosaic-img" (error)="$any($event.target).src = '/images/dmollo-dining.jpg'">
+          <div class="mosaic-badge-top">SIGNATURE CRAFT</div>
+          <div class="mosaic-content">
+            <span class="mosaic-kicker">👨‍🍳 MASTER PIZZAIOLO</span>
+            <h3 class="mosaic-title font-serif">48-Hour Cold Fermented Dough</h3>
+            <p class="mosaic-sub">Hand-stretched cornicione with wild sourdough starter</p>
+            <span class="mosaic-action">Click to view full photo →</span>
+          </div>
+        </div>
+
+        <!-- ROW 2: 3 Medium Cards -->
+        <div class="mosaic-card mosaic-medium" (click)="pizzaService.openPizzaDetails(pizzaService.menuItems()[2])">
+          <img src="/images/dmollo-ambience-detail.jpg" alt="Pizza Detail" class="mosaic-img" (error)="$any($event.target).src = '/images/dmollo-dining.jpg'">
+          <div class="mosaic-badge-top">D.O.P. INGREDIENTS</div>
+          <div class="mosaic-content">
+            <span class="mosaic-kicker">🍅 VOLCANIC SOIL</span>
+            <h3 class="mosaic-title font-serif">San Marzano & Fior Di Latte</h3>
+            <p class="mosaic-sub">Campania plum tomatoes & fresh local artisan mozzarella</p>
+            <span class="mosaic-action">Click to view full photo →</span>
+          </div>
+        </div>
+
+        <div class="mosaic-card mosaic-medium" (click)="pizzaService.openPizzaDetails(pizzaService.menuItems()[3])">
+          <img src="/images/dmollo-ambience-main.jpg" alt="Main Dining Hall" class="mosaic-img" (error)="$any($event.target).src = '/images/dmollo-dining.jpg'">
+          <div class="mosaic-badge-top">MAIN DINING</div>
+          <div class="mosaic-content">
+            <span class="mosaic-kicker">🍷 AMBIENCE</span>
+            <h3 class="mosaic-title font-serif">Warm Candlelit Dining Hall</h3>
+            <p class="mosaic-sub">Cozy ambient lighting, rustic timber & wine pairings</p>
+            <span class="mosaic-action">Click to view full photo →</span>
+          </div>
+        </div>
+
+        <div class="mosaic-card mosaic-medium" (click)="pizzaService.openPizzaDetails(pizzaService.menuItems()[4])">
+          <img src="/images/dmollo-dining.jpg" alt="Friends Dining" class="mosaic-img" (error)="$any($event.target).src = '/images/dmollo-dining.jpg'">
+          <div class="mosaic-badge-top">GUEST MOMENTS</div>
+          <div class="mosaic-content">
+            <span class="mosaic-kicker">🥂 TABLE RESERVATION</span>
+            <h3 class="mosaic-title font-serif">Memorable Family & Date Evenings</h3>
+            <p class="mosaic-sub">Bringing loved ones together, one slice at a time</p>
+            <span class="mosaic-action">Click to view full photo →</span>
+          </div>
+        </div>
+
+        <!-- ROW 3: Wide + Medium -->
+        <div class="mosaic-card mosaic-wide" (click)="pizzaService.openPizzaDetails(pizzaService.menuItems()[2])">
+          <img src="/images/burrata-truffle.jpg" alt="Truffle Burrata" class="mosaic-img" (error)="$any($event.target).src = '/images/dmollo-dining.jpg'">
+          <div class="mosaic-badge-top special-orange-badge">CHEF'S SPECIAL</div>
+          <div class="mosaic-content">
+            <span class="mosaic-kicker">🌟 SIGNATURE PIE</span>
+            <h3 class="mosaic-title font-serif">Wild Porcini & White Truffle Burrata</h3>
+            <p class="mosaic-sub">Whole burrata crest, white truffle oil & forest mushrooms</p>
+            <span class="mosaic-action">Click to view full photo →</span>
+          </div>
+        </div>
+
+        <div class="mosaic-card mosaic-medium" (click)="pizzaService.openPizzaDetails(pizzaService.menuItems()[1])">
+          <img src="/images/diavola-pizza-hq.jpg" alt="Spicy Diavola" class="mosaic-img" (error)="$any($event.target).src = '/images/dmollo-dining.jpg'">
+          <div class="mosaic-badge-top">FIERY & BOLD</div>
+          <div class="mosaic-content">
+            <span class="mosaic-kicker">🌶️ CALABRIAN CHILI</span>
+            <h3 class="mosaic-title font-serif">Diavola Piccante & Smoked Scamorza</h3>
+            <p class="mosaic-sub">Spicy artisanal salami & pickled Calabrian chilies</p>
+            <span class="mosaic-action">Click to view full photo →</span>
+          </div>
+        </div>
+
+        <!-- ROW 4: Medium + Wide -->
+        <div class="mosaic-card mosaic-medium" (click)="pizzaService.openPizzaDetails(pizzaService.menuItems()[0])">
+          <img src="/images/margherita-pizza-hq.jpg" alt="Margherita Classica" class="mosaic-img" (error)="$any($event.target).src = '/images/dmollo-dining.jpg'">
+          <div class="mosaic-badge-top">TRADITION</div>
+          <div class="mosaic-content">
+            <span class="mosaic-kicker">🌿 FRESH BASIL</span>
+            <h3 class="mosaic-title font-serif">Margherita Classica Neapolitan</h3>
+            <p class="mosaic-sub">Sweet basil leaves, cold-pressed extra virgin olive oil</p>
+            <span class="mosaic-action">Click to view full photo →</span>
+          </div>
+        </div>
+
+        <div class="mosaic-card mosaic-wide" (click)="pizzaService.openPizzaDetails(pizzaService.menuItems()[8])">
+          <img src="/images/gallery-bar.jpg" alt="Beverage Bar" class="mosaic-img" (error)="$any($event.target).src = '/images/dmollo-dining.jpg'">
+          <div class="mosaic-badge-top">VIP LOUNGE</div>
+          <div class="mosaic-content">
+            <span class="mosaic-kicker">☕ BEVERAGE BAR</span>
+            <h3 class="mosaic-title font-serif">Artisanal Coffee & Italian Wine Lounge</h3>
+            <p class="mosaic-sub">Organic espresso brews, blood orange spritz & dolci</p>
+            <span class="mosaic-action">Click to view full photo →</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Reservation Section -->
+    <section class="reservation-section">
+      <div class="container">
+        <div class="reservation-panel-card">
+          <div class="reservation-bg-overlay"></div>
+          <img src="/images/dmollo-dining.jpg" alt="Restaurant Table Ambient Scene" class="reservation-bg-img">
+
+          <div class="reservation-content-wrap">
+            <div class="reservation-header text-center">
+              <span class="editorial-kicker text-gold">BOOK A TABLE</span>
+              <h2 class="reservation-title font-serif">
+                Reserve Your <span class="text-orange font-italic">Experience</span>
+              </h2>
+            </div>
+            <form class="reservation-horizontal-form" (submit)="pizzaService.submitReservation($event)">
+              <div class="form-select-group">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#FF641A" stroke-width="2" width="18" height="18" class="form-svg-icon"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle></svg>
+                <select class="res-input-select" [(ngModel)]="pizzaService.resGuests" name="guests">
+                  <option value="2 Guests">2 People</option>
+                  <option value="4 Guests">4 People</option>
+                </select>
+              </div>
+              <div class="form-select-group">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#FF641A" stroke-width="2" width="18" height="18" class="form-svg-icon"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+                <input type="date" class="res-input-date" [(ngModel)]="pizzaService.resDate" name="date">
+              </div>
+              <div class="form-select-group">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#FF641A" stroke-width="2" width="18" height="18" class="form-svg-icon"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                <select class="res-input-select" [(ngModel)]="pizzaService.resTime" name="time">
+                  <option value="07:00 PM">07:00 PM</option>
+                  <option value="08:00 PM">08:00 PM</option>
+                </select>
+              </div>
+              <button type="submit" class="btn-orange-pill res-submit-btn">
+                <span>Reserve a Table</span>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <app-location-footer></app-location-footer>
+  }
+
+  <!-- =========================================================================
+       6. DEDICATED CONTACT PAGE VIEW
+     ========================================================================= -->
+  @if (pizzaService.activeNavTab() === 'contact') {
+    <div class="subpage-hero-banner">
+      <div class="container">
+        <div class="subpage-breadcrumb font-mono">
+          <span class="subpage-breadcrumb-link" (click)="pizzaService.activeNavTab.set('home'); scrollToTop()">HOME</span>
+          <span>/</span>
+          <span>CONTACT US</span>
+        </div>
+        <h1 class="subpage-title font-serif">Contact & <span class="text-orange">Visit Us</span></h1>
+        <p class="subpage-subtitle">We are located in Model Town, Ludhiana. Stop by for fresh pizza, or reach out to reserve your table!</p>
+      </div>
+    </div>
+
+    <!-- Location & Light Mode Map -->
+    <section class="location-section" id="location-section">
+      <div class="container">
+        <span class="editorial-kicker text-gold">FIND US</span>
+        <h2 class="section-title font-serif">Visit Our <span class="text-orange">Pizzeria</span></h2>
+
+        <div class="location-split-grid">
+          <div class="location-info-card glass-card-21st">
+            <div class="info-row">
+              <span class="info-icon">📍</span>
+              <div class="info-content">
+                <strong>Location & Address</strong>
+                <p>D’Molto Pizza, 130, Model Town Rd,<br>Pritm Nagar, Model Town, Ludhiana, Punjab 141002</p>
+              </div>
+            </div>
+
+            <div class="info-row">
+              <span class="info-icon">🕒</span>
+              <div class="info-content">
+                <strong>Opening Hours</strong>
+                <p>Mon – Sun · 11:00 AM – 11:00 PM</p>
+              </div>
+            </div>
+
+            <div class="info-row">
+              <span class="info-icon">✉️</span>
+              <div class="info-content">
+                <strong>Email Us</strong>
+                <p>hello@dmollo.com</p>
+              </div>
+            </div>
+
+            <div class="info-row">
+              <span class="info-icon">📞</span>
+              <div class="info-content">
+                <strong>Call Us</strong>
+                <p>+91 98123 45678</p>
+              </div>
+            </div>
+
+            <div class="location-actions-row">
+              <a href="https://www.google.com/maps?q=D%E2%80%99Molto+Pizza,+130,+Model+Town+Rd,+Pritm+Nagar,+Model+Town,+Ludhiana,+Punjab+141002" target="_blank" class="btn-orange-pill">Get Directions</a>
+              <button type="button" class="btn-outline-pill" (click)="pizzaService.isReservationOpen.set(true)">Book a Table</button>
+            </div>
+          </div>
+
+          <div class="location-map-card">
+            <iframe 
+              class="google-map-iframe"
+              src="https://maps.google.com/maps?q=D'Molto%20Pizza,%20130,%20Model%20Town%20Rd,%20Pritm%20Nagar,%20Model%20Town,%20Ludhiana,%20Punjab%20141002&t=&z=16&ie=UTF8&iwloc=&output=embed" 
+              width="100%" 
+              height="100%" 
+              style="border:0; width:100%; height:100%; border-radius: 24px;" 
+              allowfullscreen="" 
+              loading="lazy" 
+              referrerpolicy="no-referrer-when-downgrade">
+            </iframe>
+            
+            <div class="map-floating-venue-card glass-card-21st">
+              <img src="/images/dmollo-dining.jpg" alt="D'Mollo Pizzeria" class="venue-card-img">
+              <div class="venue-card-info">
+                <strong>D’Molto Pizza</strong>
+                <p>130 Model Town Rd, Ludhiana, Punjab</p>
+              </div>
+              <a href="https://www.google.com/maps?q=D%E2%80%99Molto+Pizza,+130,+Model+Town+Rd,+Pritm%20Nagar,+Model+Town,+Ludhiana,+Punjab+141002" target="_blank" class="venue-arrow-btn">→</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Inquiry Message Form -->
+    <section class="contact-inquiry-section">
+      <div class="container">
+        <div class="inquiry-grid">
+          <div class="inquiry-card glass-card-21st">
+            <span class="editorial-kicker text-gold">DIRECT MESSAGE</span>
+            <h3 class="font-serif text-ivory" style="font-size: 1.8rem; margin-bottom: 16px;">Have a Question? <span class="text-orange">Write to Us</span></h3>
+            <p class="text-muted" style="margin-bottom: 24px; font-size: 0.92rem;">Send us your feedback, private party inquiries, or catering requests.</p>
+
+            <form (submit)="pizzaService.submitReservation($event)">
+              <div class="inquiry-form-group">
+                <label class="inquiry-label">Your Full Name</label>
+                <input type="text" placeholder="e.g. Rahul Sharma" class="inquiry-input" required>
+              </div>
+              <div class="inquiry-form-group">
+                <label class="inquiry-label">Phone Number</label>
+                <input type="tel" placeholder="+91 98123 45678" class="inquiry-input" required>
+              </div>
+              <div class="inquiry-form-group">
+                <label class="inquiry-label">Message / Inquiry</label>
+                <textarea rows="4" placeholder="Tell us how we can help you..." class="inquiry-textarea" required></textarea>
+              </div>
+              <button type="submit" class="btn-orange-pill btn-full-width">
+                <span>Send Message</span>
+                <span>→</span>
+              </button>
+            </form>
+          </div>
+
+          <div class="inquiry-card glass-card-21st">
+            <span class="editorial-kicker text-gold">RESERVATION & HOURS</span>
+            <h3 class="font-serif text-ivory" style="font-size: 1.8rem; margin-bottom: 16px;">Operating <span class="text-orange">Schedule</span></h3>
+            
+            <div style="display: flex; flex-direction: column; gap: 18px; margin-top: 24px;">
+              <div style="display: flex; justify-content: space-between; border-bottom: 1px dashed rgba(255,255,255,0.1); padding-bottom: 10px;">
+                <span class="text-ivory">Monday – Thursday</span>
+                <span class="text-orange font-mono">11:00 AM – 11:00 PM</span>
+              </div>
+              <div style="display: flex; justify-content: space-between; border-bottom: 1px dashed rgba(255,255,255,0.1); padding-bottom: 10px;">
+                <span class="text-ivory">Friday – Sunday</span>
+                <span class="text-orange font-mono">11:00 AM – 11:30 PM</span>
+              </div>
+              <div style="display: flex; justify-content: space-between; border-bottom: 1px dashed rgba(255,255,255,0.1); padding-bottom: 10px;">
+                <span class="text-ivory">Home Delivery & Takeaway</span>
+                <span class="text-gold font-mono">Available All Day</span>
+              </div>
+            </div>
+
+            <div style="margin-top: 32px;">
+              <button type="button" class="btn-orange-pill btn-full-width" (click)="pizzaService.isReservationOpen.set(true)">
+                <span>Reserve Table Online</span>
+                <span>→</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <app-location-footer></app-location-footer>
+  }
+
+  <!-- =========================================================================
+       7. MENU DETAILS MODAL OVERLAY (AVAILABLE ON ALL PAGES)
+     ========================================================================= -->
+  @if (pizzaService.isMenuDetailsModalOpen() && pizzaService.selectedPizzaForModal(); as pizza) {
+    <div class="menu-modal-backdrop" (click)="pizzaService.closePizzaDetails()">
+      <div class="menu-modal-dialog glass-card-21st" (click)="$event.stopPropagation()">
+        <button type="button" class="modal-close-btn" (click)="pizzaService.closePizzaDetails()">✕</button>
+        
+        <div class="menu-modal-grid">
+          <div class="modal-image-column">
+            <img [src]="pizza.image || '/images/margherita-pizza-hq.jpg'" [alt]="pizza.name" class="modal-pizza-img">
+            @if (pizza.isSpecial) {
+              <span class="modal-special-badge">CHEF'S SPECIAL</span>
+            }
+          </div>
+
+          <div class="modal-info-column">
+            <span class="modal-kicker-tag">{{ pizza.subtitle || 'ARTISANAL PIZZA' }}</span>
+            <h2 class="modal-pizza-title font-serif">{{ pizza.name }}</h2>
+            <p class="modal-pizza-desc">{{ pizza.description }}</p>
+
+            <div class="modal-options-block">
+              <label class="options-label">Select Crust:</label>
+              <div class="options-pills-row">
+                <button type="button" class="option-pill active">Traditional Neapolitan</button>
+                <button type="button" class="option-pill">Thin & Crispy</button>
+              </div>
+
+              <label class="options-label">Size Options:</label>
+              <div class="options-pills-row">
+                <button type="button" class="option-pill">10" Personal</button>
+                <button type="button" class="option-pill active">12" Medium</button>
+                <button type="button" class="option-pill">14" Family</button>
+              </div>
+            </div>
+
+            <div class="modal-price-action-row">
+              <div class="modal-price-box">
+                <span class="modal-price-label">Price</span>
+                <span class="modal-price-val font-serif">${{ pizza.price.toFixed(2) }}</span>
+              </div>
+
+              <button 
+                type="button" 
+                class="btn-orange-pill modal-add-btn" 
+                (click)="pizzaService.addToCart(pizza); pizzaService.closePizzaDetails();">
+                Add to Order • ${{ pizza.price.toFixed(2) }}
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  }
+
+  <!-- =========================================================================
+       8. CART ORDER BAG SLIDE-OVER DRAWER (RESPONSIVE ON ALL SCREENS)
+     ========================================================================= -->
+  @if (pizzaService.isCartOpen()) {
+    <div class="cart-drawer-scrim" (click)="pizzaService.isCartOpen.set(false)">
+      <div class="cart-drawer-panel" (click)="$event.stopPropagation()">
+        <!-- Drawer Header -->
+        <div class="cart-drawer-header">
+          <div class="cart-header-title">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#FF641A" stroke-width="2" width="22" height="22">
+              <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+              <line x1="3" y1="6" x2="21" y2="6"></line>
+              <path d="M16 10a4 4 0 0 1-8 0"></path>
+            </svg>
+            <h3 class="font-serif text-ivory">Your Order Bag</h3>
+            <span class="cart-header-count">({{ pizzaService.cartTotalCount() }} items)</span>
+          </div>
+          <button type="button" class="drawer-close-btn" (click)="pizzaService.isCartOpen.set(false)">✕</button>
+        </div>
+
+        <!-- Cart Items List (Scrollable) -->
+        <div class="cart-drawer-body">
+          @if (pizzaService.cart().length === 0) {
+            <div class="cart-empty-state">
+              <div class="empty-cart-icon-box">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#FF641A" stroke-width="1.6" width="56" height="56">
+                  <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+                  <line x1="3" y1="6" x2="21" y2="6"></line>
+                  <path d="M16 10a4 4 0 0 1-8 0"></path>
+                </svg>
+              </div>
+              <h4 class="font-serif text-ivory">Your order bag is empty</h4>
+              <p class="text-muted">Explore our artisanal Neapolitan pizzas and add your favorite slices to start your feast!</p>
+              <button type="button" class="btn-orange-pill" (click)="pizzaService.isCartOpen.set(false); pizzaService.activeNavTab.set('menu')">
+                <span>Browse Menu</span>
+                <span>→</span>
+              </button>
+            </div>
+          } @else {
+            <div class="cart-items-list">
+              @for (item of pizzaService.cart(); track item.pizza.id; let i = $index) {
+                <div class="cart-item-card">
+                  <img [src]="item.pizza.image || '/images/margherita-pizza-hq.jpg'" [alt]="item.pizza.name" class="cart-item-img">
+                  <div class="cart-item-info">
+                    <h4 class="cart-item-name font-serif">{{ item.pizza.name }}</h4>
+                    <span class="cart-item-sub">{{ item.pizza.subtitle || 'Neapolitan' }}</span>
+                    <span class="cart-item-unit-price">${{ item.pizza.price.toFixed(2) }} each</span>
+                  </div>
+                  <div class="cart-item-controls">
+                    <div class="quantity-stepper">
+                      <button type="button" class="stepper-btn" (click)="pizzaService.updateQuantity(i, -1)">−</button>
+                      <span class="stepper-val">{{ item.quantity }}</span>
+                      <button type="button" class="stepper-btn" (click)="pizzaService.updateQuantity(i, 1)">+</button>
+                    </div>
+                    <span class="cart-item-total-price font-serif">${{ (item.pizza.price * item.quantity).toFixed(2) }}</span>
+                  </div>
+                </div>
+              }
+            </div>
+          }
+        </div>
+
+        <!-- Drawer Footer (Subtotal & Checkout Actions) -->
+        @if (pizzaService.cart().length > 0) {
+          <div class="cart-drawer-footer">
+            <div class="cart-summary-rows">
+              <div class="summary-row">
+                <span class="text-muted">Subtotal</span>
+                <span class="text-ivory font-mono">${{ pizzaService.cartTotalPrice().toFixed(2) }}</span>
+              </div>
+              <div class="summary-row">
+                <span class="text-muted">Taxes & Packaging</span>
+                <span class="text-gold font-mono">Calculated at checkout</span>
+              </div>
+              <div class="summary-row total-row">
+                <span class="text-ivory font-bold">Estimated Total</span>
+                <span class="text-orange font-serif font-bold text-xl">${{ pizzaService.cartTotalPrice().toFixed(2) }}</span>
+              </div>
+            </div>
+
+            <div class="cart-checkout-actions">
+              <button type="button" class="btn-orange-pill btn-full-width checkout-whatsapp-btn" (click)="pizzaService.checkoutWhatsApp()">
+                <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18">
+                  <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414-.074-.124-.272-.198-.57-.347z"/>
+                  <path d="M12 0C5.373 0 0 5.373 0 12c0 2.115.548 4.103 1.505 5.833L.055 23.473l5.807-1.418A11.936 11.936 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.802 0-3.551-.482-5.086-1.393l-.365-.218-3.447.841.875-3.327-.238-.378A9.957 9.957 0 012 12c0-5.514 4.486-10 10-10s10 4.486 10 10-4.486 10-10 10z"/>
+                </svg>
+                <span>Order via WhatsApp</span>
+              </button>
+              <button type="button" class="btn-secondary-pill btn-full-width" (click)="pizzaService.isCartOpen.set(false)">
+                <span>Continue Browsing</span>
+              </button>
+            </div>
+          </div>
+        }
+      </div>
+    </div>
+  }
+
+  <!-- =========================================================================
+       9. TABLE RESERVATION MODAL OVERLAY (RESPONSIVE ON ALL SCREENS)
+     ========================================================================= -->
+  @if (pizzaService.isReservationOpen()) {
+    <div class="reservation-modal-backdrop" (click)="pizzaService.isReservationOpen.set(false)">
+      <div class="reservation-modal-dialog glass-card-21st" (click)="$event.stopPropagation()">
+        <button type="button" class="modal-close-btn" (click)="pizzaService.isReservationOpen.set(false)">✕</button>
+
+        <div class="modal-res-header">
+          <span class="editorial-kicker text-orange">CONCIERGE BOOKING</span>
+          <h2 class="font-serif text-ivory modal-res-title">Reserve Your <span class="text-orange">Table</span></h2>
+          <p class="text-muted modal-res-sub">Experience authentic Neapolitan dining baked at 450°C. Select your preferred party size and timing.</p>
+        </div>
+
+        <form (submit)="pizzaService.submitReservation($event)" class="modal-res-form">
+          <div class="modal-res-grid">
+            <div class="inquiry-form-group">
+              <label class="inquiry-label">Full Name</label>
+              <input type="text" [(ngModel)]="pizzaService.resName" name="modalResName" placeholder="e.g. Rahul Sharma" class="inquiry-input" required>
+            </div>
+            <div class="inquiry-form-group">
+              <label class="inquiry-label">Phone Number</label>
+              <input type="tel" [(ngModel)]="pizzaService.resPhone" name="modalResPhone" placeholder="+91 98123 45678" class="inquiry-input" required>
+            </div>
+            <div class="inquiry-form-group">
+              <label class="inquiry-label">Guests</label>
+              <select [(ngModel)]="pizzaService.resGuests" name="modalResGuests" class="inquiry-input res-input-select" required>
+                <option value="2 Guests">2 Guests (Couple)</option>
+                <option value="4 Guests">4 Guests (Family)</option>
+                <option value="6 Guests">6 Guests (Party)</option>
+                <option value="8+ Guests">8+ Guests (VIP Hall)</option>
+              </select>
+            </div>
+            <div class="inquiry-form-group">
+              <label class="inquiry-label">Preferred Date</label>
+              <input type="date" [(ngModel)]="pizzaService.resDate" name="modalResDate" class="inquiry-input res-input-date" required>
+            </div>
+            <div class="inquiry-form-group full-width">
+              <label class="inquiry-label">Preferred Time Slot</label>
+              <select [(ngModel)]="pizzaService.resTime" name="modalResTime" class="inquiry-input res-input-select" required>
+                <option value="12:30 PM">12:30 PM (Lunch)</option>
+                <option value="01:30 PM">01:30 PM (Lunch)</option>
+                <option value="07:00 PM">07:00 PM (Dinner)</option>
+                <option value="07:30 PM">07:30 PM (Dinner Prime)</option>
+                <option value="08:30 PM">08:30 PM (Dinner Rush)</option>
+                <option value="09:30 PM">09:30 PM (Late Feast)</option>
+              </select>
+            </div>
+          </div>
+
+          <button type="submit" class="btn-orange-pill btn-full-width" style="margin-top: 20px;">
+            <span>Confirm Reservation</span>
+            <span>→</span>
+          </button>
+        </form>
+      </div>
+    </div>
+  }
+</main>

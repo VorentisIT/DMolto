@@ -1,70 +1,78 @@
-<!-- ==========================================================================
-     THE CRAFT DEDICATED PAGE VIEW WITH DETAILED CULINARY DATA
-     ========================================================================== -->
-<section class="craft-editorial-section" id="assembly-stage">
+<!-- 4. OUR STORY SECTION -->
+<section class="craft-editorial-section" id="story-section">
   <div class="container craft-editorial-layout">
-    <!-- Left Column: Simple & Attractive Detailed Content -->
+    <!-- LEFT COLUMN: Narrative & Features -->
     <div class="craft-left-content">
-      <span class="editorial-kicker text-gold">OUR ARTISANAL CRAFT</span>
-      
+      <span class="editorial-kicker text-gold">OUR STORY</span>
+
       <h2 class="craft-main-heading font-serif">
         Crafted with Passion.<br>
         <span class="text-orange">Baked to Perfection.</span>
       </h2>
 
       <p class="craft-lead-description">
-        At D’Molto, every pizza is made with 48-hour cold fermented sourdough, fresh artisan produce, and bold flavours — baked hot in our 450°C stone hearth oven for an unforgettable crust.
+        At D’Mollo, every pizza tells a story of fresh ingredients, traditional recipes, and a love for great food. Our wood-fired ovens bring out authentic flavors, creating a dining experience you'll always remember.
       </p>
 
-      <!-- Sleek Pillar Horizontal Tabset (Replaces 4-Card Grid) -->
-      <div class="craft-pillars-tabset">
-        @for (pillar of craftPillars; track pillar.id; let i = $index) {
-          <button 
-            type="button" 
-            class="craft-pillar-tab-btn" 
-            [class.active]="selectedIndex() === i"
-            (click)="selectPillar(i)">
-            <span class="tab-pillar-num">0{{ pillar.num }}</span>
-            <span class="tab-pillar-title">{{ pillar.title }}</span>
-          </button>
-        }
-      </div>
-
-      <!-- Active Pillar Spotlight Card -->
-      <div class="craft-active-spotlight-card">
-        <div class="spotlight-header">
-          <span class="spotlight-kicker text-gold">PILLAR 0{{ activePillar().num }} • {{ activePillar().icon }}</span>
-          <span class="spotlight-badge">✦ {{ activePillar().badge }}</span>
-        </div>
-        <h3 class="spotlight-title font-serif">{{ activePillar().tagline }}</h3>
-        <p class="spotlight-desc">{{ activePillar().description }}</p>
-      </div>
+      <!-- 3 Feature Rows with Orange Icons -->
+      <ul class="story-feature-list">
+        <li class="story-feature-item">
+          <span class="feature-icon-circle">🍕</span>
+          <div class="feature-text">
+            <strong>Authentic Neapolitan Techniques</strong>
+            <p>Hand-stretched sourdough fermented for 48 hours for an airy cornicione.</p>
+          </div>
+        </li>
+        <li class="story-feature-item">
+          <span class="feature-icon-circle">🌿</span>
+          <div class="feature-text">
+            <strong>Fresh, Locally Sourced Ingredients</strong>
+            <p>San Marzano D.O.P. tomatoes and fresh local produce picked daily.</p>
+          </div>
+        </li>
+        <li class="story-feature-item">
+          <span class="feature-icon-circle">🔥</span>
+          <div class="feature-text">
+            <strong>A Warm, Inviting Atmosphere</strong>
+            <p>Cozy ambient dining centered around our 450°C roaring stone hearth.</p>
+          </div>
+        </li>
+      </ul>
 
       <!-- Action Buttons -->
       <div class="craft-actions-bar">
-        <button type="button" class="btn-pill-terracotta" (click)="goToMenu()">
-          <span>Discover Our Signature Menu</span>
+        <button type="button" class="btn-orange-pill" (click)="goToMenu()">
+          <span>Our Story</span>
           <span class="cta-arrow">→</span>
         </button>
-        <button type="button" class="btn-pill-outline-luxury" (click)="openReservation()">
-          <span>Book a Table</span>
+        <button type="button" class="btn-outline-pill" (click)="openReservation()">
+          <span class="play-dot">▶</span>
+          <span>Watch Video</span>
         </button>
       </div>
     </div>
 
-    <!-- Right Column: High-Res Culinary Photo Showcase -->
+    <!-- RIGHT COLUMN: Cinematic Dough Stretching Photo -->
     <div class="craft-right-showcase">
       <div class="craft-showcase-frame">
         <img 
-          [src]="activePillar().image" 
-          [alt]="activePillar().title" 
+          src="/images/dmollo-pizzaiolo.jpg" 
+          alt="Pizzaiolo stretching fresh pizza dough in front of wood fired oven" 
           class="craft-showcase-photo">
-        
+
+        <!-- Dark Vignette Overlay -->
         <div class="craft-photo-overlay-gradient"></div>
-        
-        <div class="craft-photo-caption-badge">
-          <span class="badge-fire-icon">✦</span>
-          <span class="badge-text">{{ activePillar().badge }}</span>
+
+        <!-- Floating Glass Badge (Without Years as requested by user) -->
+        <div class="floating-craft-badge glass-card-21st">
+          <span class="badge-number text-orange">✦</span>
+          <span class="badge-label">Artisanal Wood-Fired<br>Sourdough Craft</span>
+        </div>
+
+        <!-- Handwritten Annotation -->
+        <div class="craft-handwritten-text script-annotation">
+          Tradition<br>
+          in Every Slice
         </div>
       </div>
     </div>
