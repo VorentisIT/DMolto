@@ -297,7 +297,7 @@ html, body, main, .page-content-wrapper, section {
    -------------------------------------------------------------------------- */
 .hero-mockup-section {
   position: relative;
-  padding: 105px 0 50px 0;
+  padding: 145px 0 60px 0;
   background: linear-gradient(180deg, rgba(11, 13, 12, 0.58) 0%, rgba(11, 13, 12, 0.95) 85%, #0B0D0C 100%),
               radial-gradient(circle at 75% 35%, rgba(255, 100, 26, 0.25) 0%, transparent 60%),
               url('/images/dmollo-hero-bg-cover.jpg') center/cover no-repeat;
@@ -454,6 +454,175 @@ html, body, main, .page-content-wrapper, section {
   background: rgba(255, 255, 255, 0.1);
 }
 
+/* Hero Bottom Pizza Selector Carousel Bar */
+.hero-bottom-carousel-bar {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin: 24px 0 28px 0;
+  padding: 10px 16px;
+  background: rgba(20, 23, 22, 0.75);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: var(--radius-full);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+}
+
+.carousel-arch-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 6px 16px 6px 8px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.carousel-arch-card.highlighted,
+.carousel-arch-card:hover {
+  background: rgba(255, 100, 26, 0.15);
+  border-color: rgba(255, 100, 26, 0.6);
+}
+
+.arch-circle-wrap {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 2px solid var(--color-orange);
+  flex-shrink: 0;
+}
+
+.arch-circle-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.arch-info-col {
+  display: flex;
+  flex-direction: column;
+}
+
+.arch-pizza-title {
+  font-family: var(--font-serif);
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: var(--text-ivory);
+  white-space: nowrap;
+}
+
+.arch-pizza-weight {
+  font-size: 0.76rem;
+  color: var(--color-gold);
+  white-space: nowrap;
+}
+
+.carousel-circle-previews {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  padding: 2px 4px;
+}
+
+.carousel-circle-previews::-webkit-scrollbar {
+  display: none;
+}
+
+.circle-preview-btn {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  background: transparent;
+  padding: 0;
+  overflow: hidden;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: all 0.25s ease;
+}
+
+.circle-preview-btn:hover,
+.circle-preview-btn.active-thumb {
+  border-color: var(--color-orange);
+  transform: scale(1.12);
+  box-shadow: 0 0 12px rgba(255, 100, 26, 0.5);
+}
+
+.preview-pizza-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.carousel-arrow-stack {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-left: auto;
+}
+
+.arrow-circle-btn {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: var(--text-ivory);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  line-height: 1;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.arrow-circle-btn:hover {
+  background: var(--color-orange);
+  border-color: var(--color-orange);
+  color: #FFFFFF;
+}
+
+@media (min-width: 993px) {
+  .mobile-only-carousel-bar {
+    display: none !important;
+  }
+  .desktop-only-carousel-bar {
+    display: flex !important;
+  }
+}
+
+@media (max-width: 992px) {
+  .desktop-only-carousel-bar {
+    display: none !important;
+  }
+  .mobile-only-carousel-bar {
+    display: flex !important;
+    margin: 20px auto 10px auto;
+    width: 100%;
+    justify-content: center;
+    flex-wrap: wrap;
+    border-radius: 20px;
+  }
+  /* Remove scroll down animation badge & floating particles on mobile screen */
+  .circular-scroll-badge,
+  #hero-scroll-badge,
+  .floating-particle {
+    display: none !important;
+  }
+  .hero-giant-pizza-frame {
+    transition: none !important;
+  }
+  .hero-giant-pizza-frame:hover {
+    transform: none !important;
+  }
+}
+
 /* Right Stage */
 .hero-giant-pizza-stage {
   position: relative;
@@ -553,6 +722,266 @@ html, body, main, .page-content-wrapper, section {
 /* --------------------------------------------------------------------------
    3. PIZZA CATEGORY NAVIGATION SLIDER PANEL
    -------------------------------------------------------------------------- */
+/* Instagram Story & Feed Section (@dmolto_pizza) */
+.instagram-story-section {
+  padding: 80px 0;
+  background: radial-gradient(circle at 50% 0%, rgba(220, 39, 67, 0.15) 0%, transparent 70%),
+              linear-gradient(180deg, #0B0D0C 0%, #141716 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Instagram Profile Banner Card */
+.insta-profile-header-card {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  padding: 24px 32px;
+  background: rgba(20, 23, 22, 0.85);
+  border: 1px solid rgba(220, 39, 67, 0.35);
+  border-radius: 28px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6), 0 0 30px rgba(220, 39, 67, 0.15);
+  margin-bottom: 40px;
+}
+
+@media (max-width: 768px) {
+  .insta-profile-header-card {
+    flex-direction: column;
+    text-align: center;
+    padding: 20px 16px;
+    gap: 16px;
+  }
+}
+
+.insta-profile-avatar-wrap {
+  width: 84px;
+  height: 84px;
+  border-radius: 50%;
+  padding: 3px;
+  background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+  flex-shrink: 0;
+  box-shadow: 0 8px 20px rgba(220, 39, 67, 0.4);
+}
+
+.insta-avatar-img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+  background: #0B0D0C;
+}
+
+.insta-profile-meta {
+  flex: 1;
+}
+
+.insta-handle-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 6px;
+}
+
+@media (max-width: 768px) {
+  .insta-handle-row {
+    justify-content: center;
+  }
+}
+
+.insta-handle-title {
+  font-family: var(--font-serif);
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--text-ivory);
+  margin: 0;
+}
+
+.insta-verified-badge {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #3897F0;
+  color: #FFFFFF;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.72rem;
+  font-weight: 800;
+}
+
+.insta-bio-text {
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  line-height: 1.5;
+  margin-bottom: 12px;
+}
+
+.insta-stats-row {
+  display: flex;
+  gap: 20px;
+  font-size: 0.86rem;
+  color: var(--text-ivory);
+}
+
+@media (max-width: 768px) {
+  .insta-stats-row {
+    justify-content: center;
+  }
+}
+
+.insta-play-badge {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  z-index: 5;
+  padding: 4px 10px;
+  background: rgba(0, 0, 0, 0.65);
+  backdrop-filter: blur(8px);
+  border-radius: var(--radius-full);
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #FFFFFF;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.insta-post-tag {
+  font-size: 0.75rem;
+  font-weight: 800;
+  color: var(--color-orange);
+  letter-spacing: 0.5px;
+  margin-bottom: 4px;
+  display: block;
+}
+
+.insta-badge-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 18px;
+  background: rgba(220, 39, 67, 0.12);
+  border: 1px solid rgba(220, 39, 67, 0.4);
+  border-radius: var(--radius-full);
+  color: #F56040;
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+.btn-insta-gradient {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 28px;
+  background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+  border-radius: var(--radius-full);
+  color: #FFFFFF;
+  font-weight: 700;
+  font-size: 0.95rem;
+  text-decoration: none;
+  box-shadow: 0 8px 25px rgba(220, 39, 67, 0.4);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.btn-insta-gradient:hover {
+  transform: translateY(-3px) scale(1.03);
+  box-shadow: 0 12px 35px rgba(220, 39, 67, 0.6);
+  color: #FFFFFF;
+}
+
+.insta-reels-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  margin-top: 36px;
+}
+
+@media (max-width: 992px) {
+  .insta-reels-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+}
+
+@media (max-width: 576px) {
+  .insta-reels-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.insta-card {
+  position: relative;
+  border-radius: 20px;
+  overflow: hidden;
+  aspect-ratio: 4 / 5;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: var(--bg-card);
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.insta-card:hover {
+  transform: translateY(-6px);
+  border-color: rgba(220, 39, 67, 0.5);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.6), 0 0 25px rgba(220, 39, 67, 0.2);
+}
+
+.insta-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.insta-card:hover .insta-img {
+  transform: scale(1.08);
+}
+
+.insta-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.85) 100%);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  opacity: 0.9;
+  transition: opacity 0.3s ease;
+}
+
+.insta-card:hover .insta-overlay {
+  opacity: 1;
+}
+
+.insta-post-icon {
+  align-self: flex-start;
+  padding: 4px 10px;
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(8px);
+  border-radius: var(--radius-full);
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: #FFFFFF;
+  margin-bottom: 8px;
+}
+
+.insta-caption {
+  font-size: 0.88rem;
+  color: var(--text-ivory);
+  line-height: 1.4;
+  margin-bottom: 12px;
+}
+
+.insta-view-link {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--color-orange);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.insta-view-link:hover {
+  color: #FFFFFF;
+}
+
 .category-nav-section {
   padding: 15px 0 25px 0;
   margin-top: 15px;
@@ -1157,6 +1586,72 @@ html, body, main, .page-content-wrapper, section {
   to {
     opacity: 1;
     transform: translateX(0);
+  }
+}
+
+/* Full 4-Column Responsive Grid Layout for Dedicated Menu Page */
+.full-menu-grid-wrapper {
+  width: 100%;
+  margin-top: 10px;
+}
+
+.full-menu-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+  width: 100%;
+}
+
+.full-grid-card {
+  width: 100% !important;
+  max-width: 100% !important;
+  min-width: 0 !important;
+}
+
+.card-kicker {
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  color: #C9964A;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+  display: block;
+}
+
+.menu-empty-filter-state {
+  padding: 48px 24px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  border-radius: 24px;
+  margin: 20px 0;
+}
+
+.empty-filter-icon {
+  font-size: 3rem;
+}
+
+@media (max-width: 1200px) {
+  .full-menu-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+}
+
+@media (max-width: 900px) {
+  .full-menu-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+}
+
+@media (max-width: 600px) {
+  .full-menu-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
   }
 }
 
@@ -3305,12 +3800,21 @@ select.res-input-select, select.widget-select, select.inquiry-input, .res-input-
     justify-content: center !important;
     border-radius: 24px !important;
   }
-  .reservation-modal-backdrop {
-    align-items: flex-start !important;
-    padding: 12px 10px !important;
-    overflow-y: auto !important;
-    -webkit-overflow-scrolling: touch !important;
-  }
+/* Background Page Body Scroll Lock when Modals are Active */
+body.modal-open-lock {
+  overflow: hidden !important;
+  height: 100vh !important;
+  touch-action: none !important;
+  overscroll-behavior: none !important;
+}
+
+.reservation-modal-backdrop {
+  align-items: flex-start !important;
+  padding: 12px 10px !important;
+  overflow-y: auto !important;
+  overscroll-behavior: contain !important;
+  -webkit-overflow-scrolling: touch !important;
+}
   .reservation-modal-dialog {
     width: 94vw !important;
     max-width: 440px !important;
@@ -3350,6 +3854,53 @@ select.res-input-select, select.widget-select, select.inquiry-input, .res-input-
     background: #FF641A !important;
     border-radius: 4px !important;
   }
+}
+
+/* Story Video Modal Overlay Styles */
+.story-modal-dialog {
+  max-width: 620px !important;
+}
+
+.story-modal-media-wrap {
+  margin-top: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.story-video-container {
+  position: relative;
+  width: 100%;
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 100, 26, 0.35);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+  background: #000000;
+}
+
+.story-iframe {
+  width: 100%;
+  border: none;
+  display: block;
+}
+
+.story-modal-footer-info {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.story-feature-chip {
+  padding: 6px 12px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: var(--radius-full);
+  font-size: 0.78rem;
+  color: var(--text-ivory);
+  font-weight: 500;
+}
 
   /* 10. Mobile Location Section */
   .location-section {

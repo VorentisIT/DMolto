@@ -37,7 +37,10 @@ export class HeroComponent {
   }
 
   openStoryModal(): void {
-    this.pizzaService.isStoryModalOpen.set(true);
+    this.pizzaService.activeNavTab.set('about');
+    if (typeof window !== 'undefined') {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
   }
 
   goToNav(tab: string): void {

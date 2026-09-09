@@ -22,10 +22,10 @@ export class MenuSectionComponent {
   });
 
   readonly displayedCards = computed(() => {
-    let items = this.pizzaService.filteredMenuItems();
-    if (!items.length) items = this.pizzaService.menuItems();
-    return items;
+    return this.pizzaService.filteredMenuItems();
   });
+
+  readonly categories = ['all', 'classic', 'veg', 'non-veg', 'special', 'beverages'];
 
   constructor(public pizzaService: PizzaService) {}
 
@@ -47,11 +47,38 @@ export class MenuSectionComponent {
   }
 
   scrollMenuTrack(direction: 'left' | 'right'): void {
+    // 1. Advance/decrement highlighted card index so glowing highlight moves to next/prev card
+    const total = this.displayedCards().length;
+    if (total > 0) {
+      const current = this.pizzaService.highlightedCardIndex();
+      if (direction === 'right') {
+        this.pizzaService.highlightedCardIndex.set((current + 1) % total);
+      } else {
+        this.pizzaService.highlightedCardIndex.set((current - 1 + total) % total);
+      }
+    }
+
+    // 2. Scroll cards track horizontally in Ribbon mode or grid wrapper in Grid mode
     const track = this.menuScrollTrack()?.nativeElement || 
-                  (document.querySelector('.menu-grid-showcase-container') as HTMLElement) || 
-                  (document.querySelector('.full-menu-grid') as HTMLElement);
-    if (!track) return;
-    const scrollAmount = direction === 'left' ? -320 : 320;
-    track.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+                  (document.querySelector('.menu-grid-showcase-container') as HTMLElement);
+    
+    if (track) {
+      const distance = direction === 'left' ? -320 : 320;
+      if (typeof track.scrollBy === 'function') {
+        track.scrollBy({ left: distance, behavior: 'smooth' });
+      } else {
+        track.scrollLeft += distance;
+      }
+    }
+
+    const gridWrapper = document.querySelector('.full-menu-grid-wrapper') as HTMLElement;
+    if (gridWrapper && this.layoutMode() === 'grid') {
+      const distance = direction === 'left' ? -320 : 320;
+      if (typeof gridWrapper.scrollBy === 'function') {
+        gridWrapper.scrollBy({ top: distance, behavior: 'smooth' });
+      } else {
+        gridWrapper.scrollTop += distance;
+      }
+    }
   }
 }
