@@ -31,18 +31,72 @@
       </div>
     </div>
 
-    <!-- MODE 1: RIBBON SHOWCASE (HOME PAGE - 4 CARDS SLIDER WITH RIGHT CONTROL BAR) -->
+    <!-- Category Filter Bar Above Cards -->
+    <div class="menu-filter-slider-header">
+      <div class="menu-section-filter-bar">
+        <button 
+          type="button" 
+          class="menu-filter-chip" 
+          [class.active]="pizzaService.activeCategory() === 'all'" 
+          (click)="pizzaService.activeCategory.set('all')">
+          <span>All</span>
+        </button>
+        <button 
+          type="button" 
+          class="menu-filter-chip" 
+          [class.active]="pizzaService.activeCategory() === 'classic'" 
+          (click)="pizzaService.activeCategory.set('classic')">
+          <span>Classic</span>
+        </button>
+        <button 
+          type="button" 
+          class="menu-filter-chip" 
+          [class.active]="pizzaService.activeCategory() === 'veg'" 
+          (click)="pizzaService.activeCategory.set('veg')">
+          <span>Veg</span>
+        </button>
+        <button 
+          type="button" 
+          class="menu-filter-chip" 
+          [class.active]="pizzaService.activeCategory() === 'non-veg'" 
+          (click)="pizzaService.activeCategory.set('non-veg')">
+          <span>Non-Veg</span>
+        </button>
+        <button 
+          type="button" 
+          class="menu-filter-chip" 
+          [class.active]="pizzaService.activeCategory() === 'special'" 
+          (click)="pizzaService.activeCategory.set('special')">
+          <span>Chef's Special</span>
+        </button>
+        <button 
+          type="button" 
+          class="menu-filter-chip" 
+          [class.active]="pizzaService.activeCategory() === 'beverages'" 
+          (click)="pizzaService.activeCategory.set('beverages')">
+          <span>Beverages</span>
+        </button>
+      </div>
+
+      <!-- Arrow Slide Navigation Buttons -->
+      <div class="menu-slider-arrows-row">
+        <button type="button" class="slider-nav-arrow-btn" (click)="scrollMenuTrack('left')" title="Previous Items">‹</button>
+        <button type="button" class="slider-nav-arrow-btn active-orange" (click)="scrollMenuTrack('right')" title="Next Items">›</button>
+      </div>
+    </div>
+
+    <!-- MODE 1: RIBBON SHOWCASE (HOME PAGE - SLIDE TRACK WITH RIGHT CONTROL BAR) -->
     @if (layoutMode() === 'ribbon') {
       <div class="menu-showcase-wrapper">
-        <div class="menu-grid-showcase-container">
+        <div class="menu-grid-showcase-container" #menuScrollTrack>
           @for (pizza of displayedCards(); track pizza.id + '_' + idx; let idx = $index) {
             <article 
               class="luxury-pizza-card grid-card" 
-              [class.chef-special-card]="idx === pizzaService.highlightedCardIndex()"
+              [class.chef-special-card]="idx === pizzaService.highlightedCardIndex() || pizza.isSpecial"
               (click)="pizzaService.openPizzaDetails(pizza)"
               style="cursor: pointer;">
               
-              @if (idx === pizzaService.highlightedCardIndex()) {
+              @if (idx === pizzaService.highlightedCardIndex() || pizza.isSpecial) {
                 <div class="special-top-badge">{{ pizza.isSpecial ? "CHEF'S SPECIAL" : "FEATURED" }}</div>
               }
               <div class="card-media-wrap">
@@ -64,18 +118,17 @@
           }
         </div>
 
-        <!-- Right Vertical Slider Control Bar (Next Arrow, Pizza & Coffee Buttons) -->
+        <!-- Right Vertical Slider Control Bar -->
         <aside class="menu-vertical-slider-bar">
           <button 
             type="button" 
             class="slider-arrow-btn active-arrow" 
             aria-label="Next Slide" 
-            (click)="pizzaService.shiftMenuCards()" 
+            (click)="scrollMenuTrack('right')" 
             title="Next Menu Items">
             <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14m-6-6l6 6-6 6"/></svg>
           </button>
 
-          <!-- Pizza Filter Button -->
           <button 
             type="button" 
             class="slider-coffee-btn" 
@@ -86,7 +139,6 @@
             <span style="font-size: 1.15rem; line-height: 1;">🍕</span>
           </button>
 
-          <!-- Coffee & Beverage Button -->
           <button 
             type="button" 
             class="slider-coffee-btn" 

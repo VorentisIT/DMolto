@@ -369,10 +369,21 @@ export class PizzaService {
     this.cart.set(current);
   }
 
+  openReservation(): void {
+    const elem = document.getElementById('reservations-section');
+    if (elem) {
+      elem.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+    this.isReservationOpen.set(true);
+  }
+
   submitReservation(e: Event): void {
-    e.preventDefault();
+    if (e) e.preventDefault();
     this.isReservationOpen.set(false);
-    this.showToast(`Table reserved for ${this.resGuests} on ${this.resDate} at ${this.resTime}!`);
+    const guestText = this.resGuests || '2 Guests';
+    const timeText = this.resTime || '07:00 PM';
+    const nameText = this.resName ? ` for ${this.resName}` : '';
+    this.showToast(`🎉 Reservation confirmed${nameText}! Table for ${guestText} on ${this.resDate} at ${timeText}.`);
   }
 
   checkoutWhatsApp(): void {
