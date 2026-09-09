@@ -1,4 +1,4 @@
-import { Injectable, signal, computed } from '@angular/core';
+import { Injectable, signal, computed, effect } from '@angular/core';
 
 export interface PizzaItem {
   id: string;
@@ -65,6 +65,23 @@ export class PizzaService {
 
   // Hero State
   readonly heroMode = signal<'story' | 'pizza'>('story');
+
+  constructor() {
+    effect(() => {
+      const modalOpen = this.isReservationOpen() || this.isCartOpen() || this.isMobileMenuOpen() || this.isMenuDetailsModalOpen() || this.isStoryModalOpen();
+      if (typeof document !== 'undefined') {
+        if (modalOpen) {
+          document.body.classList.add('modal-open-lock');
+          document.body.style.overflow = 'hidden';
+          document.body.style.touchAction = 'none';
+        } else {
+          document.body.classList.remove('modal-open-lock');
+          document.body.style.overflow = '';
+          document.body.style.touchAction = '';
+        }
+      }
+    });
+  }
 
   readonly categoryImages: Record<string, string> = {
     all: '/images/dmollo-hero-pizza.png',
@@ -188,86 +205,178 @@ export class PizzaService {
       id: 'p1',
       name: 'Margherita Classica',
       subtitle: 'Classic Neapolitan',
-      description: 'Fresh tomatoes, mozzarella, basil, olive oil.',
+      description: 'San Marzano D.O.P. tomatoes, fior di latte mozzarella, sweet basil, EVOO.',
       price: 15.00,
       category: 'classic',
       image: '/images/margherita-pizza-hq.jpg'
     },
     {
       id: 'p2',
-      name: 'Truffle Mushroom',
-      subtitle: 'Earthy Indulgence',
-      description: 'Wild mushrooms, truffle oil, mozzarella.',
-      price: 18.00,
-      category: 'special',
-      image: '/images/burrata-truffle.jpg'
+      name: 'Pepperoni Classico',
+      subtitle: 'Traditional Favorite',
+      description: 'Double cured pepperoni, San Marzano sugo, aged mozzarella, oregano.',
+      price: 16.50,
+      category: 'classic',
+      image: '/images/diavola-pizza-hq.jpg'
     },
     {
       id: 'p3',
-      name: 'Spicy Diavola',
-      subtitle: 'Chef’s Special',
-      description: 'Spicy salami, mozzarella, chili flakes.',
-      price: 17.00,
-      category: 'special',
-      image: '/images/diavola-pizza-hq.jpg',
-      isSpecial: true
-    },
-    {
-      id: 'p4',
-      name: 'BBQ Chicken',
-      subtitle: 'Smoky & Savory',
-      description: 'Grilled chicken, BBQ sauce, red onions.',
-      price: 16.00,
-      category: 'non-veg',
-      image: '/images/seafood-pizza-hq.jpg'
-    },
-    {
-      id: 'p5',
       name: 'Quattro Formaggi',
-      subtitle: 'Four Cheese',
+      subtitle: 'Four Cheese Classic',
       description: 'Gorgonzola, mozzarella, parmesan, scamorza with wildflower honey.',
       price: 18.00,
       category: 'classic',
       image: '/images/dmollo-hero-pizza.jpg'
     },
     {
+      id: 'p4',
+      name: 'Marinara Originale',
+      subtitle: 'Authentic Heritage',
+      description: 'San Marzano tomato sugo, roasted garlic, wild oregano, extra virgin olive oil.',
+      price: 14.00,
+      category: 'classic',
+      image: '/images/dmollo-hero-pizza.png'
+    },
+    {
+      id: 'p5',
+      name: 'Capricciosa Tradizionale',
+      subtitle: 'Classic Italian',
+      description: 'Italian ham, artichoke hearts, wild mushrooms, black olives, mozzarella.',
+      price: 17.50,
+      category: 'classic',
+      image: '/images/dmollo-experience-pizza.jpg'
+    },
+
+    // VEG CATEGORY
+    {
       id: 'p6',
       name: 'Garden Ortolana',
       subtitle: 'Vegetarian Delight',
-      description: 'Charred bell peppers, red onions, zucchini, olives, oregano.',
+      description: 'Charred bell peppers, red onions, zucchini, Kalamata olives, fresh oregano.',
       price: 15.50,
       category: 'veg',
-      image: '/images/dmollo-experience-pizza.jpg'
+      image: '/images/dmollo-experience-pizza.png'
     },
     {
       id: 'p7',
-      name: 'Wood-Fired Garlic Bread',
-      subtitle: 'Artisan Side',
-      description: 'Freshly baked sourdough garlic bread with roasted rosemary butter.',
-      price: 9.00,
-      category: 'sides',
-      image: '/images/dmollo-ambience-detail.jpg'
+      name: 'Wild Mushroom & Truffle',
+      subtitle: 'Forest Harvest',
+      description: 'Porcini & cremini mushrooms, white truffle oil, fontina & fior di latte.',
+      price: 17.50,
+      category: 'veg',
+      image: '/images/burrata-truffle.jpg'
     },
     {
       id: 'p8',
-      name: 'Artisanal Tiramisù',
-      subtitle: 'House Dessert',
-      description: 'Ladyfingers soaked in dark espresso & Marsala, mascarpone cream.',
-      price: 10.00,
-      category: 'desserts',
-      image: '/images/dmollo-ambience-main.jpg'
+      name: 'Pesto Burrata Supreme',
+      subtitle: 'Artisan Green',
+      description: 'Fresh basil pesto base, whole creamy burrata, cherry tomatoes, pine nuts.',
+      price: 18.50,
+      category: 'veg',
+      image: '/images/dmollo-ambience-detail.jpg'
     },
     {
       id: 'p9',
+      name: 'Spinach & Ricotta Bianca',
+      subtitle: 'White Sauce Specialty',
+      description: 'Baby spinach, whipped lemon ricotta, roasted garlic flakes, provolone.',
+      price: 16.00,
+      category: 'veg',
+      image: '/images/dmollo-hero-pizza.jpg'
+    },
+
+    // NON-VEG CATEGORY
+    {
+      id: 'p10',
+      name: 'BBQ Smoked Chicken',
+      subtitle: 'Smoky & Savory',
+      description: 'Grilled hickory chicken, sweet BBQ reduction, red onions, smoked scamorza.',
+      price: 16.00,
+      category: 'non-veg',
+      image: '/images/seafood-pizza-hq.jpg'
+    },
+    {
+      id: 'p11',
+      name: 'Prosciutto e Funghi',
+      subtitle: 'Italian Heritage',
+      description: 'Prosciutto cotto, wood-roasted mushrooms, fior di latte, fresh thyme.',
+      price: 18.50,
+      category: 'non-veg',
+      image: '/images/dmollo-dining.jpg'
+    },
+    {
+      id: 'p12',
+      name: 'Carnivora Meat Feast',
+      subtitle: 'Bold & Hearty',
+      description: 'Artisanal salami, Italian sausage, smoked bacon, pepperoni, chili oil.',
+      price: 19.50,
+      category: 'non-veg',
+      image: '/images/diavola-pizza-hq.jpg'
+    },
+    {
+      id: 'p13',
+      name: 'Salame Piccante & Honey',
+      subtitle: 'Sweet & Spicy',
+      description: 'Crispy cup pepperoni, spicy Calabrian salame, hot habanero honey drizzle.',
+      price: 17.50,
+      category: 'non-veg',
+      image: '/images/dmollo-hero-bg-cover.jpg'
+    },
+
+    // CHEF'S SPECIAL CATEGORY
+    {
+      id: 'p14',
+      name: 'Spicy Diavola',
+      subtitle: 'Chef’s Special',
+      description: 'Spicy salami, fior di latte mozzarella, pickled Calabrian chili flakes.',
+      price: 17.00,
+      category: 'special',
+      image: '/images/diavola-pizza-hq.jpg',
+      isSpecial: true
+    },
+    {
+      id: 'p15',
+      name: 'Truffle Burrata Indulgence',
+      subtitle: 'Gourmet Masterpiece',
+      description: 'Wild forest porcini, white truffle oil glaze, creamy whole burrata crest.',
+      price: 19.00,
+      category: 'special',
+      image: '/images/burrata-truffle.jpg',
+      isSpecial: true
+    },
+    {
+      id: 'p16',
+      name: 'Pistachio & Mortadella',
+      subtitle: 'Signature Creation',
+      description: 'Slow-roasted Mortadella Bologna, crushed Bronte pistachios, stracciatella.',
+      price: 20.00,
+      category: 'special',
+      image: '/images/dmollo-pizzaiolo.jpg',
+      isSpecial: true
+    },
+    {
+      id: 'p17',
+      name: 'Gold Leaf Prosciutto Star',
+      subtitle: 'Luxury Reserve',
+      description: '24-month aged Prosciutto di Parma, black truffle pearls, edible gold shimmer.',
+      price: 22.00,
+      category: 'special',
+      image: '/images/dmollo-ambience-main.jpg',
+      isSpecial: true
+    },
+
+    // BEVERAGES & SIDES
+    {
+      id: 'p18',
       name: 'Italian Espresso & Cappuccino',
       subtitle: 'Artisan Coffee',
-      description: 'Single or double shot organic Italian espresso with silky steamed milk foam.',
+      description: 'Organic Italian dark roast espresso with silky steamed milk foam.',
       price: 6.50,
       category: 'beverages',
       image: 'https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?auto=format&fit=crop&w=800&q=80'
     },
     {
-      id: 'p10',
+      id: 'p19',
       name: 'Iced Caramel Macchiato',
       subtitle: 'Cold Brew Coffee',
       description: 'Cold brewed Italian espresso, vanilla bean syrup, cold milk & caramel drizzle.',
@@ -276,7 +385,7 @@ export class PizzaService {
       image: 'https://images.unsplash.com/photo-1517701604599-bb29b565090c?auto=format&fit=crop&w=800&q=80'
     },
     {
-      id: 'p11',
+      id: 'p20',
       name: 'San Pellegrino Mineral Water',
       subtitle: 'Water Bottle',
       description: 'Chilled natural sparkling mineral water bottle imported from Bergamo, Italy.',
@@ -285,7 +394,7 @@ export class PizzaService {
       image: 'https://images.unsplash.com/photo-1548839140-29a749e1cf4e?auto=format&fit=crop&w=800&q=80'
     },
     {
-      id: 'p12',
+      id: 'p21',
       name: 'Italian Cold Drink Limonata',
       subtitle: 'Cold Drink Refreshment',
       description: 'Sparkling Sicilian lemon cold drink with fresh mint & crushed ice.',
@@ -294,7 +403,7 @@ export class PizzaService {
       image: 'https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?auto=format&fit=crop&w=800&q=80'
     },
     {
-      id: 'p13',
+      id: 'p22',
       name: 'Rosemary Blood Orange Spritz',
       subtitle: 'Signature Beverage',
       description: 'Blood orange reduction, sparkling water, fresh rosemary sprig.',
@@ -303,7 +412,7 @@ export class PizzaService {
       image: 'https://images.unsplash.com/photo-1551024709-8f23befc6f87?auto=format&fit=crop&w=800&q=80'
     },
     {
-      id: 'p14',
+      id: 'p23',
       name: 'Affogato al Caffè',
       subtitle: 'Espresso & Gelato',
       description: 'Hot artisanal espresso poured over vanilla bean gelato with dark chocolate shavings.',
@@ -318,7 +427,7 @@ export class PizzaService {
     const query = this.searchQuery().toLowerCase().trim();
     return this.menuItems().filter(item => {
       const matchesCat = cat === 'all' || item.category === cat;
-      const matchesQuery = !query || item.name.toLowerCase().includes(query) || item.description.toLowerCase().includes(query);
+      const matchesQuery = !query || item.name.toLowerCase().includes(query) || item.description.toLowerCase().includes(query) || item.subtitle.toLowerCase().includes(query);
       return matchesCat && matchesQuery;
     });
   });

@@ -1,7 +1,9 @@
 <!-- 2. HERO SECTION -->
 <section class="hero-mockup-section" id="hero-section">
   <!-- Top Floating Basil Leaf -->
-  <div class="floating-particle particle-top-basil">🍃</div>
+  <div class="floating-particle particle-top-basil">
+    <svg viewBox="0 0 24 24" fill="#2E7D32" stroke="#4CAF50" stroke-width="1.5" width="28" height="28"><path d="M12 22s8-4 8-10A8 8 0 0 0 4 12c0 6 8 10 8 10z"></path><path d="M12 22V12" stroke="#A5D6A7"></path></svg>
+  </div>
 
   <div class="container hero-mockup-layout">
     <!-- LEFT COLUMN: Content & Buttons -->
@@ -34,61 +36,6 @@
             </span>
             <span>Watch Our Story</span>
           </button>
-        </div>
-
-        <!-- Quick Book Table Bar in Hero Section -->
-        <div class="hero-booking-widget glass-card-21st">
-          <form class="hero-widget-form" (submit)="pizzaService.submitReservation($event)">
-            <div class="widget-field">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16" class="widget-icon">
-                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
-                <circle cx="9" cy="7" r="4"></circle>
-                <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
-                <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
-              </svg>
-              <select [(ngModel)]="pizzaService.resGuests" name="heroResGuests" class="widget-select">
-                <option value="2 Guests">2 Guests</option>
-                <option value="4 Guests">4 Guests</option>
-                <option value="6 Guests">6 Guests</option>
-                <option value="8+ Guests">8+ VIP Party</option>
-              </select>
-            </div>
-
-            <div class="widget-divider"></div>
-
-            <div class="widget-field">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16" class="widget-icon">
-                <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
-                <line x1="16" y1="2" x2="16" y2="6"></line>
-                <line x1="8" y1="2" x2="8" y2="6"></line>
-                <line x1="3" y1="10" x2="21" y2="10"></line>
-              </svg>
-              <input type="date" [(ngModel)]="pizzaService.resDate" name="heroResDate" class="widget-date-input">
-            </div>
-
-            <div class="widget-divider"></div>
-
-            <div class="widget-field">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16" class="widget-icon">
-                <circle cx="12" cy="12" r="10"></circle>
-                <polyline points="12 6 12 12 16 14"></polyline>
-              </svg>
-              <select [(ngModel)]="pizzaService.resTime" name="heroResTime" class="widget-select">
-                <option value="12:30 PM">12:30 PM</option>
-                <option value="07:00 PM">07:00 PM</option>
-                <option value="07:30 PM">07:30 PM</option>
-                <option value="08:30 PM">08:30 PM</option>
-              </select>
-            </div>
-
-            <button type="submit" class="widget-submit-btn">
-              <span>Book Table</span>
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14">
-                <line x1="5" y1="12" x2="19" y2="12"></line>
-                <polyline points="12 5 19 12 12 19"></polyline>
-              </svg>
-            </button>
-          </form>
         </div>
 
         <!-- 3 Feature Indicators with Gold Circular Badges matching reference -->
@@ -135,6 +82,41 @@
             </div>
           </div>
         </div>
+
+        <!-- Interactive Pizza Selector & Category Filter Carousel Bar Below 3 Stats Icons (Desktop Only) -->
+        <div class="hero-bottom-carousel-bar desktop-only-carousel-bar">
+          <div class="carousel-arch-card" [class.highlighted]="pizzaService.heroMode() === 'pizza'" (click)="pizzaService.heroMode() === 'story' ? selectHeroPizza(0) : showBrandStory()">
+            <div class="arch-circle-wrap">
+              <img [src]="pizzaService.selectedHeroPizza().thumb" [alt]="pizzaService.selectedHeroPizza().name" class="arch-circle-img">
+            </div>
+            <div class="arch-info-col">
+              <span class="arch-pizza-title">{{ pizzaService.selectedHeroPizza().name }}</span>
+              <span class="arch-pizza-weight">{{ pizzaService.selectedHeroPizza().weight }} • {{ pizzaService.selectedHeroPizza().price }}</span>
+            </div>
+          </div>
+
+          <div class="carousel-circle-previews">
+            @for (pizza of pizzaService.heroPizzas; track pizza.id; let i = $index) {
+              <button 
+                type="button" 
+                class="circle-preview-btn" 
+                [class.active-thumb]="i === pizzaService.selectedHeroPizzaIndex() && pizzaService.heroMode() === 'pizza'"
+                (click)="selectHeroPizza(i)" 
+                [title]="'Select ' + pizza.name">
+                <img [src]="pizza.thumb" [alt]="pizza.name" class="preview-pizza-img">
+              </button>
+            }
+          </div>
+
+          <div class="carousel-arrow-stack">
+            <button type="button" class="arrow-circle-btn" (click)="prevHeroPizza()" title="Previous Pizza">
+              ‹
+            </button>
+            <button type="button" class="arrow-circle-btn" (click)="nextHeroPizza()" title="Next Pizza">
+              ›
+            </button>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -156,7 +138,7 @@
             class="hero-giant-pizza-img fade-step-img">
         </div>
 
-        <!-- Circular Scroll Indicator -->
+        <!-- Circular Scroll Indicator (Hidden on Mobile) -->
         <div class="circular-scroll-badge" id="hero-scroll-badge">
           <svg viewBox="0 0 100 100" class="circle-text-svg">
             <path id="circlePath" d="M 50, 50 m -37, 0 a 37,37 0 1,1 74,0 a 37,37 0 1,1 -74,0" fill="none"/>
@@ -167,6 +149,7 @@
           <span class="scroll-arrow-down">↓</span>
         </div>
       </div>
+
     </div>
   </div>
 </section>

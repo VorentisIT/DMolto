@@ -22,10 +22,10 @@ export class MenuSectionComponent {
   });
 
   readonly displayedCards = computed(() => {
-    let items = this.pizzaService.filteredMenuItems();
-    if (!items.length) items = this.pizzaService.menuItems();
-    return items;
+    return this.pizzaService.filteredMenuItems();
   });
+
+  readonly categories = ['all', 'classic', 'veg', 'non-veg', 'special', 'beverages'];
 
   constructor(public pizzaService: PizzaService) {}
 
@@ -47,11 +47,19 @@ export class MenuSectionComponent {
   }
 
   scrollMenuTrack(direction: 'left' | 'right'): void {
-    const track = this.menuScrollTrack()?.nativeElement || 
-                  (document.querySelector('.menu-grid-showcase-container') as HTMLElement) || 
-                  (document.querySelector('.full-menu-grid') as HTMLElement);
-    if (!track) return;
-    const scrollAmount = direction === 'left' ? -320 : 320;
-    track.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+    const total = this.displayedCards().length;
+    if (total <= 0) return;
+
+    const current = this.pizzaService.highlightedCardIndex();
+    const nextIdx = direction === 'right' ? (current + 1) % total : (current - 1 + total) % total;
+    this.pizzaService.highlightedCardIndex.set(nextIdx);
+
+    setTimeout(() => {
+      const activeCard = document.querySelector('.chef-special-card-active') as HTMLElement ||
+                         document.querySelectorAll('.luxury-pizza-card')[nextIdx] as HTMLElement;
+      if (activeCard) {
+        activeCard.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+      }
+    }, 40);
   }
 }

@@ -92,12 +92,15 @@
           @for (pizza of displayedCards(); track pizza.id + '_' + idx; let idx = $index) {
             <article 
               class="luxury-pizza-card grid-card" 
-              [class.chef-special-card]="idx === pizzaService.highlightedCardIndex() || pizza.isSpecial"
+              [class.chef-special-card-active]="idx === pizzaService.highlightedCardIndex()"
+              [class.chef-special-card]="pizza.isSpecial"
               (click)="pizzaService.openPizzaDetails(pizza)"
               style="cursor: pointer;">
               
-              @if (idx === pizzaService.highlightedCardIndex() || pizza.isSpecial) {
-                <div class="special-top-badge">{{ pizza.isSpecial ? "CHEF'S SPECIAL" : "FEATURED" }}</div>
+              @if (idx === pizzaService.highlightedCardIndex()) {
+                <div class="special-top-badge">FEATURED</div>
+              } @else if (pizza.isSpecial) {
+                <div class="special-top-badge special-orange-badge">CHEF'S SPECIAL</div>
               }
               <div class="card-media-wrap">
                 <img [src]="pizza.image || '/images/dmollo-hero-pizza.jpg'" (error)="$any($event.target).src = '/images/dmollo-dining.jpg'" [alt]="pizza.name" class="card-media-img" loading="lazy">
@@ -136,7 +139,7 @@
             aria-label="Pizza Menu" 
             (click)="pizzaService.showPizzaMenu()" 
             title="All Pizzas Menu">
-            <span style="font-size: 1.15rem; line-height: 1;">🍕</span>
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 22h20L12 2z"></path><circle cx="12" cy="14" r="1.5" fill="currentColor"></circle></svg>
           </button>
 
           <button 
@@ -155,36 +158,50 @@
     <!-- MODE 2: FULL MULTI-COLUMN GRID (DEDICATED MENU PAGE) -->
     @if (layoutMode() === 'grid') {
       <div class="full-menu-grid-wrapper">
-        <div class="full-menu-grid">
-          @for (pizza of displayedCards(); track pizza.id) {
-            <article 
-              class="luxury-pizza-card full-grid-card" 
-              [class.chef-special-card]="pizza.isSpecial"
-              (click)="pizzaService.openPizzaDetails(pizza)"
-              style="cursor: pointer;">
-              
-              @if (pizza.isSpecial) {
-                <div class="special-top-badge">CHEF'S SPECIAL</div>
-              }
-              <div class="card-media-wrap">
-                <img [src]="pizza.image || '/images/dmollo-hero-pizza.jpg'" (error)="$any($event.target).src = '/images/dmollo-dining.jpg'" [alt]="pizza.name" class="card-media-img" loading="lazy">
-              </div>
-
-              <div class="card-details-wrap">
-                <span class="card-kicker">{{ pizza.subtitle || 'ARTISANAL SELECTION' }}</span>
-                <h3 class="card-pizza-title font-serif">{{ pizza.name }}</h3>
-                <p class="card-pizza-desc">{{ pizza.description }}</p>
-
-                <div class="card-footer-row">
-                  <span class="card-pizza-price font-serif">${{ pizza.price.toFixed(2) }}</span>
-                  <button type="button" class="card-add-btn btn-orange-pill" (click)="addToCart(pizza, $event)">
-                    + Add to Order
-                  </button>
+        @if (displayedCards().length === 0) {
+          <div class="menu-empty-filter-state glass-card-21st">
+            <div class="empty-filter-icon">🍕</div>
+            <h3 class="font-serif text-ivory">No Menu Items Found</h3>
+            <p class="text-muted">No items matched your selected category or search filter.</p>
+            <button type="button" class="btn-orange-pill" (click)="pizzaService.activeCategory.set('all'); pizzaService.searchQuery.set('')">
+              Show All Menu Items
+            </button>
+          </div>
+        } @else {
+          <div class="full-menu-grid">
+            @for (pizza of displayedCards(); track pizza.id + '_' + idx; let idx = $index) {
+              <article 
+                class="luxury-pizza-card full-grid-card" 
+                [class.chef-special-card-active]="idx === pizzaService.highlightedCardIndex()"
+                [class.chef-special-card]="pizza.isSpecial"
+                (click)="pizzaService.openPizzaDetails(pizza)"
+                style="cursor: pointer;">
+                
+                @if (idx === pizzaService.highlightedCardIndex()) {
+                  <div class="special-top-badge">FEATURED</div>
+                } @else if (pizza.isSpecial) {
+                  <div class="special-top-badge special-orange-badge">CHEF'S SPECIAL</div>
+                }
+                <div class="card-media-wrap">
+                  <img [src]="pizza.image || '/images/dmollo-hero-pizza.jpg'" (error)="$any($event.target).src = '/images/dmollo-dining.jpg'" [alt]="pizza.name" class="card-media-img" loading="lazy">
                 </div>
-              </div>
-            </article>
-          }
-        </div>
+
+                <div class="card-details-wrap">
+                  <span class="card-kicker">{{ pizza.subtitle || 'ARTISANAL SELECTION' }}</span>
+                  <h3 class="card-pizza-title font-serif">{{ pizza.name }}</h3>
+                  <p class="card-pizza-desc">{{ pizza.description }}</p>
+
+                  <div class="card-footer-row">
+                    <span class="card-pizza-price font-serif">${{ pizza.price.toFixed(2) }}</span>
+                    <button type="button" class="card-add-btn btn-orange-pill" (click)="addToCart(pizza, $event)">
+                      + Add to Order
+                    </button>
+                  </div>
+                </div>
+              </article>
+            }
+          </div>
+        }
       </div>
     }
   </div>
