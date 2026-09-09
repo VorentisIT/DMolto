@@ -47,38 +47,19 @@ export class MenuSectionComponent {
   }
 
   scrollMenuTrack(direction: 'left' | 'right'): void {
-    // 1. Advance/decrement highlighted card index so glowing highlight moves to next/prev card
     const total = this.displayedCards().length;
-    if (total > 0) {
-      const current = this.pizzaService.highlightedCardIndex();
-      if (direction === 'right') {
-        this.pizzaService.highlightedCardIndex.set((current + 1) % total);
-      } else {
-        this.pizzaService.highlightedCardIndex.set((current - 1 + total) % total);
-      }
-    }
+    if (total <= 0) return;
 
-    // 2. Scroll cards track horizontally in Ribbon mode or grid wrapper in Grid mode
-    const track = this.menuScrollTrack()?.nativeElement || 
-                  (document.querySelector('.menu-grid-showcase-container') as HTMLElement);
-    
-    if (track) {
-      const distance = direction === 'left' ? -320 : 320;
-      if (typeof track.scrollBy === 'function') {
-        track.scrollBy({ left: distance, behavior: 'smooth' });
-      } else {
-        track.scrollLeft += distance;
-      }
-    }
+    const current = this.pizzaService.highlightedCardIndex();
+    const nextIdx = direction === 'right' ? (current + 1) % total : (current - 1 + total) % total;
+    this.pizzaService.highlightedCardIndex.set(nextIdx);
 
-    const gridWrapper = document.querySelector('.full-menu-grid-wrapper') as HTMLElement;
-    if (gridWrapper && this.layoutMode() === 'grid') {
-      const distance = direction === 'left' ? -320 : 320;
-      if (typeof gridWrapper.scrollBy === 'function') {
-        gridWrapper.scrollBy({ top: distance, behavior: 'smooth' });
-      } else {
-        gridWrapper.scrollTop += distance;
+    setTimeout(() => {
+      const activeCard = document.querySelector('.chef-special-card-active') as HTMLElement ||
+                         document.querySelectorAll('.luxury-pizza-card')[nextIdx] as HTMLElement;
+      if (activeCard) {
+        activeCard.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
       }
-    }
+    }, 40);
   }
 }

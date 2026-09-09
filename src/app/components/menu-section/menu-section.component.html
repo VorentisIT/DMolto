@@ -92,12 +92,15 @@
           @for (pizza of displayedCards(); track pizza.id + '_' + idx; let idx = $index) {
             <article 
               class="luxury-pizza-card grid-card" 
-              [class.chef-special-card]="idx === pizzaService.highlightedCardIndex() || pizza.isSpecial"
+              [class.chef-special-card-active]="idx === pizzaService.highlightedCardIndex()"
+              [class.chef-special-card]="pizza.isSpecial"
               (click)="pizzaService.openPizzaDetails(pizza)"
               style="cursor: pointer;">
               
-              @if (idx === pizzaService.highlightedCardIndex() || pizza.isSpecial) {
-                <div class="special-top-badge">{{ pizza.isSpecial ? "CHEF'S SPECIAL" : "FEATURED" }}</div>
+              @if (idx === pizzaService.highlightedCardIndex()) {
+                <div class="special-top-badge">FEATURED</div>
+              } @else if (pizza.isSpecial) {
+                <div class="special-top-badge special-orange-badge">CHEF'S SPECIAL</div>
               }
               <div class="card-media-wrap">
                 <img [src]="pizza.image || '/images/dmollo-hero-pizza.jpg'" (error)="$any($event.target).src = '/images/dmollo-dining.jpg'" [alt]="pizza.name" class="card-media-img" loading="lazy">
@@ -169,12 +172,15 @@
             @for (pizza of displayedCards(); track pizza.id + '_' + idx; let idx = $index) {
               <article 
                 class="luxury-pizza-card full-grid-card" 
-                [class.chef-special-card]="idx === pizzaService.highlightedCardIndex() || pizza.isSpecial"
+                [class.chef-special-card-active]="idx === pizzaService.highlightedCardIndex()"
+                [class.chef-special-card]="pizza.isSpecial"
                 (click)="pizzaService.openPizzaDetails(pizza)"
                 style="cursor: pointer;">
                 
-                @if (idx === pizzaService.highlightedCardIndex() || pizza.isSpecial) {
-                  <div class="special-top-badge">{{ pizza.isSpecial ? "CHEF'S SPECIAL" : "FEATURED" }}</div>
+                @if (idx === pizzaService.highlightedCardIndex()) {
+                  <div class="special-top-badge">FEATURED</div>
+                } @else if (pizza.isSpecial) {
+                  <div class="special-top-badge special-orange-badge">CHEF'S SPECIAL</div>
                 }
                 <div class="card-media-wrap">
                   <img [src]="pizza.image || '/images/dmollo-hero-pizza.jpg'" (error)="$any($event.target).src = '/images/dmollo-dining.jpg'" [alt]="pizza.name" class="card-media-img" loading="lazy">

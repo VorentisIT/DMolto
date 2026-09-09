@@ -150,40 +150,6 @@
         </div>
       </div>
 
-      <!-- Mobile Only Filter Bar (Displays Below Pizza Image on Mobile) -->
-      <div class="hero-bottom-carousel-bar mobile-only-carousel-bar">
-        <div class="carousel-arch-card" [class.highlighted]="pizzaService.heroMode() === 'pizza'" (click)="pizzaService.heroMode() === 'story' ? selectHeroPizza(0) : showBrandStory()">
-          <div class="arch-circle-wrap">
-            <img [src]="pizzaService.selectedHeroPizza().thumb" [alt]="pizzaService.selectedHeroPizza().name" class="arch-circle-img">
-          </div>
-          <div class="arch-info-col">
-            <span class="arch-pizza-title">{{ pizzaService.selectedHeroPizza().name }}</span>
-            <span class="arch-pizza-weight">{{ pizzaService.selectedHeroPizza().weight }} • {{ pizzaService.selectedHeroPizza().price }}</span>
-          </div>
-        </div>
-
-        <div class="carousel-circle-previews">
-          @for (pizza of pizzaService.heroPizzas; track pizza.id; let i = $index) {
-            <button 
-              type="button" 
-              class="circle-preview-btn" 
-              [class.active-thumb]="i === pizzaService.selectedHeroPizzaIndex() && pizzaService.heroMode() === 'pizza'"
-              (click)="selectHeroPizza(i)" 
-              [title]="'Select ' + pizza.name">
-              <img [src]="pizza.thumb" [alt]="pizza.name" class="preview-pizza-img">
-            </button>
-          }
-        </div>
-
-        <div class="carousel-arrow-stack">
-          <button type="button" class="arrow-circle-btn" (click)="prevHeroPizza()" title="Previous Pizza">
-            ‹
-          </button>
-          <button type="button" class="arrow-circle-btn" (click)="nextHeroPizza()" title="Next Pizza">
-            ›
-          </button>
-        </div>
-      </div>
     </div>
   </div>
 </section>
